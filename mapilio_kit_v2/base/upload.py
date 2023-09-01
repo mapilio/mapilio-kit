@@ -3,7 +3,7 @@ class Upload:
     name = "upload"
     help = "upload images and descriptions to Mapilio"
 
-    def add_basic_arguments(self, parser):
+    def add_basic_arguments(self, parser: argparse.ArgumentParser):
 
         group = parser.add_argument_group("upload options")
         group.add_argument(
