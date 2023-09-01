@@ -1,6 +1,9 @@
 import argparse
+import inspect
 
-
+import sys
+sys.path.append(r"/home/visio-ai/PycharmProjects/Mapilio-kitv2/mapilio-kit-v2/mapilio_kit_v2/components")
+from edit_config import edit_config
 
 class Authenticate:
     name = "authenticate"
@@ -51,4 +54,12 @@ class Authenticate:
         )
 
     def run(self, vars_args: dict):
-        pass
+        return edit_config(
+            **(
+                {
+                    k: v
+                    for k, v in vars_args.items()
+                    if k in inspect.getfullargspec(edit_config).args
+                }
+            )
+        )

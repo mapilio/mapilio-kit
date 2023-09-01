@@ -3,7 +3,7 @@ class Upload:
     name = "upload"
     help = "upload images and descriptions to Mapilio"
 
-    def add_basic_arguments(self, parser):
+    def add_basic_arguments(self, parser: argparse.ArgumentParser):
 
         group = parser.add_argument_group("upload options")
         group.add_argument(
@@ -16,6 +16,10 @@ class Upload:
             default=None,
             required=False,
         )
+        group.add_argument("--processed",
+                                   action="store_true",
+                                   help="processed option")
+
         group.add_argument(
             "--organization_key",
             help="Specify organization key",
