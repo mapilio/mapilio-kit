@@ -16,6 +16,10 @@ class Upload:
             default=None,
             required=False,
         )
+        group.add_argument("--processed",
+                                   action="store_true",
+                                   help="processed option")
+
         group.add_argument(
             "--organization_key",
             help="Specify organization key",

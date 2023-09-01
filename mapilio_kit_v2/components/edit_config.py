@@ -1,8 +1,6 @@
 import os
 
-from . import login
-from . import api_v1
-from . import config
+import login, api_v1, config
 
 
 def edit_config(
