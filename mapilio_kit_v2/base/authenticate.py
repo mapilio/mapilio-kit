@@ -1,4 +1,5 @@
 import argparse
+import inspect
 
 
 
@@ -13,8 +14,17 @@ class Authenticate:
             default=None,
             required=False,
         )
+
+        # The user_name, user_email, and user_password arguments are used to create
+        # a Mapilio account. If all three are specified, a Mapilio account is created
+        # and the user is logged in. If only the user_email is specified, the user
+        # is logged in. If only the user_name is specified, the user is logged in
+        # using the stored credentials.
         parser.add_argument(
-            "--user_name", help="Mapilio user name", default=None, required=False
+            "--user_name",
+            help="Mapilio user name",
+            default=None,
+            required=False,
         )
         parser.add_argument(
             "--user_email",
@@ -28,15 +38,25 @@ class Authenticate:
             default=None,
             required=False,
         )
+
+        # The jwt argument is used to authenticate the user.
         parser.add_argument(
-            "--jwt", help="JWT authentication token", default=None, required=False
+            "--jwt",
+            help="JWT authentication token",
+            default=None,
+            required=False,
         )
+
+        # The user_key argument is used to manually specify the user key.
         parser.add_argument(
             "--user_key",
             help="Manually specify user key",
             default=False,
             required=False,
         )
+
+        # The force_overwrite argument is used to automatically overwrite any existing
+        # credentials stored in the config file for the specified user.
         parser.add_argument(
             "--force_overwrite",
             help="Automatically overwrite any existing credentials stored in the config file for the specified user.",
@@ -44,11 +64,15 @@ class Authenticate:
             default=False,
             required=False,
         )
-        parser.add_argument(
-            "--gui",
-            help="is use gui",
-            default=False,
-        )
 
     def run(self, vars_args: dict):
-        pass
+        # Authenticate to the API using the provided credentials.
+        authenticate(
+            **(
+                {
+                    k: v
+                    for k, v in vars_args.items()
+                    if k in inspect.getfullargspec(authenticate).args
+                }
+            )
+        )
