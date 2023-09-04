@@ -5,14 +5,13 @@ from .base import loader,decomposer,authenticator
 FUNCTION_MAP = {'Upload' : loader,
                 'Decompose' : decomposer ,
                 'Authenticate' : authenticator,}
-                # 'Download' : Download }
 
 def get_parser(subparsers,funtion_map):
     for key, value in funtion_map.items():
         print(value, key)
         cmd_parser = subparsers.add_parser(
             value.name, help=value.help, conflict_handler="resolve")
-        value().add_basic_arguments(cmd_parser)
+        value().fundamental_arguments(cmd_parser)
         cmd_parser.set_defaults(func=value().run)
 
 def main():
@@ -33,8 +32,6 @@ def main():
     args = parser.parse_args()
     
     # Call the appropriate function based on the selected command
-
-    print(f"argparse vars: {vars(args)}")
     if hasattr(args, 'func'):
         try:
             args.func(vars(args))
