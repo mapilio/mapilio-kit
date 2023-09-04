@@ -83,7 +83,7 @@ class FinalImageDescriptionFromGeoJSON(FinalImageDescription):
     pass
 
 
-UserItemSchema = {
+UserItemAttributes = {
     "type": "object",
     "properties": {
         "OrganizationKey": {"type": "string"},
@@ -96,7 +96,7 @@ UserItemSchema = {
     "additionalProperties": False,
 }
 
-FinalImageDescriptionSchema = {
+FinalImageDescriptionMetadata = {
     "type": "object",
     "properties": {
         "latitude": {"type": "number", "description": "latitude of the image"},
@@ -159,7 +159,7 @@ def merge_schema(*schemas: T.Dict):
 
 
 ImageDescriptionJSONSchema = merge_schema(
-    FinalImageDescriptionSchema,
+    FinalImageDescriptionMetadata,
     {
         "type": "object",
         "properties": {

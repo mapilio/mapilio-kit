@@ -1,6 +1,7 @@
 import argparse
 from . import VERSION
 from .base import loader,decomposer,authenticator
+from .components import arguments
 
 FUNCTION_MAP = {'Upload' : loader,
                 'Decompose' : decomposer ,
@@ -11,6 +12,7 @@ def get_parser(subparsers,funtion_map):
         print(value, key)
         cmd_parser = subparsers.add_parser(
             value.name, help=value.help, conflict_handler="resolve")
+        arguments.general_arguments(cmd_parser, value.name)
         value().fundamental_arguments(cmd_parser)
         cmd_parser.set_defaults(func=value().run)
 

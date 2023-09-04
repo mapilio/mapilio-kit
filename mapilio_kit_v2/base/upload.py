@@ -1,4 +1,5 @@
 import argparse
+from upload import upload
 class Upload:
     name = "upload"
     help = "upload images and descriptions to Mapilio"
@@ -51,12 +52,12 @@ class Upload:
             from . import decomposer
             decomposer().run(vars_args)
 
-        # return upload(
-        #     **(
-        #         {
-        #             k: v
-        #             for k, v in vars_args.items()
-        #             if k in inspect.getfullargspec(upload).args
-        #         }
-        #     )
-        # )
+        return upload(
+            **(
+                {
+                    k: v
+                    for k, v in vars_args.items()
+                    if k in upload.__code__.co_varnames
+                }
+            )
+        )
