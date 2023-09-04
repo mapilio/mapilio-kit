@@ -5,7 +5,7 @@ import typing as T
 
 import requests
 
-import api_v1, config
+import auth_config, config
 import types_fmt as types
 from config import MAPILIO_CONFIG_PATH
 
@@ -32,7 +32,7 @@ def prompt_user_for_user_items(user_name: str) -> types.User:
     user_password = getpass.getpass("Enter Mapilio user password: ")
 
     try:
-        data = api_v1.get_upload_token(user_email, user_password)
+        data = auth_config.get_upload_token(user_email, user_password)
     except requests.HTTPError as ex:
         if 400 <= ex.response.status_code < 500:
             resp = ex.response.json()

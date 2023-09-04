@@ -68,7 +68,7 @@ class MakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        export_path = os.path.join('mapilio_kit_v2', 'base', 'bin')
+        export_path = os.path.join('mapilio_kit_v2', 'base', 'components','bin')
         if not os.path.exists(export_path):
             os.makedirs(export_path)
         subprocess.run(['make',
@@ -118,7 +118,7 @@ setup(name='mapilio_kit_v2',
       python_requires='>=3.6',
       ext_modules=ext_modules,
       cmdclass=cmdclass,
-      packages=['mapilio_kit_v2', 'mapilio_kit_v2.base'],
+      packages=['mapilio_kit_v2', 'mapilio_kit_v2.base', 'mapilio_kit_v2.components'],
       entry_points='''
       [console_scripts]
       mapilio_kit=mapilio_kit_v2.__main__:main

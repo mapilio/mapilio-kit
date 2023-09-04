@@ -3,6 +3,22 @@ import os
 import typing as T
 
 import types_fmt as types
+MAPILIO_API_ENDPOINT = os.getenv(
+    "MAPILIO_API_ENDPOINT", "https://end.mapilio.com/api/"
+)
+MAPILIO_CDN_ENDPOINT = os.getenv(
+    "MAPILIO_CDN_ENDPOINT", "https://cdn.mapilio.com/"
+)
+
+# POST METHODS noqa
+MAPILIO_API_URL_FUNCTION = 'function/mapilio/imagery/'
+MAPILIO_API_ENDPOINT_UPLOAD = MAPILIO_API_ENDPOINT + MAPILIO_API_URL_FUNCTION + 'upload'
+MAPILIO_UPLOAD_ENDPOINT_ZIP = MAPILIO_CDN_ENDPOINT + "upload/"
+
+# GET METHODS noqa
+URL_CDN = MAPILIO_CDN_ENDPOINT + "im/"
+URL_Sequences = MAPILIO_API_ENDPOINT + MAPILIO_API_URL_FUNCTION + "getUploadsWithProject/"
+URL_Images = MAPILIO_API_ENDPOINT + MAPILIO_API_URL_FUNCTION + "getUploadsImagesWithProject/"
 
 
 MAPILIO_CONFIG_PATH = os.getenv(

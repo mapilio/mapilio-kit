@@ -1,6 +1,6 @@
 import os
 
-import login, api_v1, config
+import login, auth_config, config
 
 
 def edit_config(
@@ -71,7 +71,7 @@ def edit_config(
 
     if user_email and user_password:
         try:
-            data = api_v1.get_upload_token(user_email, user_password)
+            data = auth_config.get_upload_token(user_email, user_password)
         except:
             return False
         upload_token = data["token"]
