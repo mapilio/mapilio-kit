@@ -1,15 +1,11 @@
 import argparse
-import inspect
-
-import sys
-sys.path.append(r"/home/visio-ai/PycharmProjects/Mapilio-kitv2/mapilio-kit-v2/mapilio_kit_v2/components")
 from edit_config import edit_config
 
 class Authenticate:
     name = "authenticate"
     help = "authenticate Mapilio users"
 
-    def add_basic_arguments(self, parser: argparse.ArgumentParser):
+    def fundamental_arguments(self, parser: argparse.ArgumentParser):
         parser.add_argument(
             "--config_file",
             help="Full path to the config file to be edited. Default is ~/.config/mapilio/configs/MLY_CLIENT_ID",
@@ -59,7 +55,7 @@ class Authenticate:
                 {
                     k: v
                     for k, v in vars_args.items()
-                    if k in inspect.getfullargspec(edit_config).args
+                    if k in edit_config.__code__.co_varnames
                 }
             )
         )

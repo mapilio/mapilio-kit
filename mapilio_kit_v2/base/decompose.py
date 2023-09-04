@@ -4,7 +4,7 @@ class Decompose():
     name = "Decompose"
     help = "Decompose images"
 
-    def add_basic_arguments(self, parser: argparse.ArgumentParser):
+    def fundamental_arguments(self, parser: argparse.ArgumentParser):
         parser.add_argument(
             "--skip_decompose_errors",
             help="Skip decompose errors.",

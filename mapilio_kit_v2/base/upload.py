@@ -3,7 +3,7 @@ class Upload:
     name = "upload"
     help = "upload images and descriptions to Mapilio"
 
-    def add_basic_arguments(self, parser: argparse.ArgumentParser):
+    def fundamental_arguments(self, parser: argparse.ArgumentParser):
 
         group = parser.add_argument_group("upload options")
         group.add_argument(
@@ -17,8 +17,8 @@ class Upload:
             required=False,
         )
         group.add_argument("--processed",
-                                   action="store_true",
-                                   help="processed option")
+                               action="store_true",
+                               help="processed option")
 
         group.add_argument(
             "--organization_key",
@@ -47,4 +47,16 @@ class Upload:
         )
 
     def run(self, vars_args: dict):
-        pass
+        if not vars_args['processed']:
+            from . import decomposer
+            decomposer().run(vars_args)
+
+        # return upload(
+        #     **(
+        #         {
+        #             k: v
+        #             for k, v in vars_args.items()
+        #             if k in inspect.getfullargspec(upload).args
+        #         }
+        #     )
+        # )
