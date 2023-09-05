@@ -1,7 +1,7 @@
 import sys
 import os
 pwd = os.getcwd()
-sys.path.append(pwd+r"/mapilio_kit_v2/components")
+sys.path.append(pwd+r"/mapilio_kit/components")
 from .upload import Upload
 from.decompose import Decompose
 from .authenticate import Authenticate
