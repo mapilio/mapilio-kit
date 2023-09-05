@@ -25,7 +25,7 @@ def read_requirements_macos():
 
 if platform.system() == "Darwin":
     about = {}
-    with open(os.path.join(here, 'mapilio_kit', '__init__.py'), 'r') as f:
+    with open(os.path.join(here, 'mapilio_kit', 'components', 'version.py'), 'r') as f:
         exec(f.read(), about)
 
     setup(name='mapilio-kit-v2',
@@ -35,7 +35,7 @@ if platform.system() == "Darwin":
           author='Mapilio',
           license='BSD',
           python_requires='>=3.6',
-          packages=['mapilio_kit', 'mapilio_kit.base'],
+          packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
           entry_points='''
           [console_scripts]
           mapilio_kit=mapilio_kit.__main__:main
@@ -68,7 +68,7 @@ class MakeBuild(build_ext):
             self.build_extension(ext)
 
     def build_extension(self, ext):
-        export_path = os.path.join('mapilio_kit', 'base', 'components', 'bin')
+        export_path = os.path.join('mapilio_kit', 'base', 'bin')
         if not os.path.exists(export_path):
             os.makedirs(export_path)
         subprocess.run(['make',
@@ -97,7 +97,7 @@ def win_read_requirements():
 
 
 about = {}
-with open(os.path.join(here, 'mapilio_kit', '__init__.py'), 'r') as f:
+with open(os.path.join(here, 'mapilio_kit','components', 'version.py'), 'r') as f:
     exec(f.read(), about)
 
 if os.name == 'nt' or 'darwin':

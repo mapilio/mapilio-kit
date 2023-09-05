@@ -6,7 +6,7 @@ def general_arguments(parser, command):
         return
     if command == "gopro360max_process":
         return
-    if command in ["sample_video", "video_process", "video_process_and_upload"]:
+    if command in ["sample_video", "video_process", "video_upload"]:
         parser.add_argument(
             "video_import_path",
             help="Path to a video or directory with one or more video files.",

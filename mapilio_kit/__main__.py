@@ -1,20 +1,23 @@
+import sys
+import os
+sys.path.append(os.getcwd()+r"/mapilio_kit/components")
 import argparse
-from . import VERSION
-from .base import loader,decomposer,authenticator
+from .components.version import VERSION
+from .base import loader,decomposer,authenticator,video_loader
 from .components import arguments
 
 FUNCTION_MAP = {'Upload' : loader,
                 'Decompose' : decomposer ,
-                'Authenticate' : authenticator,}
+                'Authenticate' : authenticator,
+                'VideoUpload' : video_loader,}
 
 def get_parser(subparsers,funtion_map):
     for key, value in funtion_map.items():
-        print(value, key)
         cmd_parser = subparsers.add_parser(
             value.name, help=value.help, conflict_handler="resolve")
         arguments.general_arguments(cmd_parser, value.name)
         value().fundamental_arguments(cmd_parser)
-        cmd_parser.set_defaults(func=value().run)
+        cmd_parser.set_defaults(func=value().perform_task)
 
 def main():
     parser = argparse.ArgumentParser(description="mapi-kit-v2")

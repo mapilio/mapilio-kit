@@ -48,14 +48,9 @@ class Authenticate:
             help="is use gui",
             default=False,
         )
+    def filter_args(self, args):
+        return {k: v for k, v in args.items() if k in edit_config.__code__.co_varnames}
 
-    def run(self, vars_args: dict):
-        return edit_config(
-            **(
-                {
-                    k: v
-                    for k, v in vars_args.items()
-                    if k in edit_config.__code__.co_varnames
-                }
-            )
-        )
+    def perform_task(self, vars_args: dict):
+        valid_args = self.filter_args(vars_args)
+        return edit_config(**valid_args)

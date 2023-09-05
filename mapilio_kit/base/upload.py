@@ -46,18 +46,13 @@ class Upload:
             default=False,
             required=False,
         )
-
-    def run(self, vars_args: dict):
+        from . import decomposer
+        decomposer().fundamental_arguments(parser)
+    def filter_args(self, args):
+        return {k: v for k, v in args.items() if k in upload.__code__.co_varnames}
+    def perform_task(self, vars_args: dict):
         if not vars_args['processed']:
             from . import decomposer
-            decomposer().run(vars_args)
-
-        return upload(
-            **(
-                {
-                    k: v
-                    for k, v in vars_args.items()
-                    if k in upload.__code__.co_varnames
-                }
-            )
-        )
+            decomposer().perform_task(vars_args)
+        valid_args = self.filter_args(vars_args)
+        return upload(**valid_args)

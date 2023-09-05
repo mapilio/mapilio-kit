@@ -1,6 +1,6 @@
 import os
-
-import login, auth_config, config
+from login import prompt_user_for_user_items
+import  auth_config, config
 
 
 def edit_config(
@@ -92,7 +92,7 @@ def edit_config(
         if gui is None:
             return False
         else:
-            user_items = login.prompt_user_for_user_items(user_name)
+            user_items = prompt_user_for_user_items(user_name)
 
     config.update_config(config_file, user_name, user_items)
     return True
