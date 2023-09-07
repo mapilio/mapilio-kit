@@ -60,6 +60,29 @@ pip install -r requirements.txt
 </code></pre>
 <hr>
 
+<h3>Video Images upload</h3>
+<p>
+Video Support Devices: GoPro Hero 9-8-7 Black and 360, and other devices that support GPS metadata.
+</p>
+
+<h4>Examples</h4>
+
+<ol>
+<li>
+Sample GoPro videos in directory path/to/videos/ into import path (must be created before starting)path/to/sample_images/ at a sampling rate 1 seconds, i.e. two frames every second, reading geotag data from the GoPro videos in path/to/videos/
+</li>
+
+
+<pre><code>mapilio_kit video_upload "path/to/videos/" "path/to/sample_images/" \
+    --geotag_source "gopro_videos" \
+    --interpolate_directions \
+    --video_sample_interval 1
+</code></pre>
+<li> 
+Checking path/to/sample_images/ images and mapilio_image_description.json then run under command
+</ol>
+<pre><code>mapilio_kit video_upload "path/to/sample_images/" --desc_path "mapilio_image_description.json" --processed</code></pre>
+
 <h2 id="contributing">Contributing</h2>
 
 <p>We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:</p>
