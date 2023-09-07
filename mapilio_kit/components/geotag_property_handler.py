@@ -1,0 +1,66 @@
+import os
+import typing as T
+
+import image_log
+import processing
+
+
+def geotag_property_handler(
+    import_path: T.Optional[str] = None,
+    video_import_path: T.Optional[str] = None,
+    geotag_source="exif",
+    geotag_source_path: T.Optional[str] = None,
+    offset_time=0.0,
+    offset_angle=0.0,
+    skip_subfolders=False,
+) -> None:
+    if not import_path or not os.path.isdir(import_path):
+        raise RuntimeError(
+            f"Error, import directory {import_path} does not exist, exiting..."
+        )
+
+    process_file_list = image_log.get_total_file_list(
+        import_path,
+        skip_subfolders=skip_subfolders,
+    )
+    if not process_file_list:
+        return
+
+    if geotag_source == "exif":
+        return processing.geotag_from_exif(process_file_list, offset_time, offset_angle)
+
+    elif geotag_source == "gpx":
+        if geotag_source_path is None:
+            raise RuntimeError(
+                "GPX file is required to be specified with --geotag_source_path"
+            )
+        return processing.geotag_from_gpx_file(
+            process_file_list,
+            geotag_source_path,
+            offset_time=offset_time,
+            offset_angle=offset_angle,
+        )
+    elif geotag_source == "nmea":
+        if geotag_source_path is None:
+            raise RuntimeError(
+                "NMEA file is required to be specified with --geotag_source_path"
+            )
+        return processing.geotag_from_nmea_file(
+            process_file_list,
+            geotag_source_path,
+            offset_time=offset_time,
+            offset_angle=offset_angle,
+        )
+    elif geotag_source == "gopro_videos":
+        if geotag_source_path is None:
+            geotag_source_path = video_import_path
+        if geotag_source_path is None:
+            raise RuntimeError("geotag_source_path is required")
+        return processing.geotag_from_gopro_video(
+            process_file_list,
+            geotag_source_path,
+            offset_time=offset_time,
+            offset_angle=offset_angle,
+        )
+    else:
+        raise RuntimeError(f"Invalid geotag source {geotag_source}")
