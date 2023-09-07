@@ -28,7 +28,7 @@ def wrap_http_exception(ex: requests.HTTPError):
 
 def prompt_user_for_user_items(user_name: str) -> types.User:
     print(f"Sign in for user {user_name}")
-    user_email = input("Enter your Mapilio user email: ")
+    user_email = input("Enter your Mapilio user name: ")
     user_password = getpass.getpass("Enter Mapilio user password: ")
 
     try:
