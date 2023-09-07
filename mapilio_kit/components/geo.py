@@ -42,53 +42,28 @@ def lla_to_ecef(lat: float, lon: float, alt: float) -> Tuple[float, float, float
 
     return x, y, z
 
-
-def compute_bearing(start_lat, start_lon, end_lat, end_lon) -> float:
-    """
-    Get the compass bearing from start to end.
-
-    Formula from
-    http://www.movable-type.co.uk/scripts/latlong.html
-    """
-    # make sure everything is in radians
-    start_lat = math.radians(start_lat)
-    start_lon = math.radians(start_lon)
-    end_lat = math.radians(end_lat)
-    end_lon = math.radians(end_lon)
-
-    dLong = end_lon - start_lon
-
-    if abs(dLong) > math.pi:
-        if dLong > 0.0:
-            dLong = -(2.0 * math.pi - dLong)
-        else:
-            dLong = 2.0 * math.pi + dLong
-
-    y = math.sin(dLong) * math.cos(end_lat)
-    x = math.cos(start_lat) * math.sin(end_lat) - math.sin(start_lat) * math.cos(
-        end_lat
-    ) * math.cos(dLong)
-    bearing = (math.degrees(math.atan2(y, x)) + 360.0) % 360.0
-
-    return bearing
-
-
-def diff_bearing(b1, b2):
+def calculate_bearing_difference(b1, b2):
     """
     Compute difference between two bearings
     """
-    d = abs(b2 - b1)
-    d = 360 - d if d > 180 else d
-    return d
+    difference = abs(bearing2 - bearing1)
+    difference = 360 - difference if difference > 180 else difference
+    return difference
 
 _IT = TypeVar("_IT")
 
 # http://stackoverflow.com/a/5434936
-def pairwise(iterable: Iterable[_IT]) -> Iterable[Tuple[_IT, _IT]]:
+def generate_pairs(iterable: Iterable) -> Iterable[Tuple]:
     """s -> (s0,s1), (s1,s2), (s2, s3), ..."""
-    a, b = itertools.tee(iterable)
-    next(b, None)
-    return zip(a, b)
+    iterator = iter(iterable)
+    try:
+        prev_item = next(iterator)
+    except StopIteration:
+        return  # Empty iterable, so there are no pairs to generate.
+
+    for item in iterator:
+        yield (prev_item, item)
+        prev_item = item
 
 
 def gps_distance(latlon_1: Tuple[float, float], latlon_2: Tuple[float, float]) -> float:
