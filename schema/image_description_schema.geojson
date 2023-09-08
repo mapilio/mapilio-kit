@@ -1,0 +1,2675 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-19 10:48:58",
+                "order": 0,
+                "marker-color": "0414fb",
+                "heading": 134.10389617598332,
+                "altitude": 0.0,
+                "roll": 0.0,
+                "yaw": 0.0,
+                "pitch": 0.0,
+                "acceleration": {
+                    "accx": 0,
+                    "accy": 0,
+                    "accz": 0
+                },
+                "gyroscope": {
+                    "gyrx": 0,
+                    "gyry": 0,
+                    "gyrz": 0
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1176109313965,
+                    28.8004665374756
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-20 10:48:58",
+                "order": 1,
+                "marker-color": "0414fb",
+                "heading": 133.18440238208734,
+                "altitude": 0.0,
+                "roll": 1.0,
+                "yaw": 1.0,
+                "pitch": 1.0,
+                "acceleration": {
+                    "accx": 1,
+                    "accy": 1,
+                    "accz": 1
+                },
+                "gyroscope": {
+                    "gyrx": 1,
+                    "gyry": 1,
+                    "gyrz": 1
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1175231933594,
+                    28.8005867004395
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-21 10:48:58",
+                "order": 2,
+                "marker-color": "0414fb",
+                "heading": 133.70268497231189,
+                "altitude": 0.0,
+                "roll": 2.0,
+                "yaw": 2.0,
+                "pitch": 2.0,
+                "acceleration": {
+                    "accx": 2,
+                    "accy": 2,
+                    "accz": 2
+                },
+                "gyroscope": {
+                    "gyrx": 2,
+                    "gyry": 2,
+                    "gyrz": 2
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1173896789551,
+                    28.8007755279541
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-22 10:48:58",
+                "order": 3,
+                "marker-color": "0414fb",
+                "heading": 133.85365920855844,
+                "altitude": 0.0,
+                "roll": 3.0,
+                "yaw": 3.0,
+                "pitch": 3.0,
+                "acceleration": {
+                    "accx": 3,
+                    "accy": 3,
+                    "accz": 3
+                },
+                "gyroscope": {
+                    "gyrx": 3,
+                    "gyry": 3,
+                    "gyrz": 3
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1172523498535,
+                    28.8009662628174
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-23 10:48:58",
+                "order": 4,
+                "marker-color": "0414fb",
+                "heading": 133.04776446748394,
+                "altitude": 0.0,
+                "roll": 4.0,
+                "yaw": 4.0,
+                "pitch": 4.0,
+                "acceleration": {
+                    "accx": 4,
+                    "accy": 4,
+                    "accz": 4
+                },
+                "gyroscope": {
+                    "gyrx": 4,
+                    "gyry": 4,
+                    "gyrz": 4
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1171073913574,
+                    28.8011665344238
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-24 10:48:58",
+                "order": 5,
+                "marker-color": "0414fb",
+                "heading": 134.1275067730121,
+                "altitude": 0.0,
+                "roll": 5.0,
+                "yaw": 5.0,
+                "pitch": 5.0,
+                "acceleration": {
+                    "accx": 5,
+                    "accy": 5,
+                    "accz": 5
+                },
+                "gyroscope": {
+                    "gyrx": 5,
+                    "gyry": 5,
+                    "gyrz": 5
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1169624328613,
+                    28.8013725280762
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-25 10:48:58",
+                "order": 6,
+                "marker-color": "0414fb",
+                "heading": 133.70243547513246,
+                "altitude": 0.0,
+                "roll": 6.0,
+                "yaw": 6.0,
+                "pitch": 6.0,
+                "acceleration": {
+                    "accx": 6,
+                    "accy": 6,
+                    "accz": 6
+                },
+                "gyroscope": {
+                    "gyrx": 6,
+                    "gyry": 6,
+                    "gyrz": 6
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1168174743652,
+                    28.801570892334
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-26 10:48:58",
+                "order": 7,
+                "marker-color": "0414fb",
+                "heading": 133.59851335439384,
+                "altitude": 0.0,
+                "roll": 7.0,
+                "yaw": 7.0,
+                "pitch": 7.0,
+                "acceleration": {
+                    "accx": 7,
+                    "accy": 7,
+                    "accz": 7
+                },
+                "gyroscope": {
+                    "gyrx": 7,
+                    "gyry": 7,
+                    "gyrz": 7
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1166801452637,
+                    28.8017616271973
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-27 10:48:58",
+                "order": 8,
+                "marker-color": "0414fb",
+                "heading": 131.50579329744255,
+                "altitude": 0.0,
+                "roll": 8.0,
+                "yaw": 8.0,
+                "pitch": 8.0,
+                "acceleration": {
+                    "accx": 8,
+                    "accy": 8,
+                    "accz": 8
+                },
+                "gyroscope": {
+                    "gyrx": 8,
+                    "gyry": 8,
+                    "gyrz": 8
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1165542602539,
+                    28.8019371032715
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-28 10:48:58",
+                "order": 9,
+                "marker-color": "0414fb",
+                "heading": 135.91298793699167,
+                "altitude": 0.0,
+                "roll": 9.0,
+                "yaw": 9.0,
+                "pitch": 9.0,
+                "acceleration": {
+                    "accx": 9,
+                    "accy": 9,
+                    "accz": 9
+                },
+                "gyroscope": {
+                    "gyrx": 9,
+                    "gyry": 9,
+                    "gyrz": 9
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1164131164551,
+                    28.8021488189697
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-29 10:48:58",
+                "order": 10,
+                "marker-color": "0414fb",
+                "heading": 146.80528883854333,
+                "altitude": 0.0,
+                "roll": 10.0,
+                "yaw": 10.0,
+                "pitch": 10.0,
+                "acceleration": {
+                    "accx": 10,
+                    "accy": 10,
+                    "accz": 10
+                },
+                "gyroscope": {
+                    "gyrx": 10,
+                    "gyry": 10,
+                    "gyrz": 10
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1162796020508,
+                    28.8023204803467
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-30 10:48:58",
+                "order": 11,
+                "marker-color": "0414fb",
+                "heading": 158.8359096684154,
+                "altitude": 0.0,
+                "roll": 11.0,
+                "yaw": 11.0,
+                "pitch": 11.0,
+                "acceleration": {
+                    "accx": 11,
+                    "accy": 11,
+                    "accz": 11
+                },
+                "gyroscope": {
+                    "gyrx": 11,
+                    "gyry": 11,
+                    "gyrz": 11
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1161346435547,
+                    28.8024463653564
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-10-31 10:48:58",
+                "order": 12,
+                "marker-color": "0414fb",
+                "heading": 165.90299556750222,
+                "altitude": 0.0,
+                "roll": 12.0,
+                "yaw": 12.0,
+                "pitch": 12.0,
+                "acceleration": {
+                    "accx": 12,
+                    "accy": 12,
+                    "accz": 12
+                },
+                "gyroscope": {
+                    "gyrx": 12,
+                    "gyry": 12,
+                    "gyrz": 12
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1159973144531,
+                    28.8025169372559
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-01 10:48:58",
+                "order": 13,
+                "marker-color": "0414fb",
+                "heading": 173.07176672815365,
+                "altitude": 0.0,
+                "roll": 13.0,
+                "yaw": 13.0,
+                "pitch": 13.0,
+                "acceleration": {
+                    "accx": 13,
+                    "accy": 13,
+                    "accz": 13
+                },
+                "gyroscope": {
+                    "gyrx": 13,
+                    "gyry": 13,
+                    "gyrz": 13
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1158828735352,
+                    28.8025550842285
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-02 10:48:58",
+                "order": 14,
+                "marker-color": "0414fb",
+                "heading": 176.6832686082472,
+                "altitude": 0.0,
+                "roll": 14.0,
+                "yaw": 14.0,
+                "pitch": 14.0,
+                "acceleration": {
+                    "accx": 14,
+                    "accy": 14,
+                    "accz": 14
+                },
+                "gyroscope": {
+                    "gyrx": 14,
+                    "gyry": 14,
+                    "gyrz": 14
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1157646179199,
+                    28.8025741577148
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-03 10:48:58",
+                "order": 15,
+                "marker-color": "0414fb",
+                "heading": 176.4075604039807,
+                "altitude": 0.0,
+                "roll": 15.0,
+                "yaw": 15.0,
+                "pitch": 15.0,
+                "acceleration": {
+                    "accx": 15,
+                    "accy": 15,
+                    "accz": 15
+                },
+                "gyroscope": {
+                    "gyrx": 15,
+                    "gyry": 15,
+                    "gyrz": 15
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1156158447266,
+                    28.8025856018066
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-04 10:48:58",
+                "order": 16,
+                "marker-color": "0414fb",
+                "heading": 176.68324936636486,
+                "altitude": 0.0,
+                "roll": 16.0,
+                "yaw": 16.0,
+                "pitch": 16.0,
+                "acceleration": {
+                    "accx": 16,
+                    "accy": 16,
+                    "accz": 16
+                },
+                "gyroscope": {
+                    "gyrx": 16,
+                    "gyry": 16,
+                    "gyrz": 16
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1154327392578,
+                    28.8026008605957
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-05 10:48:58",
+                "order": 17,
+                "marker-color": "0414fb",
+                "heading": 176.33993880257822,
+                "altitude": 0.0,
+                "roll": 17.0,
+                "yaw": 17.0,
+                "pitch": 17.0,
+                "acceleration": {
+                    "accx": 17,
+                    "accy": 17,
+                    "accz": 17
+                },
+                "gyroscope": {
+                    "gyrx": 17,
+                    "gyry": 17,
+                    "gyrz": 17
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.115234375,
+                    28.8026161193848
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-06 10:48:58",
+                "order": 18,
+                "marker-color": "0414fb",
+                "heading": 176.34680040065155,
+                "altitude": 0.0,
+                "roll": 18.0,
+                "yaw": 18.0,
+                "pitch": 18.0,
+                "acceleration": {
+                    "accx": 18,
+                    "accy": 18,
+                    "accz": 18
+                },
+                "gyroscope": {
+                    "gyrx": 18,
+                    "gyry": 18,
+                    "gyrz": 18
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1150321960449,
+                    28.8026332855225
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-07 10:48:58",
+                "order": 19,
+                "marker-color": "0414fb",
+                "heading": 175.98260877760822,
+                "altitude": 0.0,
+                "roll": 19.0,
+                "yaw": 19.0,
+                "pitch": 19.0,
+                "acceleration": {
+                    "accx": 19,
+                    "accy": 19,
+                    "accz": 19
+                },
+                "gyroscope": {
+                    "gyrx": 19,
+                    "gyry": 19,
+                    "gyrz": 19
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1148071289063,
+                    28.8026523590088
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-08 10:48:58",
+                "order": 20,
+                "marker-color": "0414fb",
+                "heading": 175.6914829873739,
+                "altitude": 0.0,
+                "roll": 20.0,
+                "yaw": 20.0,
+                "pitch": 20.0,
+                "acceleration": {
+                    "accx": 20,
+                    "accy": 20,
+                    "accz": 20
+                },
+                "gyroscope": {
+                    "gyrx": 20,
+                    "gyry": 20,
+                    "gyrz": 20
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1145820617676,
+                    28.8026733398437
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-09 10:48:58",
+                "order": 21,
+                "marker-color": "0414fb",
+                "heading": 175.6187242896085,
+                "altitude": 0.0,
+                "roll": 21.0,
+                "yaw": 21.0,
+                "pitch": 21.0,
+                "acceleration": {
+                    "accx": 21,
+                    "accy": 21,
+                    "accz": 21
+                },
+                "gyroscope": {
+                    "gyrx": 21,
+                    "gyry": 21,
+                    "gyrz": 21
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1143531799316,
+                    28.8026962280273
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-10 10:48:58",
+                "order": 22,
+                "marker-color": "0414fb",
+                "heading": 175.91353417689243,
+                "altitude": 0.0,
+                "roll": 22.0,
+                "yaw": 22.0,
+                "pitch": 22.0,
+                "acceleration": {
+                    "accx": 22,
+                    "accy": 22,
+                    "accz": 22
+                },
+                "gyroscope": {
+                    "gyrx": 22,
+                    "gyry": 22,
+                    "gyrz": 22
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.114128112793,
+                    28.8027191162109
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-11 10:48:58",
+                "order": 23,
+                "marker-color": "0414fb",
+                "heading": 175.69143883944912,
+                "altitude": 0.0,
+                "roll": 23.0,
+                "yaw": 23.0,
+                "pitch": 23.0,
+                "acceleration": {
+                    "accx": 23,
+                    "accy": 23,
+                    "accz": 23
+                },
+                "gyroscope": {
+                    "gyrx": 23,
+                    "gyry": 23,
+                    "gyrz": 23
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1139068603516,
+                    28.8027400970459
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-12 10:48:58",
+                "order": 24,
+                "marker-color": "0414fb",
+                "heading": 175.54344139579428,
+                "altitude": 0.0,
+                "roll": 24.0,
+                "yaw": 24.0,
+                "pitch": 24.0,
+                "acceleration": {
+                    "accx": 24,
+                    "accy": 24,
+                    "accz": 24
+                },
+                "gyroscope": {
+                    "gyrx": 24,
+                    "gyry": 24,
+                    "gyrz": 24
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1136779785156,
+                    28.8027629852295
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-13 10:48:58",
+                "order": 25,
+                "marker-color": "0414fb",
+                "heading": 176.08181991969218,
+                "altitude": 0.0,
+                "roll": 25.0,
+                "yaw": 25.0,
+                "pitch": 25.0,
+                "acceleration": {
+                    "accx": 25,
+                    "accy": 25,
+                    "accz": 25
+                },
+                "gyroscope": {
+                    "gyrx": 25,
+                    "gyry": 25,
+                    "gyrz": 25
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1134567260742,
+                    28.8027858734131
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-14 10:48:58",
+                "order": 26,
+                "marker-color": "0414fb",
+                "heading": 175.27287008805956,
+                "altitude": 0.0,
+                "roll": 26.0,
+                "yaw": 26.0,
+                "pitch": 26.0,
+                "acceleration": {
+                    "accx": 26,
+                    "accy": 26,
+                    "accz": 26
+                },
+                "gyroscope": {
+                    "gyrx": 26,
+                    "gyry": 26,
+                    "gyrz": 26
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1132469177246,
+                    28.8028049468994
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-15 10:48:58",
+                "order": 27,
+                "marker-color": "0414fb",
+                "heading": 176.03041051916398,
+                "altitude": 0.0,
+                "roll": 27.0,
+                "yaw": 27.0,
+                "pitch": 27.0,
+                "acceleration": {
+                    "accx": 27,
+                    "accy": 27,
+                    "accz": 27
+                },
+                "gyroscope": {
+                    "gyrx": 27,
+                    "gyry": 27,
+                    "gyrz": 27
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1130905151367,
+                    28.8028221130371
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-16 10:48:58",
+                "order": 28,
+                "marker-color": "0414fb",
+                "heading": 175.8958342989706,
+                "altitude": 0.0,
+                "roll": 28.0,
+                "yaw": 28.0,
+                "pitch": 28.0,
+                "acceleration": {
+                    "accx": 28,
+                    "accy": 28,
+                    "accz": 28
+                },
+                "gyroscope": {
+                    "gyrx": 28,
+                    "gyry": 28,
+                    "gyrz": 28
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1129455566406,
+                    28.8028354644775
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-17 10:48:58",
+                "order": 29,
+                "marker-color": "0414fb",
+                "heading": 177.46238266071464,
+                "altitude": 0.0,
+                "roll": 29.0,
+                "yaw": 29.0,
+                "pitch": 29.0,
+                "acceleration": {
+                    "accx": 29,
+                    "accy": 29,
+                    "accz": 29
+                },
+                "gyroscope": {
+                    "gyrx": 29,
+                    "gyry": 29,
+                    "gyrz": 29
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1127853393555,
+                    28.8028507232666
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-18 10:48:58",
+                "order": 30,
+                "marker-color": "0414fb",
+                "heading": 179.66275480198192,
+                "altitude": 0.0,
+                "roll": 30.0,
+                "yaw": 30.0,
+                "pitch": 30.0,
+                "acceleration": {
+                    "accx": 30,
+                    "accy": 30,
+                    "accz": 30
+                },
+                "gyroscope": {
+                    "gyrx": 30,
+                    "gyry": 30,
+                    "gyrz": 30
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1125907897949,
+                    28.8028621673584
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-19 10:48:58",
+                "order": 31,
+                "marker-color": "0414fb",
+                "heading": 180.6744695370671,
+                "altitude": 0.0,
+                "roll": 31.0,
+                "yaw": 31.0,
+                "pitch": 31.0,
+                "acceleration": {
+                    "accx": 31,
+                    "accy": 31,
+                    "accz": 31
+                },
+                "gyroscope": {
+                    "gyrx": 31,
+                    "gyry": 31,
+                    "gyrz": 31
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1123466491699,
+                    28.802864074707
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-20 10:48:58",
+                "order": 32,
+                "marker-color": "0414fb",
+                "heading": 176.63137073343592,
+                "altitude": 0.0,
+                "roll": 32.0,
+                "yaw": 32.0,
+                "pitch": 32.0,
+                "acceleration": {
+                    "accx": 32,
+                    "accy": 32,
+                    "accz": 32
+                },
+                "gyroscope": {
+                    "gyrx": 32,
+                    "gyry": 32,
+                    "gyrz": 32
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1121025085449,
+                    28.8028602600098
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-21 10:48:58",
+                "order": 33,
+                "marker-color": "0414fb",
+                "heading": 173.16491394677132,
+                "altitude": 0.0,
+                "roll": 33.0,
+                "yaw": 33.0,
+                "pitch": 33.0,
+                "acceleration": {
+                    "accx": 33,
+                    "accy": 33,
+                    "accz": 33
+                },
+                "gyroscope": {
+                    "gyrx": 33,
+                    "gyry": 33,
+                    "gyrz": 33
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1118583679199,
+                    28.8028793334961
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-22 10:48:58",
+                "order": 34,
+                "marker-color": "0414fb",
+                "heading": 173.8567174278777,
+                "altitude": 0.0,
+                "roll": 34.0,
+                "yaw": 34.0,
+                "pitch": 34.0,
+                "acceleration": {
+                    "accx": 34,
+                    "accy": 34,
+                    "accz": 34
+                },
+                "gyroscope": {
+                    "gyrx": 34,
+                    "gyry": 34,
+                    "gyrz": 34
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1116065979004,
+                    28.8029193878174
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-23 10:48:58",
+                "order": 35,
+                "marker-color": "0414fb",
+                "heading": 174.37302413207726,
+                "altitude": 0.0,
+                "roll": 35.0,
+                "yaw": 35.0,
+                "pitch": 35.0,
+                "acceleration": {
+                    "accx": 35,
+                    "accy": 35,
+                    "accz": 35
+                },
+                "gyroscope": {
+                    "gyrx": 35,
+                    "gyry": 35,
+                    "gyrz": 35
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1113662719727,
+                    28.8029537200928
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-24 10:48:58",
+                "order": 36,
+                "marker-color": "0414fb",
+                "heading": 175.89571546611216,
+                "altitude": 0.0,
+                "roll": 36.0,
+                "yaw": 36.0,
+                "pitch": 36.0,
+                "acceleration": {
+                    "accx": 36,
+                    "accy": 36,
+                    "accz": 36
+                },
+                "gyroscope": {
+                    "gyrx": 36,
+                    "gyry": 36,
+                    "gyrz": 36
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1111183166504,
+                    28.8029861450195
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-25 10:48:58",
+                "order": 37,
+                "marker-color": "0414fb",
+                "heading": 176.34656983457887,
+                "altitude": 0.0,
+                "roll": 37.0,
+                "yaw": 37.0,
+                "pitch": 37.0,
+                "acceleration": {
+                    "accx": 37,
+                    "accy": 37,
+                    "accz": 37
+                },
+                "gyroscope": {
+                    "gyrx": 37,
+                    "gyry": 37,
+                    "gyrz": 37
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1108779907227,
+                    28.8030090332031
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-26 10:48:58",
+                "order": 38,
+                "marker-color": "0414fb",
+                "heading": 176.6830084325445,
+                "altitude": 0.0,
+                "roll": 38.0,
+                "yaw": 38.0,
+                "pitch": 38.0,
+                "acceleration": {
+                    "accx": 38,
+                    "accy": 38,
+                    "accz": 38
+                },
+                "gyroscope": {
+                    "gyrx": 38,
+                    "gyry": 38,
+                    "gyrz": 38
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.110652923584,
+                    28.8030281066895
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-27 10:48:58",
+                "order": 39,
+                "marker-color": "0414fb",
+                "heading": 175.1063391161174,
+                "altitude": 0.0,
+                "roll": 39.0,
+                "yaw": 39.0,
+                "pitch": 39.0,
+                "acceleration": {
+                    "accx": 39,
+                    "accy": 39,
+                    "accz": 39
+                },
+                "gyroscope": {
+                    "gyrx": 39,
+                    "gyry": 39,
+                    "gyrz": 39
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1104545593262,
+                    28.8030433654785
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-28 10:48:58",
+                "order": 40,
+                "marker-color": "0414fb",
+                "heading": 175.27265790732326,
+                "altitude": 0.0,
+                "roll": 40.0,
+                "yaw": 40.0,
+                "pitch": 40.0,
+                "acceleration": {
+                    "accx": 40,
+                    "accy": 40,
+                    "accz": 40
+                },
+                "gyroscope": {
+                    "gyrx": 40,
+                    "gyry": 40,
+                    "gyrz": 40
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1102867126465,
+                    28.8030624389648
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-29 10:48:58",
+                "order": 41,
+                "marker-color": "0414fb",
+                "heading": 174.1338399732938,
+                "altitude": 0.0,
+                "roll": 41.0,
+                "yaw": 41.0,
+                "pitch": 41.0,
+                "acceleration": {
+                    "accx": 41,
+                    "accy": 41,
+                    "accz": 41
+                },
+                "gyroscope": {
+                    "gyrx": 41,
+                    "gyry": 41,
+                    "gyrz": 41
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1101303100586,
+                    28.8030796051025
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-11-30 10:48:58",
+                "order": 42,
+                "marker-color": "0414fb",
+                "heading": 172.64025450895645,
+                "altitude": 0.0,
+                "roll": 42.0,
+                "yaw": 42.0,
+                "pitch": 42.0,
+                "acceleration": {
+                    "accx": 42,
+                    "accy": 42,
+                    "accz": 42
+                },
+                "gyroscope": {
+                    "gyrx": 42,
+                    "gyry": 42,
+                    "gyrz": 42
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1099624633789,
+                    28.8031024932861
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-01 10:48:58",
+                "order": 43,
+                "marker-color": "0414fb",
+                "heading": 178.86410579325332,
+                "altitude": 0.0,
+                "roll": 43.0,
+                "yaw": 43.0,
+                "pitch": 43.0,
+                "acceleration": {
+                    "accx": 43,
+                    "accy": 43,
+                    "accz": 43
+                },
+                "gyroscope": {
+                    "gyrx": 43,
+                    "gyry": 43,
+                    "gyrz": 43
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1098289489746,
+                    28.8031253814697
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-02 10:48:58",
+                "order": 44,
+                "marker-color": "0414fb",
+                "heading": 187.359776363468,
+                "altitude": 0.0,
+                "roll": 44.0,
+                "yaw": 44.0,
+                "pitch": 44.0,
+                "acceleration": {
+                    "accx": 44,
+                    "accy": 44,
+                    "accz": 44
+                },
+                "gyroscope": {
+                    "gyrx": 44,
+                    "gyry": 44,
+                    "gyrz": 44
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1096839904785,
+                    28.803129196167
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-03 10:48:58",
+                "order": 45,
+                "marker-color": "0414fb",
+                "heading": 189.71707311824787,
+                "altitude": 0.0,
+                "roll": 45.0,
+                "yaw": 45.0,
+                "pitch": 45.0,
+                "acceleration": {
+                    "accx": 45,
+                    "accy": 45,
+                    "accz": 45
+                },
+                "gyroscope": {
+                    "gyrx": 45,
+                    "gyry": 45,
+                    "gyrz": 45
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1095504760742,
+                    28.8031063079834
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-04 10:48:58",
+                "order": 46,
+                "marker-color": "0414fb",
+                "heading": 172.13163116593716,
+                "altitude": 0.0,
+                "roll": 46.0,
+                "yaw": 46.0,
+                "pitch": 46.0,
+                "acceleration": {
+                    "accx": 46,
+                    "accy": 46,
+                    "accz": 46
+                },
+                "gyroscope": {
+                    "gyrx": 46,
+                    "gyry": 46,
+                    "gyrz": 46
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1094245910645,
+                    28.8030776977539
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-05 10:48:58",
+                "order": 47,
+                "marker-color": "0414fb",
+                "heading": 174.4212395788146,
+                "altitude": 0.0,
+                "roll": 47.0,
+                "yaw": 47.0,
+                "pitch": 47.0,
+                "acceleration": {
+                    "accx": 47,
+                    "accy": 47,
+                    "accz": 47
+                },
+                "gyroscope": {
+                    "gyrx": 47,
+                    "gyry": 47,
+                    "gyrz": 47
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1051712036133,
+                    28.8038578033447
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-06 10:48:58",
+                "order": 48,
+                "marker-color": "0414fb",
+                "heading": 174.90094023594884,
+                "altitude": 0.0,
+                "roll": 48.0,
+                "yaw": 48.0,
+                "pitch": 48.0,
+                "acceleration": {
+                    "accx": 48,
+                    "accy": 48,
+                    "accz": 48
+                },
+                "gyroscope": {
+                    "gyrx": 48,
+                    "gyry": 48,
+                    "gyrz": 48
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1050682067871,
+                    28.8038711547852
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-07 10:48:58",
+                "order": 49,
+                "marker-color": "0414fb",
+                "heading": 176.56989768801782,
+                "altitude": 0.0,
+                "roll": 49.0,
+                "yaw": 49.0,
+                "pitch": 49.0,
+                "acceleration": {
+                    "accx": 49,
+                    "accy": 49,
+                    "accz": 49
+                },
+                "gyroscope": {
+                    "gyrx": 49,
+                    "gyry": 49,
+                    "gyrz": 49
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.104923248291,
+                    28.8038883209229
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-08 10:48:58",
+                "order": 50,
+                "marker-color": "0414fb",
+                "heading": 180.79944832934441,
+                "altitude": 0.0,
+                "roll": 50.0,
+                "yaw": 50.0,
+                "pitch": 50.0,
+                "acceleration": {
+                    "accx": 50,
+                    "accy": 50,
+                    "accz": 50
+                },
+                "gyroscope": {
+                    "gyrx": 50,
+                    "gyry": 50,
+                    "gyrz": 50
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1047554016113,
+                    28.8039016723633
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-09 10:48:58",
+                "order": 51,
+                "marker-color": "0414fb",
+                "heading": 182.55941587474823,
+                "altitude": 0.0,
+                "roll": 51.0,
+                "yaw": 51.0,
+                "pitch": 51.0,
+                "acceleration": {
+                    "accx": 51,
+                    "accy": 51,
+                    "accz": 51
+                },
+                "gyroscope": {
+                    "gyrx": 51,
+                    "gyry": 51,
+                    "gyrz": 51
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.104549407959,
+                    28.803897857666
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-10 10:48:58",
+                "order": 52,
+                "marker-color": "0414fb",
+                "heading": 186.19562149262495,
+                "altitude": 0.0,
+                "roll": 52.0,
+                "yaw": 52.0,
+                "pitch": 52.0,
+                "acceleration": {
+                    "accx": 52,
+                    "accy": 52,
+                    "accz": 52
+                },
+                "gyroscope": {
+                    "gyrx": 52,
+                    "gyry": 52,
+                    "gyrz": 52
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1043243408203,
+                    28.8038845062256
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-11 10:48:58",
+                "order": 53,
+                "marker-color": "0414fb",
+                "heading": 190.13742449077566,
+                "altitude": 0.0,
+                "roll": 53.0,
+                "yaw": 53.0,
+                "pitch": 53.0,
+                "acceleration": {
+                    "accx": 53,
+                    "accy": 53,
+                    "accz": 53
+                },
+                "gyroscope": {
+                    "gyrx": 53,
+                    "gyry": 53,
+                    "gyrz": 53
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1040992736817,
+                    28.8038520812988
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-12 10:48:58",
+                "order": 54,
+                "marker-color": "0414fb",
+                "heading": 189.22412968075935,
+                "altitude": 0.0,
+                "roll": 54.0,
+                "yaw": 54.0,
+                "pitch": 54.0,
+                "acceleration": {
+                    "accx": 54,
+                    "accy": 54,
+                    "accz": 54
+                },
+                "gyroscope": {
+                    "gyrx": 54,
+                    "gyry": 54,
+                    "gyrz": 54
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.103874206543,
+                    28.8037986755371
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-13 10:48:58",
+                "order": 55,
+                "marker-color": "0414fb",
+                "heading": 185.82627605175557,
+                "altitude": 0.0,
+                "roll": 55.0,
+                "yaw": 55.0,
+                "pitch": 55.0,
+                "acceleration": {
+                    "accx": 55,
+                    "accy": 55,
+                    "accz": 55
+                },
+                "gyroscope": {
+                    "gyrx": 55,
+                    "gyry": 55,
+                    "gyrz": 55
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1036529541016,
+                    28.8037509918213
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-14 10:48:58",
+                "order": 56,
+                "marker-color": "0414fb",
+                "heading": 183.69547921537654,
+                "altitude": 0.0,
+                "roll": 56.0,
+                "yaw": 56.0,
+                "pitch": 56.0,
+                "acceleration": {
+                    "accx": 56,
+                    "accy": 56,
+                    "accz": 56
+                },
+                "gyroscope": {
+                    "gyrx": 56,
+                    "gyry": 56,
+                    "gyrz": 56
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1034698486328,
+                    28.8037261962891
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-15 10:48:58",
+                "order": 57,
+                "marker-color": "0414fb",
+                "heading": 184.1707357408605,
+                "altitude": 0.0,
+                "roll": 57.0,
+                "yaw": 57.0,
+                "pitch": 57.0,
+                "acceleration": {
+                    "accx": 57,
+                    "accy": 57,
+                    "accz": 57
+                },
+                "gyroscope": {
+                    "gyrx": 57,
+                    "gyry": 57,
+                    "gyrz": 57
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1033363342285,
+                    28.8037147521973
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-16 10:48:58",
+                "order": 58,
+                "marker-color": "0414fb",
+                "heading": 183.77226387017902,
+                "altitude": 0.0,
+                "roll": 58.0,
+                "yaw": 58.0,
+                "pitch": 58.0,
+                "acceleration": {
+                    "accx": 58,
+                    "accy": 58,
+                    "accz": 58
+                },
+                "gyroscope": {
+                    "gyrx": 58,
+                    "gyry": 58,
+                    "gyrz": 58
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1032180786133,
+                    28.8037033081055
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-17 10:48:58",
+                "order": 59,
+                "marker-color": "0414fb",
+                "heading": 181.59862659279037,
+                "altitude": 0.0,
+                "roll": 59.0,
+                "yaw": 59.0,
+                "pitch": 59.0,
+                "acceleration": {
+                    "accx": 59,
+                    "accy": 59,
+                    "accz": 59
+                },
+                "gyroscope": {
+                    "gyrx": 59,
+                    "gyry": 59,
+                    "gyrz": 59
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1030654907227,
+                    28.803689956665
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-18 10:48:58",
+                "order": 60,
+                "marker-color": "0414fb",
+                "heading": 180.0,
+                "altitude": 0.0,
+                "roll": 60.0,
+                "yaw": 60.0,
+                "pitch": 60.0,
+                "acceleration": {
+                    "accx": 60,
+                    "accy": 60,
+                    "accz": 60
+                },
+                "gyroscope": {
+                    "gyrx": 60,
+                    "gyry": 60,
+                    "gyrz": 60
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1028594970703,
+                    28.8036823272705
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-19 10:48:58",
+                "order": 61,
+                "marker-color": "0414fb",
+                "heading": 182.0550423821129,
+                "altitude": 0.0,
+                "roll": 61.0,
+                "yaw": 61.0,
+                "pitch": 61.0,
+                "acceleration": {
+                    "accx": 61,
+                    "accy": 61,
+                    "accz": 61
+                },
+                "gyroscope": {
+                    "gyrx": 61,
+                    "gyry": 61,
+                    "gyrz": 61
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.102668762207,
+                    28.8036823272705
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-20 10:48:58",
+                "order": 62,
+                "marker-color": "0414fb",
+                "heading": 181.5145435756169,
+                "altitude": 0.0,
+                "roll": 62.0,
+                "yaw": 62.0,
+                "pitch": 62.0,
+                "acceleration": {
+                    "accx": 62,
+                    "accy": 62,
+                    "accz": 62
+                },
+                "gyroscope": {
+                    "gyrx": 62,
+                    "gyry": 62,
+                    "gyrz": 62
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1024284362793,
+                    28.8036708831787
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-21 10:48:58",
+                "order": 63,
+                "marker-color": "0414fb",
+                "heading": 177.2038627464092,
+                "altitude": 0.0,
+                "roll": 63.0,
+                "yaw": 63.0,
+                "pitch": 63.0,
+                "acceleration": {
+                    "accx": 63,
+                    "accy": 63,
+                    "accz": 63
+                },
+                "gyroscope": {
+                    "gyrx": 63,
+                    "gyry": 63,
+                    "gyrz": 63
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1022109985352,
+                    28.8036632537842
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-22 10:48:58",
+                "order": 64,
+                "marker-color": "0414fb",
+                "heading": 175.08861964456366,
+                "altitude": 0.0,
+                "roll": 64.0,
+                "yaw": 64.0,
+                "pitch": 64.0,
+                "acceleration": {
+                    "accx": 64,
+                    "accy": 64,
+                    "accz": 64
+                },
+                "gyroscope": {
+                    "gyrx": 64,
+                    "gyry": 64,
+                    "gyrz": 64
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1020050048828,
+                    28.8036766052246
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-23 10:48:58",
+                "order": 65,
+                "marker-color": "0414fb",
+                "heading": 174.61900555330305,
+                "altitude": 0.0,
+                "roll": 65.0,
+                "yaw": 65.0,
+                "pitch": 65.0,
+                "acceleration": {
+                    "accx": 65,
+                    "accy": 65,
+                    "accz": 65
+                },
+                "gyroscope": {
+                    "gyrx": 65,
+                    "gyry": 65,
+                    "gyrz": 65
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1017875671387,
+                    28.8037014007568
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-24 10:48:58",
+                "order": 66,
+                "marker-color": "0414fb",
+                "heading": 174.9758200085887,
+                "altitude": 0.0,
+                "roll": 66.0,
+                "yaw": 66.0,
+                "pitch": 66.0,
+                "acceleration": {
+                    "accx": 66,
+                    "accy": 66,
+                    "accz": 66
+                },
+                "gyroscope": {
+                    "gyrx": 66,
+                    "gyry": 66,
+                    "gyrz": 66
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1015739440918,
+                    28.8037281036377
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-25 10:48:58",
+                "order": 67,
+                "marker-color": "0414fb",
+                "heading": 174.79157890125794,
+                "altitude": 0.0,
+                "roll": 67.0,
+                "yaw": 67.0,
+                "pitch": 67.0,
+                "acceleration": {
+                    "accx": 67,
+                    "accy": 67,
+                    "accz": 67
+                },
+                "gyroscope": {
+                    "gyrx": 67,
+                    "gyry": 67,
+                    "gyrz": 67
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1013450622559,
+                    28.8037548065186
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-26 10:48:58",
+                "order": 68,
+                "marker-color": "0414fb",
+                "heading": 173.51084634709366,
+                "altitude": 0.0,
+                "roll": 68.0,
+                "yaw": 68.0,
+                "pitch": 68.0,
+                "acceleration": {
+                    "accx": 68,
+                    "accy": 68,
+                    "accz": 68
+                },
+                "gyroscope": {
+                    "gyrx": 68,
+                    "gyry": 68,
+                    "gyrz": 68
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1011085510254,
+                    28.803783416748
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-27 10:48:58",
+                "order": 69,
+                "marker-color": "0414fb",
+                "heading": 172.7079330943916,
+                "altitude": 0.0,
+                "roll": 69.0,
+                "yaw": 69.0,
+                "pitch": 69.0,
+                "acceleration": {
+                    "accx": 69,
+                    "accy": 69,
+                    "accz": 69
+                },
+                "gyroscope": {
+                    "gyrx": 69,
+                    "gyry": 69,
+                    "gyrz": 69
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1009063720703,
+                    28.8038139343262
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-28 10:48:58",
+                "order": 70,
+                "marker-color": "0414fb",
+                "heading": 173.25862790825113,
+                "altitude": 0.0,
+                "roll": 70.0,
+                "yaw": 70.0,
+                "pitch": 70.0,
+                "acceleration": {
+                    "accx": 70,
+                    "accy": 70,
+                    "accz": 70
+                },
+                "gyroscope": {
+                    "gyrx": 70,
+                    "gyry": 70,
+                    "gyrz": 70
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1007041931152,
+                    28.8038482666016
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-29 10:48:58",
+                "order": 71,
+                "marker-color": "0414fb",
+                "heading": 174.72809678324813,
+                "altitude": 0.0,
+                "roll": 71.0,
+                "yaw": 71.0,
+                "pitch": 71.0,
+                "acceleration": {
+                    "accx": 71,
+                    "accy": 71,
+                    "accz": 71
+                },
+                "gyroscope": {
+                    "gyrx": 71,
+                    "gyry": 71,
+                    "gyrz": 71
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1005096435547,
+                    28.8038787841797
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-30 10:48:58",
+                "order": 72,
+                "marker-color": "0414fb",
+                "heading": 170.16722001398,
+                "altitude": 0.0,
+                "roll": 72.0,
+                "yaw": 72.0,
+                "pitch": 72.0,
+                "acceleration": {
+                    "accx": 72,
+                    "accy": 72,
+                    "accz": 72
+                },
+                "gyroscope": {
+                    "gyrx": 72,
+                    "gyry": 72,
+                    "gyrz": 72
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1003227233887,
+                    28.8039016723633
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2022-12-31 10:48:58",
+                "order": 73,
+                "marker-color": "0414fb",
+                "heading": 164.0354797380536,
+                "altitude": 0.0,
+                "roll": 73.0,
+                "yaw": 73.0,
+                "pitch": 73.0,
+                "acceleration": {
+                    "accx": 73,
+                    "accy": 73,
+                    "accz": 73
+                },
+                "gyroscope": {
+                    "gyrx": 73,
+                    "gyry": 73,
+                    "gyrz": 73
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.1001319885254,
+                    28.8039455413818
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-01 10:48:58",
+                "order": 74,
+                "marker-color": "0414fb",
+                "heading": 163.74997481771368,
+                "altitude": 0.0,
+                "roll": 74.0,
+                "yaw": 74.0,
+                "pitch": 74.0,
+                "acceleration": {
+                    "accx": 74,
+                    "accy": 74,
+                    "accz": 74
+                },
+                "gyroscope": {
+                    "gyrx": 74,
+                    "gyry": 74,
+                    "gyrz": 74
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0999259948731,
+                    28.8040237426758
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-02 10:48:58",
+                "order": 75,
+                "marker-color": "0414fb",
+                "heading": 162.95777832457316,
+                "altitude": 0.0,
+                "roll": 75.0,
+                "yaw": 75.0,
+                "pitch": 75.0,
+                "acceleration": {
+                    "accx": 75,
+                    "accy": 75,
+                    "accz": 75
+                },
+                "gyroscope": {
+                    "gyrx": 75,
+                    "gyry": 75,
+                    "gyrz": 75
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.099723815918,
+                    28.8041019439697
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-03 10:48:58",
+                "order": 76,
+                "marker-color": "0414fb",
+                "heading": 161.09199691123445,
+                "altitude": 0.0,
+                "roll": 76.0,
+                "yaw": 76.0,
+                "pitch": 76.0,
+                "acceleration": {
+                    "accx": 76,
+                    "accy": 76,
+                    "accz": 76
+                },
+                "gyroscope": {
+                    "gyrx": 76,
+                    "gyry": 76,
+                    "gyrz": 76
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0994987487793,
+                    28.8041934967041
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-04 10:48:58",
+                "order": 77,
+                "marker-color": "0414fb",
+                "heading": 159.71176444962202,
+                "altitude": 0.0,
+                "roll": 77.0,
+                "yaw": 77.0,
+                "pitch": 77.0,
+                "acceleration": {
+                    "accx": 77,
+                    "accy": 77,
+                    "accz": 77
+                },
+                "gyroscope": {
+                    "gyrx": 77,
+                    "gyry": 77,
+                    "gyrz": 77
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0992889404297,
+                    28.8042888641357
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-05 10:48:58",
+                "order": 78,
+                "marker-color": "0414fb",
+                "heading": 155.8228297117297,
+                "altitude": 0.0,
+                "roll": 78.0,
+                "yaw": 78.0,
+                "pitch": 78.0,
+                "acceleration": {
+                    "accx": 78,
+                    "accy": 78,
+                    "accz": 78
+                },
+                "gyroscope": {
+                    "gyrx": 78,
+                    "gyry": 78,
+                    "gyrz": 78
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0990867614746,
+                    28.8043880462647
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-06 10:48:58",
+                "order": 79,
+                "marker-color": "0414fb",
+                "heading": 151.60391654917248,
+                "altitude": 0.0,
+                "roll": 79.0,
+                "yaw": 79.0,
+                "pitch": 79.0,
+                "acceleration": {
+                    "accx": 79,
+                    "accy": 79,
+                    "accz": 79
+                },
+                "gyroscope": {
+                    "gyrx": 79,
+                    "gyry": 79,
+                    "gyrz": 79
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0989074707031,
+                    28.8044948577881
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-07 10:48:58",
+                "order": 80,
+                "marker-color": "0414fb",
+                "heading": 151.60388452921416,
+                "altitude": 0.0,
+                "roll": 80.0,
+                "yaw": 80.0,
+                "pitch": 80.0,
+                "acceleration": {
+                    "accx": 80,
+                    "accy": 80,
+                    "accz": 80
+                },
+                "gyroscope": {
+                    "gyrx": 80,
+                    "gyry": 80,
+                    "gyrz": 80
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.098819732666,
+                    28.804557800293
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-08 10:48:58",
+                "order": 81,
+                "marker-color": "0414fb",
+                "heading": 150.52553506919503,
+                "altitude": 0.0,
+                "roll": 81.0,
+                "yaw": 81.0,
+                "pitch": 81.0,
+                "acceleration": {
+                    "accx": 81,
+                    "accy": 81,
+                    "accz": 81
+                },
+                "gyroscope": {
+                    "gyrx": 81,
+                    "gyry": 81,
+                    "gyrz": 81
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0987319946289,
+                    28.8046207427979
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-09 10:48:58",
+                "order": 82,
+                "marker-color": "0414fb",
+                "heading": 146.8513101759683,
+                "altitude": 0.0,
+                "roll": 82.0,
+                "yaw": 82.0,
+                "pitch": 82.0,
+                "acceleration": {
+                    "accx": 82,
+                    "accy": 82,
+                    "accz": 82
+                },
+                "gyroscope": {
+                    "gyrx": 82,
+                    "gyry": 82,
+                    "gyrz": 82
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0986175537109,
+                    28.8047065734863
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-10 10:48:58",
+                "order": 83,
+                "marker-color": "0414fb",
+                "heading": 145.95604220277858,
+                "altitude": 0.0,
+                "roll": 83.0,
+                "yaw": 83.0,
+                "pitch": 83.0,
+                "acceleration": {
+                    "accx": 83,
+                    "accy": 83,
+                    "accz": 83
+                },
+                "gyroscope": {
+                    "gyrx": 83,
+                    "gyry": 83,
+                    "gyrz": 83
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.098503112793,
+                    28.8048057556152
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-11 10:48:58",
+                "order": 84,
+                "marker-color": "0414fb",
+                "heading": 145.5382250823996,
+                "altitude": 0.0,
+                "roll": 84.0,
+                "yaw": 84.0,
+                "pitch": 84.0,
+                "acceleration": {
+                    "accx": 84,
+                    "accy": 84,
+                    "accz": 84
+                },
+                "gyroscope": {
+                    "gyrx": 84,
+                    "gyry": 84,
+                    "gyrz": 84
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0983924865723,
+                    28.8049049377441
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-12 10:48:58",
+                "order": 85,
+                "marker-color": "0414fb",
+                "heading": 146.59968157045,
+                "altitude": 0.0,
+                "roll": 85.0,
+                "yaw": 85.0,
+                "pitch": 85.0,
+                "acceleration": {
+                    "accx": 85,
+                    "accy": 85,
+                    "accz": 85
+                },
+                "gyroscope": {
+                    "gyrx": 85,
+                    "gyry": 85,
+                    "gyrz": 85
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0982856750488,
+                    28.8050022125244
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-13 10:48:58",
+                "order": 86,
+                "marker-color": "0414fb",
+                "heading": 147.14034320891392,
+                "altitude": 0.0,
+                "roll": 86.0,
+                "yaw": 86.0,
+                "pitch": 86.0,
+                "acceleration": {
+                    "accx": 86,
+                    "accy": 86,
+                    "accz": 86
+                },
+                "gyroscope": {
+                    "gyrx": 86,
+                    "gyry": 86,
+                    "gyrz": 86
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0981788635254,
+                    28.8050956726074
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-14 10:48:58",
+                "order": 87,
+                "marker-color": "0414fb",
+                "heading": 147.51708541396243,
+                "altitude": 0.0,
+                "roll": 87.0,
+                "yaw": 87.0,
+                "pitch": 87.0,
+                "acceleration": {
+                    "accx": 87,
+                    "accy": 87,
+                    "accz": 87
+                },
+                "gyroscope": {
+                    "gyrx": 87,
+                    "gyry": 87,
+                    "gyrz": 87
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.098072052002,
+                    28.8051872253418
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "time": "2023-01-15 10:48:58",
+                "order": 88,
+                "marker-color": "0414fb",
+                "heading": 147.51708541396243,
+                "altitude": 0.0,
+                "roll": 88.0,
+                "yaw": 88.0,
+                "pitch": 88.0,
+                "acceleration": {
+                    "accx": 88,
+                    "accy": 88,
+                    "accz": 88
+                },
+                "gyroscope": {
+                    "gyrx": 88,
+                    "gyry": 88,
+                    "gyrz": 88
+                }
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    41.0979614257812,
+                    28.8052806854248
+                ]
+            }
+        }
+    ]
+}
