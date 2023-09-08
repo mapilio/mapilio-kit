@@ -59,6 +59,7 @@ def _group_sequences_by_uuid(
 
 
 def _validate_descs(image_dir: str, image_descs: T.List[types.ImageDescriptionJSON]):
+    image_descs = [desc for desc in image_descs if "Information" not in desc]
     for desc in image_descs:
         jsonschema.validate(instance=desc, schema=types.ImageDescriptionJSONSchema)
     for desc in image_descs:
@@ -66,7 +67,7 @@ def _validate_descs(image_dir: str, image_descs: T.List[types.ImageDescriptionJS
         abspath = os.path.join(image_dir, dirpath)
         if not os.path.isfile(abspath):
             raise RuntimeError(f"Image path {abspath} not found")
-
+    return image_descs
 
 def upload_desc(
         image_desc: T.List[types.ImageDescriptionJSON],
@@ -170,7 +171,7 @@ def upload_image_dir_and_description(
 def zip_image_dir(
         image_dir: str, image_descs: T.List[types.ImageDescriptionJSON], zip_dir: str
 ):
-    _validate_descs(image_dir, image_descs)
+    image_descs=_validate_descs(image_dir, image_descs)
     sequences = _group_sequences_by_uuid(image_descs)
     os.makedirs(zip_dir, exist_ok=True)
     for sequence_uuid, sequence in sequences.items():

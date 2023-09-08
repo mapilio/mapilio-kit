@@ -82,7 +82,7 @@ Checking path/to/sample_images/ images and mapilio_image_description.json then r
 </ol>
 <pre><code>mapilio_kit video_upload "path/to/sample_images/" --desc_path "mapilio_image_description.json" --processed</code></pre>
 
-<h3>360 panorama image upload command</h3>
+<h3>360 panorama image upload</h3>
 <p>
 Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/schema/panoromic_image_description_shecma.csv">panoramic image description schema.</a>
 </p>
