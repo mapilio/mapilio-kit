@@ -43,7 +43,6 @@ pip install -r requirements.txt
   </li>
 </ol>
 
-<hr>
 
 <h2 id="usage">Usage</h2>
 <hr>
@@ -58,7 +57,7 @@ pip install -r requirements.txt
 <p>Authenticate for user `user_name`. If the user is already authenticated, it will update the credentials in the config:</p>
 <pre><code>mapilio_kit authenticate --user_name "mapilio_user_mail"
 </code></pre>
-<hr>
+
 
 <h3>Video Images upload</h3>
 <p>
@@ -82,6 +81,15 @@ Sample GoPro videos in directory path/to/videos/ into import path (must be creat
 Checking path/to/sample_images/ images and mapilio_image_description.json then run under command
 </ol>
 <pre><code>mapilio_kit video_upload "path/to/sample_images/" --desc_path "mapilio_image_description.json" --processed</code></pre>
+
+<h3>360 panorama image upload command</h3>
+<p>
+Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/schema/panoromic_image_description_shecma.csv">panoramic image description schema.</a>
+</p>
+<pre><code>
+mapilio_kit image_and_csv_upload "path/to/images" --csv_path "path/to/test.csv" --user_name "example@mapilio.com"
+</code></pre>
+
 
 <h2 id="contributing">Contributing</h2>
 
