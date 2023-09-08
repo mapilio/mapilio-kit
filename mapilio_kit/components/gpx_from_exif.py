@@ -4,7 +4,7 @@ from error import MapilioGeoTaggingError
 
 
 def gpx_from_exif(image: str) -> GPXPointAngle:
-    exif = ImageExifModifier(image)
+    exif = ExifRead(image)
 
     lon, lat = exif.calc_lon_lat()
     if lat is None or lon is None:

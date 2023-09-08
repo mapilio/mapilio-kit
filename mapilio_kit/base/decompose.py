@@ -2,8 +2,8 @@ import argparse
 from insert_MAPJson import insert_MAPJson
 from geotag_property_handler import geotag_property_handler
 from metadata_property_handler import metadata_property_handler
-
 from sequence_property_handler import sequence_property_handler
+
 
 class Decompose():
     name = "decompose"
@@ -199,17 +199,19 @@ class Decompose():
             default=5,
             required=False,
         )
-    def filter_args(self,func, args):
+
+    def filter_args(self, func, args):
         return {k: v for k, v in args.items() if k in func.__code__.co_varnames}
+
     def perform_task(self, vars_args: dict):
-        metadata_property_handler_args = self.filter_args(metadata_property_handler,vars_args)
+        metadata_property_handler_args = self.filter_args(metadata_property_handler, vars_args)
         metadata_property_handler(**metadata_property_handler_args)
 
-        geotag_property_handler_args = self.filter_args(geotag_property_handler,vars_args)
+        geotag_property_handler_args = self.filter_args(geotag_property_handler, vars_args)
         geotag_property_handler(**geotag_property_handler_args)
 
-        sequence_property_handler_args = self.filter_args(sequence_property_handler,vars_args)
+        sequence_property_handler_args = self.filter_args(sequence_property_handler, vars_args)
         sequence_property_handler(**sequence_property_handler_args)
 
-        insert_MAPJson_args = self.filter_args(insert_MAPJson,vars_args)
+        insert_MAPJson_args = self.filter_args(insert_MAPJson, vars_args)
         insert_MAPJson(**insert_MAPJson_args)
