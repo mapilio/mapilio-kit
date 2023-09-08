@@ -4,7 +4,7 @@ import os
 sys.path.append(os.getcwd() + r"/mapilio_kit/components")
 import argparse
 from .components.version import VERSION
-from .base import loader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocesser, gopro360max_processer
+from .base import loader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocesser, gopro360max_processer, Zipper
 from .components import arguments
 
 FUNCTION_MAP = {'Upload': loader,
@@ -13,7 +13,8 @@ FUNCTION_MAP = {'Upload': loader,
                 'VideoUpload': video_loader,
                 "image_and_csv_upload": image_and_csv_uploader,
                 "CSVprocesser": CSVprocesser,
-                "gopro360max_processer": gopro360max_processer}
+                "gopro360max_processer": gopro360max_processer,
+                "Zipper": Zipper}
 
 
 def get_parser(subparsers, funtion_map):

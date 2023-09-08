@@ -1,12 +1,10 @@
 import os
-import inspect
 import argparse
-
 from video_processor import video_sampler
 
 
 class Sampler:
-    name = "sample_video"
+    name = "Sampler"
     help = "sample video into images"
 
     def fundamental_arguments(self, parser: argparse.ArgumentParser):
