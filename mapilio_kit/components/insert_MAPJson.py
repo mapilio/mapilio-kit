@@ -47,7 +47,7 @@ def get_final_mapilio_image_description(
 def insert_MAPJson(
     import_path,
     skip_subfolders=False,
-    skip_process_errors=False,
+    skip_process_errors=True,
     overwrite_all_EXIF_tags=False,
     overwrite_EXIF_time_tag=False,
     overwrite_EXIF_gps_tag=False,

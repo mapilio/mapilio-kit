@@ -159,7 +159,7 @@ def metadata_property_handler(
         orientation = processing.format_orientation(orientation)
 
     for image in tqdm(
-        process_file_list, unit="files", desc="Processing import meta properties"
+        process_file_list, unit="files", desc="metadata properties being processed"
     ):
         import_meta_data_properties = get_import_meta_properties_exif(image)
         desc = finalize_import_properties_process(

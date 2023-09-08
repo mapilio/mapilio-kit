@@ -54,8 +54,6 @@ class Upload:
         if not vars_args['processed']:
             from . import decomposer
             decomposer().perform_task(vars_args)
-        print(vars_args)
 
         valid_args = self.filter_args(vars_args)
-        print(valid_args)
         return upload(**valid_args)
