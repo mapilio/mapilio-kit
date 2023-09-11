@@ -136,6 +136,13 @@ mapilio_kit upload ~/Desktop/OutputData/frames --user_name="username@mapilio.com
 
 ```
 
+<h3>Zip and upload</h3>
+
+<h4>Examples</h4>
+<pre><code>mapilio_kit zip  "path/to/images"  "path/to/zipfolder"
+mapiio_kit upload "path/to/zipfolder" --proccessed
+</code></pre>
+
 <h2 id="contributing">Contributing</h2>
 
 <p>We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:</p>
