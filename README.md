@@ -101,12 +101,12 @@ The decompose command geotags images in the given directory. It extracts the req
 
 
 <h3>Timelaps Images upload</h3>
-<p> .</p>
+<p>If you haven't processed your images, please use this command below</p>
 <h4>Examples</h4>
 <pre><code>mapilio_kit upload "path/to/images" 
 </code></pre>
 
-<p> .</p>
+<p>If you have processed your images already, use this one instead</p>
 <h4>Examples</h4>
 <pre><code>mapilio_kit upload "path/to/images" --processed
 </code></pre>
