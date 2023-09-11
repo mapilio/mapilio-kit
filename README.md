@@ -86,8 +86,29 @@ Checking path/to/sample_images/ images and mapilio_image_description.json then r
 <p>
 Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/schema/panoromic_image_description_shecma.csv">panoramic image description schema.</a>
 </p>
-<pre><code>
-mapilio_kit image_and_csv_upload "path/to/images" --csv_path "path/to/test.csv" --user_name "example@mapilio.com"
+<h4>Examples</h4>
+<pre><code>mapilio_kit image_and_csv_upload "path/to/images" --csv_path "path/to/test.csv" --user_name "example@mapilio.com"
+</code></pre>
+
+
+
+<h3>Decompose Images</h3>
+<p>
+The decompose command geotags images in the given directory. It extracts the required and optional metadata from image EXIF (or the other supported geotag sources), and writes all the metadata (or process errors) in an image description file, which will be read during upload.</p>
+<h4>Examples</h4>
+<pre><code>mapilio_kit decompose "path/to/images" 
+</code></pre>
+
+
+<h3>Timelaps Images upload</h3>
+<p> .</p>
+<h4>Examples</h4>
+<pre><code>mapilio_kit upload "path/to/images" 
+</code></pre>
+
+<p> .</p>
+<h4>Examples</h4>
+<pre><code>mapilio_kit upload "path/to/images" --processed
 </code></pre>
 
 
