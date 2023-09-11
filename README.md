@@ -112,6 +112,30 @@ The decompose command geotags images in the given directory. It extracts the req
 </code></pre>
 
 
+### **GoPro Max .360 videos**
+
+#### Must be installed with this method `./max_extractor_install.sh` 
+
+1. First, create equirectangular convert script such as below 
+
+python script config
+- --video-file {video file path}
+- --output-folder {output frames path}
+- --bin-dir {equirectanguler bin path}
+  
+```shell
+mapilio_kit gopro360max_process --video-file ~/Desktop/GS017111.360 --output-folder ~/Desktop/OutputData/ --bin-dir ../../bin
+```
+
+2. Now we can upload frames
+
+```shell
+mapilio_kit upload ~/Desktop/OutputData/frames --user_name="username@mapilio.com" \
+                    --geotag_source "gpx" \
+                    --geotag_source_path "~Desktop/gps_track.gpx"
+
+```
+
 <h2 id="contributing">Contributing</h2>
 
 <p>We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:</p>
