@@ -28,6 +28,13 @@ class Authenticate:
             required=False,
         )
         parser.add_argument(
+            "--verbose", "-v",
+            help="Provides additional details for users",
+            action="store_true",
+            default=False,
+            required=False,
+        )
+        parser.add_argument(
             "--jwt", help="JWT authentication token", default=None, required=False
         )
         parser.add_argument(

@@ -11,7 +11,8 @@ def edit_config(
         jwt=None,
         force_overwrite=False,
         user_key=None,
-        gui=None
+        gui=None,
+        verbose=False,
 ):
     if config_file is None:
         config_file = config.MAPILIO_CONFIG_PATH
@@ -25,6 +26,7 @@ def edit_config(
 
         user_items = {
             "SettingsUsername": user_name,
+            "SettingsUserPassword": user_password,
             "SettingsUserKey": user_key,
             "user_upload_token": jwt,
         }
@@ -55,8 +57,12 @@ def edit_config(
     # safety check if section exists, otherwise add it
     if user_name in config_object.sections():
         if not force_overwrite:
-            print("Warning, mail exists with the following items : ")
-            print(config.load_user(config_object, user_name))
+            if verbose:
+                print("Warning, mail exists with the following items : ")
+                print(config.load_user(config_object, user_name))
+            else:
+                print("Warning, mail exists")
+                config.load_user(config_object, user_name)
             sure = input(
                 "Are you sure you would like to re-authenticate (current parameters will be overwritten) [y,Y,yes,Yes]?"
             )
@@ -84,6 +90,7 @@ def edit_config(
 
         user_items = {
             "SettingsUsername": user_name,
+            "SettingsUserPassword": user_password,
             "SettingsUserKey": str(user_key),
             "user_upload_token": upload_token,
         }
@@ -92,7 +99,7 @@ def edit_config(
         if gui is None:
             return False
         else:
-            user_items = prompt_user_for_user_items(user_name)
+            user_items = prompt_user_for_user_items(user_name, user_password)
 
     config.update_config(config_file, user_name, user_items)
     return True

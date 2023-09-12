@@ -26,10 +26,14 @@ def wrap_http_exception(ex: requests.HTTPError):
     return HTTPError("\n".join(lines))
 
 
-def prompt_user_for_user_items(user_name: str) -> types.User:
+def prompt_user_for_user_items(user_name, user_password) -> types.User:
     print(f"Sign in for user {user_name}")
-    user_email = input("Enter your Mapilio user name: ")
-    user_password = getpass.getpass("Enter Mapilio user password: ")
+    user_email = input("Enter your Mapilio user email: ")
+
+    if user_password is None:
+        user_password = getpass.getpass("Enter Mapilio user password: ")
+    else:
+        user_password = user_password
 
     try:
         data = auth_config.get_upload_token(user_email, user_password)
@@ -41,7 +45,7 @@ def prompt_user_for_user_items(user_name: str) -> types.User:
                 title = resp.get("error", {}).get("error_user_title")
                 message = resp.get("error", {}).get("error_user_msg")
                 LOG.error(f"{title}: {message}")
-                return prompt_user_for_user_items(user_name)
+                return prompt_user_for_user_items(user_name, user_password)
             else:
                 raise wrap_http_exception(ex)
         else:
@@ -59,6 +63,7 @@ def prompt_user_for_user_items(user_name: str) -> types.User:
 
     return {
         "SettingsUsername": user_name,
+        "SettingsUserPassword": user_password,
         "SettingsUserKey": user_key,
         "user_upload_token": upload_token,
     }
@@ -75,13 +80,13 @@ def list_all_users() -> T.List[types.User]:
         return []
 
 
-def authenticate_user(user_name: str) -> types.User:
+def authenticate_user(user_name: str, ) -> types.User:
     if os.path.isfile(MAPILIO_CONFIG_PATH):
         global_config_object = config.load_config(MAPILIO_CONFIG_PATH)
         if user_name in global_config_object.sections():
             return config.load_user(global_config_object, user_name)
 
-    user_items = prompt_user_for_user_items(user_name)
+    user_items = prompt_user_for_user_items(user_name, user_password)
 
     config.create_config(MAPILIO_CONFIG_PATH)
     config.update_config(MAPILIO_CONFIG_PATH, user_name, user_items)
