@@ -3,7 +3,7 @@ import argparse
 
 
 class CSVprocess:
-    name = "CSVprocesser"
+    name = "CSVprocessor"
     help = "create panorama csv to description format to Mapilio"
 
     def fundamental_arguments(self, parser: argparse.ArgumentParser):
