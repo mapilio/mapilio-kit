@@ -4,7 +4,7 @@ import io
 
 import piexif
 
-from geo import decimal_to_dms
+from calculation.geospatial_utils import decimal_to_dms
 from types_fmt import FinalImageDescription
 
 

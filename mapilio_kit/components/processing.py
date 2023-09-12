@@ -11,7 +11,7 @@ import types_fmt as types
 from error import MapilioGeoTaggingError
 from exif_metadata_reader import ExifRead
 from exif_metadata_writer import ImageExifModifier
-from geo import normalize_bearing, interpolate_lat_lon, Point
+from calculation.geospatial_utils import normalize_bearing, interpolate_lat_lon, Point
 from gps_parser import get_lat_lon_time_from_gpx, get_lat_lon_time_from_nmea
 from gpx_from_exif import gpx_from_exif
 from gpx_from_gopro import gpx_from_gopro
