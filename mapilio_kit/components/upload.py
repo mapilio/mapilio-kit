@@ -59,7 +59,7 @@ def zip_images(
 
 
 def user_items_retriever(
-    user_name: T.Optional[str] = None, organization_key: T.Optional[str] = None
+    user_name: T.Optional[str] = None, organization_key: T.Optional[str] = None, user_password: T.Optional[str] = None
 ) -> types.User:
     if user_name is None:
         all_user_items = login.list_all_users()
@@ -72,7 +72,7 @@ def user_items_retriever(
                 f"Found multiple Mapilio accounts. Please specify one with --user_name"
             )
     else:
-        user_items = login.authenticate_user(user_name)
+        user_items = login.authenticate_user(user_name, user_password)
 
     # if organization_key is not None:
     #     try:
