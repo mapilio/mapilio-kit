@@ -29,7 +29,7 @@ class Authenticate:
         )
         parser.add_argument(
             "--verbose", "-v",
-            help="Provides additional details about the authentication process",
+            help="Provides additional details for users",
             action="store_true",
             default=False,
             required=False,
