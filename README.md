@@ -9,7 +9,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#getting-started">Getting Started</a></li>
   <li><a href="#usage">Usage</a></li>
-  <li><a href="#contributing">Contributing</a></li>
+  <li><a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/CONTRIBUTING.md">Contributing</a></li>
   <li><a href="#license">License</a></li>
   <li><a href="#to-do">To-Do</a></li>
 </ul>
