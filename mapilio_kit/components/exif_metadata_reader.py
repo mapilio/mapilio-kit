@@ -5,7 +5,7 @@ import os
 
 import exifread
 
-from geo import normalize_bearing
+from calculation.geospatial_utils import normalize_bearing
 from exifread.utils import Ratio
 
 

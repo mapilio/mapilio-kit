@@ -5,7 +5,7 @@ import uuid
 
 import image_log, types_fmt
 import types_fmt as types
-from geo import calculate_compass_bearing, gps_distance, calculate_bearing_difference, generate_pairs
+from calculation.geospatial_utils import calculate_compass_bearing, gps_distance, calculate_bearing_difference, generate_pairs
 from error import MapilioDuplicationError
 
 MAX_SEQUENCE_LENGTH = 250
