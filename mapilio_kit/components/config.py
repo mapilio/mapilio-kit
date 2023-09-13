@@ -61,6 +61,12 @@ def add_user(
         print(f"Error, user {user_name} already exists")
     save_config(config, config_path)
 
+def delete_user(config: configparser.ConfigParser, user_name: str, config_path: str) -> None:
+    if user_name in config.sections():
+        config.remove_section(user_name)
+        save_config(config, config_path)
+    else:
+        print(f"Error, user {user_name} does not exist")
 
 def set_user_items(
     config: configparser.ConfigParser, user_name: str, user_items: types.User

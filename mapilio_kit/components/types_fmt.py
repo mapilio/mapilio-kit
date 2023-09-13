@@ -89,6 +89,7 @@ UserItemAttributes = {
         "OrganizationKey": {"type": "string"},
         "OrganizationProjectKey": {"type": "string"},
         "SettingsUsername": {"type": "string"},
+        "SettingsUserPassword": {"type": "string"},
         "SettingsUserKey": {"type": "string"},
         "user_upload_token": {"type": "string"},
     },
