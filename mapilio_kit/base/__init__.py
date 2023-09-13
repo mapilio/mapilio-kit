@@ -1,4 +1,4 @@
-from .upload import Upload
+from .loader import Upload
 from .decompose import Decompose
 from .authenticate import Authenticate
 from .sampler import Sampler

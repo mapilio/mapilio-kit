@@ -8,6 +8,8 @@ echo "|_|  |_/_/   \_\_|  |___|_____|___\___/    |_|\_\___| |_|  "
 python3 -m virtualenv mapilio_venv
 . mapilio_venv/bin/activate
 
+pip install -r requirements.txt
+
 python setup.py install --force
 mapilio_kit --version
 
