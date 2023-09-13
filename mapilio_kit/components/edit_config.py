@@ -1,6 +1,6 @@
 import os
 from login import prompt_user_for_user_items
-import  auth_config, config
+import auth_config, config
 
 
 def edit_config(
@@ -41,6 +41,7 @@ def edit_config(
             "user_upload_token": "Dummy_upload_token",
         }
         config.update_config(config_file, user_name, user_items)
+        print("User key added successfully")
         return
 
     if not user_name:
@@ -49,6 +50,7 @@ def edit_config(
                 "Enter the Mapilio mail you would like to (re)authenticate: "
             )
         else:
+            print("Please specify a user name")
             return
 
     # config file must exist at this step
@@ -79,6 +81,7 @@ def edit_config(
         try:
             data = auth_config.get_upload_token(user_email, user_password)
         except:
+            print("Authentication failed, please try again.")
             return False
         upload_token = data["token"]
         user_key = data["id"]
