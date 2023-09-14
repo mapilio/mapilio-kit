@@ -1,10 +1,8 @@
 import os
 import getpass
-
-from upload import upload, zip_images
+from upload import upload, zip_images, user_items_retriever
 from edit_config import edit_config
 from process_csv_to_description import process_csv_to_description
-
 
 class Run:
     name = "run"
@@ -150,8 +148,13 @@ class Run:
         return {arg: None for arg in arg_names}
 
     def perform_task(self, vars_args: dict):
-        # if self.check_auth():
-        if True:
+
+        if len(user_items_retriever()) == 0:
+            check_authenticate=self.check_auth()
+        else:
+            check_authenticate=True
+
+        if check_authenticate:
             func = input("Choose your process:\n\
                          1. image upload (Hint: Receives your images or time lapse images, processes them and uploads.)\n\
                          2. Video upload (Hint: Takes your video, processes it (as 1 second timelapse photos) and uploads.)\n\
@@ -185,7 +188,7 @@ class Run:
             elif func == "q":
                 exit()
             else:
-                print("\n\nPlease enter a valid option\n\n")
+                print("\n\nYou've entered an invalid option. Please enter a valid option\n\n")
                 Run().perform_task(vars_args=None)
 
 
