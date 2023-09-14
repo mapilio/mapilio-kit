@@ -46,7 +46,7 @@ class Run:
     def perform_image_upload(self):
         args = self.get_args(upload)
         import_path = input("Enter your image path: ").strip()
-        processed = input("Are your images processed [y,Y,yes,Yes]?").strip()
+        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
 
         if import_path and processed:
             args["import_path"] = import_path
@@ -76,7 +76,7 @@ class Run:
     def perform_video_upload(self):
         args = self.get_args(upload)
         video_import_path = input("Enter your video path: ").strip()
-        processed = input("Are your images processed [y,Y,yes,Yes]?").strip()
+        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
             import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
             print(import_path)
