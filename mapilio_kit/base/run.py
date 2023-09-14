@@ -49,7 +49,7 @@ class Run:
     def perform_image_upload(self):
         args = self.get_args(upload)
         import_path = input("Enter your image path: ").strip()
-        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
+        processed = input("Are your images processed already [y,Y,yes,Yes]? (Hint: will convert your images to exif data and write them to a json file):").strip()
 
         if import_path and processed:
             args["import_path"] = import_path
@@ -153,10 +153,10 @@ class Run:
         # if self.check_auth():
         if True:
             func = input("Choose your process:\n\
-                         1. image upload \n\
-                         2. Video upload\n\
-                         3. gopro360max upload\n\
-                         4. Advance options\n"
+                         1. image upload (Hint: Receives your images or time lapse images, processes them and uploads.)\n\
+                         2. Video upload (Hint: Takes your video, processes it (as 1 second timelapse photos) and uploads.)\n\
+                         3. gopro360max upload (Hint: Takes your panoramic images, processes and uploads them.)\n\
+                         4. Advance options (Hint: This option gives access to more advanced processing options.)\n"
                          )
 
             if func == "1" or func == "image upload":
@@ -170,9 +170,9 @@ class Run:
 
             elif func == "4" or func == "Advance options":
                 advanced_func = input("Choose your advanced process:\n\
-                                         4.1 Decompose \n\
-                                         4.2 360 panorama image upload\n\
-                                         4.3 Zip upload\n"
+                                         4.1 Decompose (Hint: Used for processing data in a more advanced and detailed way)\n\
+                                         4.2 360 panorama image upload (Hint: Used for uploading 360 degree panorama pictures. This is suitable for pictures that containing wide-angle or panorama pictures.)\n\
+                                         4.3 Zip upload (Hint: It allows you to upload multiple media files within a zip file. This can facilitate large data uploads.)\n"
                                       )
                 if advanced_func == "4.1" or advanced_func == "Decompose":
                     self.perform_decompose()
