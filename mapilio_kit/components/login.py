@@ -26,10 +26,12 @@ def wrap_http_exception(ex: requests.HTTPError):
     return HTTPError("\n".join(lines))
 
 
-def prompt_user_for_user_items(user_name, user_password) -> types.User:
+def prompt_user_for_user_items(user_name, user_password, user_email) -> types.User:
     print(f"Sign in for user {user_name}")
-    user_email = input("Enter your Mapilio user email: ")
-
+    if user_email is None:
+        user_email = input("Enter your Mapilio user email: ")
+    else:
+        user_email = user_email
     if user_password is None:
         user_password = getpass.getpass("Enter Mapilio user password: ")
     else:
