@@ -1,9 +1,10 @@
 import os
 import getpass
 from login import list_all_users
-from upload import upload, zip_images, user_items_retriever
+from upload import upload, zip_images
 from edit_config import edit_config
 from process_csv_to_description import process_csv_to_description
+
 
 class Run:
     name = "run"
@@ -48,7 +49,8 @@ class Run:
     def perform_image_upload(self):
         args = self.get_args(upload)
         import_path = input("Enter your image path: ").strip()
-        processed = input("Are your images processed already [y,Y,yes,Yes]? (Hint: will convert your images to exif data and write them to a json file):").strip()
+        processed = input(
+            "Are your images processed already [y,Y,yes,Yes]? (Hint: will convert your images to exif data and write them to a json file):").strip()
 
         if import_path and processed:
             args["import_path"] = import_path
@@ -93,7 +95,7 @@ class Run:
 
     def perform_video_upload(self):
         args = self.get_args(upload)
-        video_import_path = input("Enter your video path: ").strip()
+        video_import_path = input("Enter your video folder path: ").strip()
         processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
             import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
@@ -135,7 +137,8 @@ class Run:
             check_zip = self.zipper.perform_task(args)
             if check_zip:
                 zip_file_path = \
-                [os.path.join(zip_dir, filename) for filename in os.listdir(zip_dir) if filename.endswith(".zip")][0]
+                    [os.path.join(zip_dir, filename) for filename in os.listdir(zip_dir) if filename.endswith(".zip")][
+                        0]
                 args["processed"] = True
                 args["import_path"] = zip_file_path
                 self.uploader.perform_task(args)
@@ -151,15 +154,15 @@ class Run:
     def perform_task(self, vars_args: dict):
 
         if len(list_all_users()) == 0:
-            check_authenticate=self.check_auth()
+            check_authenticate = self.check_auth()
         else:
-            check_authenticate=True
+            check_authenticate = True
 
         if check_authenticate:
             func = input("Choose your process:\n\
-                         1. image upload (Hint: Receives your images or time lapse images, processes them and uploads.)\n\
+                         1. image upload (Hint: Receives your images or timelapse images, processes them and uploads.)\n\
                          2. Video upload (Hint: Takes your video, processes it (as 1 second timelapse photos) and uploads.)\n\
-                         3. gopro360max upload (Hint: Takes your panoramic images, processes and uploads them.)\n\
+                         3. gopro360max upload (Hint: Takes your panoramic images, processes and uploads them.) still in progress!\n\
                          4. Advance options (Hint: This option gives access to more advanced processing options.)\n"
                          )
 
