@@ -16,9 +16,13 @@ class Run:
         from . import authenticator
         from . import uploader
         from . import video_loader
+        from . import decomposer
         self.authenticator = authenticator()
         self.uploader = uploader()
         self.video_loader = video_loader()
+        self.decomposer = decomposer()
+        self.video_sample_interval = 1
+        self.interpolate_directions = True
 
     def fundamental_arguments(self, parser):
         group = parser.add_argument_group("run options")
@@ -42,8 +46,7 @@ class Run:
     def perform_image_upload(self):
         args = self.get_args(upload)
         import_path = input("Enter your image path: ").strip()
-        processed = input("Are your images processed [y,Y,yes,Yes]?").strip()
-
+        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
 
         if import_path and processed:
             args["import_path"] = import_path
@@ -60,30 +63,38 @@ class Run:
             self.perform_image_upload()
 
     def perform_decompose(self):
-        pass
+        args = self.get_args(edit_config)
+        import_path = input("Enter your image path: ").strip()
+
+        if import_path:
+            args["import_path"] = import_path
+            return self.decomposer.perform_task(args)
+        else:
+            print("Please enter your image path and processed properly \n\n\n\n\n")
+            self.perform_image_upload()
 
     def perform_video_upload(self):
         args = self.get_args(upload)
         video_import_path = input("Enter your video path: ").strip()
-        processed = input("Are your images processed [y,Y,yes,Yes]?").strip()
+        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
-            import_path = input("Enter your sample images path: ").strip()
+            import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
+            print(import_path)
             args["import_path"] = import_path
             if processed not in ["y", "Y", "yes", "Yes"]:
                 args["video_import_path"] = video_import_path
                 geotag_source = input(
                     "Enter your geotag source (choices=['exif', 'gpx', 'gopro_videos', 'nmea']): ").strip()
-                interpolate_directions = True
-                video_sample_interval = int(input("Enter your video sample interval: ").strip())
+                # self.video_sample_interval = int(input("Enter your video sample interval: ").strip())
                 args["processed"] = False
                 args["geotag_source"] = geotag_source
-                args["interpolate_directions"] = interpolate_directions
-                args["video_sample_interval"] = video_sample_interval
+                args["interpolate_directions"] = self.interpolate_directions
+                args["video_sample_interval"] = self.video_sample_interval
                 return self.video_loader.perform_task(args)
 
 
             else:
-                desc_path = input("Enter your description json path: ").strip()
+                # desc_path = input("Enter your description json path: ").strip()
                 # args["desc_path"] = desc_path
                 args["processed"] = True
                 return self.uploader.perform_task(args)
@@ -92,7 +103,6 @@ class Run:
         else:
             print("Please enter your image path and processed properly \n\n\n\n\n")
             self.perform_video_upload()
-
 
     def gopro360max_upload(self):
         pass
@@ -127,7 +137,13 @@ class Run:
                                          5.2 360-panorama-image-upload\n\
                                          5.3 Zip-upload\n"
                                       )
-                if advanced_func == "q":
+                if advanced_func == "5.1" or advanced_func == "Decompose":
+                    self.perform_decompose()
+                if advanced_func == "5.2" or advanced_func == "360-panorama-image-upload":
+                    pass
+                if advanced_func == "5.3" or advanced_func == "Zip-upload":
+                    pass
+                elif advanced_func == "q":
                     exit()
             elif func == "q":
                 exit()
@@ -135,46 +151,6 @@ class Run:
                 print("\n\nPlease enter a valid option\n\n")
                 Run().perform_task(vars_args=None)
 
-import configparser
-
-def load_config(config_path: str) -> configparser.ConfigParser:
-    if not os.path.isfile(config_path):
-        raise RuntimeError(f"config {config_path} does not exist")
-    config = configparser.ConfigParser()
-    config.optionxform = str  # type: ignore
-    config.read(config_path)
-    return config
-
-
-def save_config(config: configparser.ConfigParser, config_path: str) -> None:
-
-    with open(config_path, "w") as cfg:
-        print(cfg)
-        config.write(cfg)
-
-def delete_user(config: configparser.ConfigParser, user_name: str, config_path: str) -> None:
-    print(config.sections())
-
-    if user_name in config.sections():
-        config.remove_section(user_name)
-        save_config(config, config_path)
-    else:
-        print(f"Error, user {user_name} does not exist")
-MAPILIO_CONFIG_PATH = os.getenv(
-    "MAPILIO_CONFIG_PATH",
-    os.path.join(
-        os.path.expanduser("~"),
-        ".config",
-        "mapilio",
-        "configs",
-        "CLIENT_USERS",
-    ),
-)
 if __name__ == "__main__":
     print("Welcome to Mapilio-kit\n")
     Run().perform_task(vars_args=None)
-
-    # global_config_object = load_config(MAPILIO_CONFIG_PATH)
-    # user_name = "omer_faruk_karaboga"
-    # delete_user(global_config_object, user_name, MAPILIO_CONFIG_PATH)
-
