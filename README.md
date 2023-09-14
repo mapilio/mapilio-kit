@@ -39,9 +39,8 @@ chmod +x install.sh
 source ./install.sh
 </code></pre>
   </li>
-</ol>
-
-<strong>Necessary tools:</strong>
+  <li>
+    <strong>Necessary tools:</strong>
 <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
 
 <p>You can download <code>ffmpeg</code> from <a href="https://ffmpeg.org/download.html">here</a>. Make sure it is executable and put the downloaded binaries in your <code>$PATH</code>. You can also install <code>ffmpeg</code> with your favorite package manager. For example:</p>
@@ -68,6 +67,9 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install ffmpeg
 choco install exiftool
 </pre>
+
+  </li>
+</ol>
 
 
 <h1 id="usage">Usage</h1>
