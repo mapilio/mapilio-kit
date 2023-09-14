@@ -67,20 +67,19 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManage
 choco install ffmpeg
 choco install exiftool
 </pre>
-
-  </li>
 </ol>
+
 
 
 <h1 id="usage">Usage</h1>
 <hr>
-<h2>Basic Usage</h2>
+<h2>Magic Usage</h2>
 <p>To use basic usage simply run this command below:</p>
 <h4>Examples</h4>
 <pre><code>mapilio_kit run
 </code></pre>
 
-<h2>Advence Usage</h3>
+<h2>Advance Usage</h2>
 
 <h3>User Authentication</h3>
 
@@ -182,5 +181,3 @@ mapiio_kit upload "path/to/zipfolder" --proccessed
 <h2 id="license">License</h2>
 
 <p>This project is licensed under the MIT LICENSE - see the <code>LICENSE.md</code> file for details.</p>
-
-<hr>
