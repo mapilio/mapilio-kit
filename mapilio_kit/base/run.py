@@ -1,5 +1,6 @@
 import os
 import getpass
+import subprocess
 from login import list_all_users
 from upload import upload, zip_images
 from edit_config import edit_config
@@ -31,6 +32,8 @@ class Run:
         group = parser.add_argument_group("run options")
 
     def check_auth(self):
+        print("Please enter your Mapilio account information to continue.\n"
+              "If you don't have a Mapilio account, please create one at https://mapilio.com/ \n")
         user_name = input("Enter your username: ").strip()
         user_email = input("Enter your email: ").strip()
         user_password = getpass.getpass("Enter Mapilio user password: ").strip()
@@ -47,6 +50,11 @@ class Run:
             self.check_auth()
 
     def perform_image_upload(self):
+        try:
+            result = subprocess.run(['exiftool', '-ver'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except FileNotFoundError:
+            print("Please install exiftool\n\n\n\n\n")
+            exit()
         args = self.get_args(upload)
         import_path = input("Enter your image path: ").strip()
         processed = input(
@@ -94,6 +102,11 @@ class Run:
             self.perform_decompose()
 
     def perform_video_upload(self):
+        try:
+            result = subprocess.run(['ffmpeg', '-version'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        except FileNotFoundError:
+            print("Please install ffmpeg\n\n\n\n\n")
+            exit()
         args = self.get_args(upload)
         video_import_path = input("Enter your video folder path: ").strip()
         processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
@@ -152,6 +165,9 @@ class Run:
         return {arg: None for arg in arg_names}
 
     def perform_task(self, vars_args: dict):
+        if vars_args is not None:
+            print("Welcome to Mapilio-kit\n"
+                  "This is a tool that allows you to upload your images, videos and 360 degree panorama images to Mapilio.\n")
 
         if len(list_all_users()) == 0:
             check_authenticate = self.check_auth()
@@ -177,18 +193,18 @@ class Run:
 
             elif func == "4" or func == "Advance options":
                 advanced_func = input("Choose your advanced process:\n\
-                                         4.1 Decompose (Hint: Used for processing data in a more advanced and detailed way)\n\
-                                         4.2 360 panorama image upload (Hint: Used for uploading 360 degree panorama pictures. This is suitable for pictures that containing wide-angle or panorama pictures.)\n\
-                                         4.3 Zip upload (Hint: It allows you to upload multiple media files within a zip file. This can facilitate large data uploads.)\n"
+                                         1 Decompose (Hint: Used for processing data in a more advanced and detailed way)\n\
+                                         2 360 panorama image upload (Hint: Used for uploading 360 degree panorama pictures. This is suitable for pictures that containing wide-angle or panorama pictures.)\n"
                                       )
-                if advanced_func == "4.1" or advanced_func == "Decompose":
+                if advanced_func == "1" or advanced_func == "Decompose":
                     self.perform_decompose()
-                if advanced_func == "4.2" or advanced_func == "360 panorama image upload":
+                if advanced_func == "2" or advanced_func == "360 panorama image upload":
                     self.panorama_image_upload()
-                if advanced_func == "4.3" or advanced_func == "Zip upload":
-                    self.zip_upload()
                 elif advanced_func == "q":
                     exit()
+                else:
+                    print("\n\nYou've entered an invalid option. Please enter a valid option\n\n")
+                    Run().perform_task(vars_args=None)
             elif func == "q":
                 exit()
             else:
@@ -197,5 +213,4 @@ class Run:
 
 
 if __name__ == "__main__":
-    print("Welcome to Mapilio-kit\n")
     Run().perform_task(vars_args=None)
