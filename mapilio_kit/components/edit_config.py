@@ -47,10 +47,8 @@ def edit_config(
     if not user_name:
         if gui is not None:
             user_name = input(
-                "Enter the Mapilio mail you would like to (re)authenticate: "
-            )
+                "Please enter your user_name (this will be used to identify your mail): ")
         else:
-            print("Please specify a user name")
             return
 
     # config file must exist at this step
@@ -80,6 +78,7 @@ def edit_config(
     if user_email and user_password:
         try:
             data = auth_config.get_upload_token(user_email, user_password)
+            print("Authentication successfully done.")
         except:
             print("Authentication failed, please try again.")
             return False
@@ -88,7 +87,7 @@ def edit_config(
 
         if not upload_token:
             raise RuntimeError(
-                f"Authentication failed for mail {user_name}, please try again."
+                f"Authentication failed for user {user_name}, please try again."
             )
 
         user_items = {
@@ -102,7 +101,8 @@ def edit_config(
         if gui is None:
             return False
         else:
-            user_items = prompt_user_for_user_items(user_name, user_password)
+            user_items = prompt_user_for_user_items(user_name, user_password, user_email)
+
 
     config.update_config(config_file, user_name, user_items)
     return True
