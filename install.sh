@@ -10,7 +10,7 @@ python3 -m virtualenv mapilio_venv
 
 pip install -r requirements.txt
 
-python setup.py install --force
+python3 setup.py install --force
 mapilio_kit --version
 
 echo "Installation has completed"
