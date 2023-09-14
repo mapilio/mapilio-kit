@@ -1,9 +1,7 @@
-import sys
 import os
 import getpass
 
-sys.path.append(os.getcwd() + r"/mapilio_kit/components")
-from upload import upload
+from upload import upload, zip_images
 from edit_config import edit_config
 from process_csv_to_description import process_csv_to_description
 
@@ -19,11 +17,13 @@ class Run:
         from . import video_loader
         from . import decomposer
         from . import image_and_csv_uploader
+        from . import Zipper
         self.authenticator = authenticator()
         self.uploader = uploader()
         self.video_loader = video_loader()
         self.decomposer = decomposer()
         self.image_and_csv_uploader = image_and_csv_uploader()
+        self.zipper = Zipper()
         self.video_sample_interval = 1
         self.interpolate_directions = True
 
@@ -67,7 +67,6 @@ class Run:
 
     def panorama_image_upload(self):
         args = self.get_args(process_csv_to_description)
-        print(args)
         import_path = input("Enter your image path: ").strip()
         csv_path = input("Enter your csv path: ").strip()
 
@@ -90,7 +89,7 @@ class Run:
             args["import_path"] = import_path
             return self.decomposer.perform_task(args)
         else:
-            print("Please enter your image path and processed properly \n\n\n\n\n")
+            print("Please enter your image path properly \n\n\n\n\n")
             self.perform_decompose()
 
     def perform_video_upload(self):
@@ -99,7 +98,6 @@ class Run:
         processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
             import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
-            print(import_path)
             args["import_path"] = import_path
             if processed not in ["y", "Y", "yes", "Yes"]:
                 args["video_import_path"] = video_import_path
@@ -121,11 +119,31 @@ class Run:
 
 
         else:
-            print("Please enter your image path and processed properly \n\n\n\n\n")
+            print("Please enter your video path properly \n\n\n\n\n")
             self.perform_video_upload()
 
     def gopro360max_upload(self):
         pass
+
+    def zip_upload(self):
+        args = self.get_args(zip_images)
+        import_path = input("Enter your image path: ").strip()
+        zip_dir = import_path
+        if import_path:
+            args["import_path"] = import_path
+            args["zip_dir"] = zip_dir
+            args["processed"] = False
+            check_zip = self.zipper.perform_task(args)
+            if check_zip:
+                zip_file_path = \
+                [os.path.join(zip_dir, filename) for filename in os.listdir(zip_dir) if filename.endswith(".zip")][0]
+                args["processed"] = True
+                args["import_path"] = zip_file_path
+                self.uploader.perform_task(args)
+
+        else:
+            print("Please enter your image path properly \n\n\n\n\n")
+            self.zip_upload()
 
     def get_args(self, func):
         arg_names = func.__code__.co_varnames[:func.__code__.co_argcount]
@@ -161,7 +179,7 @@ class Run:
                 if advanced_func == "4.2" or advanced_func == "360 panorama image upload":
                     self.panorama_image_upload()
                 if advanced_func == "4.3" or advanced_func == "Zip upload":
-                    pass
+                    self.zip_upload()
                 elif advanced_func == "q":
                     exit()
             elif func == "q":
@@ -169,6 +187,7 @@ class Run:
             else:
                 print("\n\nPlease enter a valid option\n\n")
                 Run().perform_task(vars_args=None)
+
 
 if __name__ == "__main__":
     print("Welcome to Mapilio-kit\n")
