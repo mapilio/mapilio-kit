@@ -16,4 +16,4 @@ class Zip:
     def filter_args(self, args):
         return {k: v for k, v in args.items() if k in zip_images.__code__.co_varnames}
     def perform_task(self, vars_args: dict):
-        zip_images(**self.filter_args(vars_args))
+        return zip_images(**self.filter_args(vars_args))

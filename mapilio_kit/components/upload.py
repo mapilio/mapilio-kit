@@ -54,8 +54,12 @@ def zip_images(
     if not descs:
         LOG.warning(f"No images found in {desc_path}. Exiting...")
         return
-
-    uploader.zip_image_dir(import_path, descs, zip_dir)
+    try:
+        uploader.zip_image_dir(import_path, descs, zip_dir)
+        return True
+    except Exception as ex:
+        LOG.error(f"Error zipping {import_path}: {ex}")
+        return False
 
 
 def user_items_retriever(
