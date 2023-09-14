@@ -1,5 +1,6 @@
 import os
 import getpass
+from login import list_all_users
 from upload import upload, zip_images, user_items_retriever
 from edit_config import edit_config
 from process_csv_to_description import process_csv_to_description
@@ -149,7 +150,7 @@ class Run:
 
     def perform_task(self, vars_args: dict):
 
-        if len(user_items_retriever()) == 0:
+        if len(list_all_users()) == 0:
             check_authenticate=self.check_auth()
         else:
             check_authenticate=True
