@@ -5,6 +5,7 @@ import getpass
 sys.path.append(os.getcwd() + r"/mapilio_kit/components")
 from upload import upload
 from edit_config import edit_config
+from process_csv_to_description import process_csv_to_description
 
 
 class Run:
@@ -17,10 +18,12 @@ class Run:
         from . import uploader
         from . import video_loader
         from . import decomposer
+        from . import image_and_csv_uploader
         self.authenticator = authenticator()
         self.uploader = uploader()
         self.video_loader = video_loader()
         self.decomposer = decomposer()
+        self.image_and_csv_uploader = image_and_csv_uploader()
         self.video_sample_interval = 1
         self.interpolate_directions = True
 
@@ -62,6 +65,23 @@ class Run:
             print("Please enter your image path and processed properly \n\n\n\n\n")
             self.perform_image_upload()
 
+    def panorama_image_upload(self):
+        args = self.get_args(process_csv_to_description)
+        print(args)
+        import_path = input("Enter your image path: ").strip()
+        csv_path = input("Enter your csv path: ").strip()
+
+        if import_path and csv_path:
+            args["import_path"] = import_path
+            args["csv_path"] = csv_path
+            args["processed"] = False
+
+            return self.image_and_csv_uploader.perform_task(args)
+
+        else:
+            print("Please enter your image and csv path properly \n\n\n\n\n")
+            self.panorama_image_upload()
+
     def perform_decompose(self):
         args = self.get_args(edit_config)
         import_path = input("Enter your image path: ").strip()
@@ -71,7 +91,7 @@ class Run:
             return self.decomposer.perform_task(args)
         else:
             print("Please enter your image path and processed properly \n\n\n\n\n")
-            self.perform_image_upload()
+            self.perform_decompose()
 
     def perform_video_upload(self):
         args = self.get_args(upload)
@@ -115,33 +135,32 @@ class Run:
         # if self.check_auth():
         if True:
             func = input("Choose your process:\n\
-                         1. image-upload \n\
-                         2. timelapse-upload\n\
-                         3. Video-Upload\n\
-                         4. gopro360max-upload\n\
-                         5. Advance options\n"
+                         1. image upload \n\
+                         2. Video upload\n\
+                         3. gopro360max upload\n\
+                         4. Advance options\n"
                          )
 
-            if func == "1" or func == "image-upload" or func == "2" or func == "timelapse-upload":
+            if func == "1" or func == "image upload":
                 self.perform_image_upload()
 
-            elif func == "3" or func == "Video-Upload":
+            elif func == "2" or func == "Video upload":
                 self.perform_video_upload()
 
-            elif func == "4" or func == "gopro360max-upload":
+            elif func == "3" or func == "gopro360max upload":
                 self.gopro360max_upload()
 
-            elif func == "5" or func == "image-and-csv-upload":
+            elif func == "4" or func == "Advance options":
                 advanced_func = input("Choose your advanced process:\n\
-                                         5.1 Decompose \n\
-                                         5.2 360-panorama-image-upload\n\
-                                         5.3 Zip-upload\n"
+                                         4.1 Decompose \n\
+                                         4.2 360 panorama image upload\n\
+                                         4.3 Zip upload\n"
                                       )
-                if advanced_func == "5.1" or advanced_func == "Decompose":
+                if advanced_func == "4.1" or advanced_func == "Decompose":
                     self.perform_decompose()
-                if advanced_func == "5.2" or advanced_func == "360-panorama-image-upload":
-                    pass
-                if advanced_func == "5.3" or advanced_func == "Zip-upload":
+                if advanced_func == "4.2" or advanced_func == "360 panorama image upload":
+                    self.panorama_image_upload()
+                if advanced_func == "4.3" or advanced_func == "Zip upload":
                     pass
                 elif advanced_func == "q":
                     exit()
