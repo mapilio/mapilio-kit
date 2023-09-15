@@ -30,15 +30,31 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
     using the kits for the first time, user authentication is required. You will be prompted to enter your account
     credentials.</p>
   </li>
-  <li><strong>Installation:</strong>
-    <p>via Pip on Ubuntu + 18.04 and Python (3.6 and above) and git are required:</p>
-    <pre><code># Installation commands
+  <li><strong>Installation:</strong></li>
+
+<ul>
+
+<li> <p>via Pip on Windows and Python (3.6 and above) and git are required:</p> </li>
+<p><strong>Note:</strong> In case you're using <strong></strong>PowerShell<strong></strong> to run these commands below, you need to re-activate virtual env after installation is done, however, if you're using <strong>Command Prompt</strong> you don't need to re-activate it. </p>
+
+<pre><code># Installation commands
+git clone https://github.com/mapilio/mapilio-kit-v2.git
+cd mapilio-kit-v2
+win_installer.cmd
+</code></pre>
+
+
+<li> <p>via Pip on Ubuntu + 18.04 and Python (3.6 and above) and git are required:</p> </li>
+
+<pre><code># Installation commands
 git clone https://github.com/mapilio/mapilio-kit-v2.git
 cd mapilio-kit-v2
 chmod +x install.sh
 source ./install.sh
 </code></pre>
-  </li>
+
+</ul>
+
   <li>
     <strong>Necessary tools:</strong>
 <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
@@ -62,11 +78,9 @@ sudo apt install exiftool
 
 <h4>On Windows:</h4>
 <p>Open PowerShell:</p>
-<pre>
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 choco install ffmpeg
 choco install exiftool
-</pre>
 </ol>
 
 
