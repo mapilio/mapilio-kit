@@ -22,6 +22,5 @@ typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
 gps-anomaly
-virtualenv
 calculation-mapilio>=0.1.36
 windows-curses; platform_system  == "Windows"
