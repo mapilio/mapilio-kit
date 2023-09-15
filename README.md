@@ -33,7 +33,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
   <li><strong>Installation:</strong>
     <p>via Pip on Ubuntu + 18.04 and Python (3.6 and above) and git are required:</p>
     <pre><code># Installation commands
-git clone git@github.com:mapilio/mapilio-kit-v2.git
+git clone https://github.com/mapilio/mapilio-kit-v2.git
 cd mapilio-kit-v2
 chmod +x install.sh
 source ./install.sh
