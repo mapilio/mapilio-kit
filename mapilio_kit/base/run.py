@@ -9,8 +9,7 @@ from process_csv_to_description import process_csv_to_description
 
 class Run:
     name = "run"
-    # TODO: change help
-    help = "Mapilio"
+    help = "Follow instructions of magic usage of Mapilio-kit."
 
     def __init__(self):
         from . import authenticator
@@ -167,7 +166,7 @@ class Run:
     def perform_task(self, vars_args: dict):
         if vars_args is not None:
             print("Welcome to Mapilio-kit\n"
-                  "This is a tool that allows you to upload your images, videos and 360 degree panorama images to Mapilio.\n")
+                  "Mapilio allows you to upload your images, videos and 360 degree panorama images to Mapilio map.\n")
 
         if len(list_all_users()) == 0:
             check_authenticate = self.check_auth()
@@ -176,25 +175,32 @@ class Run:
 
         if check_authenticate:
             func = input("Choose your process:\n\
-                         1. image upload (Hint: Receives your images or timelapse images, processes them and uploads.)\n\
-                         2. Video upload (Hint: Takes your video, processes it (as 1 second timelapse photos) and uploads.)\n\
-                         3. gopro360max upload (Hint: Takes your panoramic images, processes and uploads them.) still in progress!\n\
-                         4. Advance options (Hint: This option gives access to more advanced processing options.)\n"
+                         1. Image upload (Hint: Basically, Image Upload takes your images or timelapse images, processes and uploads them to Mapilio.)\n\
+                         2. Video upload (Hint: Briefly, Video Upload takes your video or panoramic video that obtained from gopro360max, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
+                         3. Advanced options (Hint: This option gives access to more advanced processing options.)\n"
                          )
 
-            if func == "1" or func == "image upload":
+            if func == "1" or func == "Image upload":
                 self.perform_image_upload()
 
             elif func == "2" or func == "Video upload":
-                self.perform_video_upload()
-
-            elif func == "3" or func == "gopro360max upload":
-                self.gopro360max_upload()
-
-            elif func == "4" or func == "Advance options":
+                video_func = input("Choose your video process:\n\
+                             1. Video upload (Hint: Briefly, Video Upload takes your video, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
+                             2. gopro360max panoramic video upload (Hint: Takes your panoramic images, processes and uploads to Mapilio.) still in progress!\n"
+                                   )
+                if video_func == "1" or video_func == "Video upload":
+                    self.perform_video_upload()
+                elif video_func == "2" or video_func == "gopro360max panoramic video upload":
+                    self.gopro360max_upload()
+                elif video_func == "q":
+                    exit()
+                else:
+                    print("\n\nYou've entered an invalid option. Please enter a valid option\n\n")
+                    Run().perform_task(vars_args=None)
+            elif func == "3" or func == "Advance options":
                 advanced_func = input("Choose your advanced process:\n\
-                                         1 Decompose (Hint: Used for processing data in a more advanced and detailed way)\n\
-                                         2 360 panorama image upload (Hint: Used for uploading 360 degree panorama pictures. This is suitable for pictures that containing wide-angle or panorama pictures.)\n"
+                                         1 Decompose (Hint: Shortly, Decompose extracts metadata information to json file from images by using EXIF Tool.)\n\
+                                         2 360 panorama image upload (Hint: In Short, 360 panorama image upload takes 360 degree panorama images with their csv file which taken from surveying car and then uploads to Mapilio.)\n"
                                       )
                 if advanced_func == "1" or advanced_func == "Decompose":
                     self.perform_decompose()
@@ -205,6 +211,7 @@ class Run:
                 else:
                     print("\n\nYou've entered an invalid option. Please enter a valid option\n\n")
                     Run().perform_task(vars_args=None)
+
             elif func == "q":
                 exit()
             else:
