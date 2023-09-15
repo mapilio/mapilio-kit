@@ -1,6 +1,6 @@
 pip install virtualenv
 
-virtualenv mapilio_venv
+python -m virtualenv mapilio_venv
 call .\mapilio_venv\Scripts\activate
 
 pip install -r requirements.txt
