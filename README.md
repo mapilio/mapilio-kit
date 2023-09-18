@@ -1,3 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE)
+
 # Mapilio Kit
 
 Mapilio Kit is a library for processing and uploading images to [Mapilio](https://www.mapilio.com/).
