@@ -26,6 +26,7 @@ class Run:
         self.zipper = Zipper()
         self.video_sample_interval = 1
         self.interpolate_directions = True
+        self.username = None
 
     def fundamental_arguments(self, parser):
         group = parser.add_argument_group("run options")
@@ -55,6 +56,7 @@ class Run:
             print("Please install exiftool\n\n\n\n\n")
             exit()
         args = self.get_args(upload)
+        args["user_name"] = self.username
         import_path = input("Enter your image path: ").strip()
         processed = input(
             "Are your images processed already [y,Y,yes,Yes]? (Hint: will convert your images to exif data and write them to a json file):").strip()
@@ -107,6 +109,7 @@ class Run:
             print("Please install ffmpeg\n\n\n\n\n")
             exit()
         args = self.get_args(upload)
+        args["user_name"] = self.username
         video_import_path = input("Enter your video folder path: ").strip()
         processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
@@ -170,6 +173,8 @@ class Run:
 
         if len(list_all_users()) == 0:
             check_authenticate = self.check_auth()
+        if len(list_all_users()) >= 2:
+            self.username = input("Found multiple Mapilio accounts. Please specify your username.\n")
         else:
             check_authenticate = True
 
