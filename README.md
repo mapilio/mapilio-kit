@@ -52,8 +52,11 @@ cd mapilio-kit-v2
 chmod +x install.sh
 source ./install.sh
 </code></pre>
-
+<li>
+<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
+</li><br>
 </ul>
+
 
   <li>
     <strong>Necessary tools:</strong>
@@ -88,17 +91,15 @@ choco install exiftool
 <h1 id="usage">Usage</h1>
 <hr>
 <h2>Magic Usage</h2>
-<p>To use basic usage simply run this command below:</p>
-<h4>Examples</h4>
+<p>To use magic usage simply run this command below:</p>
 <pre><code>mapilio_kit run
 </code></pre>
 
-<h2>Advance Usage</h2>
+<h2>Advanced Usage</h2>
 
 <h3>User Authentication</h3>
 
 <p>To upload images to mapilio, an account is required and can be created <a href="https://www.mapilio.com/signup" target="_blank">here</a>. When using the tools for the first time, user authentication is required. You will be prompted to enter your account credentials.</p>
-<h4>Examples</h4>
 <p>Authenticate new user:</p>
 <pre><code>mapilio_kit authenticate
 </code></pre>
@@ -109,12 +110,10 @@ choco install exiftool
 <h3>Images upload</h3>
 
 <p>Upload command also works for timelapse images.If you haven't processed your images, please use this command below</p>
-<h4>Examples</h4>
 <pre><code>mapilio_kit upload "path/to/images" 
 </code></pre>
 
 <p>If you have processed your images already, use this one instead</p>
-<h4>Examples</h4>
 <pre><code>mapilio_kit upload "path/to/images" --processed
 </code></pre>
 
@@ -122,8 +121,6 @@ choco install exiftool
 <p>
 Video Support Devices: GoPro Hero 9-8-7 Black and 360, and other devices that support GPS metadata.
 </p>
-
-<h4>Examples</h4>
 
 <ol>
 <li>
@@ -169,7 +166,6 @@ mapilio_kit upload ~/Desktop/OutputData/frames --user_name="username@mapilio.com
 <h3>Decompose Images</h3>
 <p>
 The decompose command geotags images in the given directory. It extracts the required and optional metadata from image EXIF (or the other supported geotag sources), and writes all the metadata (or process errors) in an image description file, which will be read during upload.</p>
-<h4>Examples</h4>
 <pre><code>mapilio_kit decompose "path/to/images" 
 </code></pre>
 
@@ -178,14 +174,12 @@ The decompose command geotags images in the given directory. It extracts the req
 <p>
 Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/schema/panoromic_image_description_shecma.csv">panoramic image description schema.</a>
 </p>
-<h4>Examples</h4>
 <pre><code>mapilio_kit image_and_csv_upload "path/to/images" --csv_path "path/to/test.csv" --user_name "example@mapilio.com"
 </code></pre>
 
 
 <h3>Zip and upload</h3>
 
-<h4>Examples</h4>
 <pre><code>mapilio_kit zip  "path/to/images"  "path/to/zipfolder"
 mapiio_kit upload "path/to/zipfolder" --proccessed
 </code></pre>
