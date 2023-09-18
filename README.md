@@ -53,7 +53,7 @@ chmod +x install.sh
 source ./install.sh
 </code></pre>
 <li>
-<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using iTerm for installation you don't need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
+<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using Mac Terminal instead of using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
 </li><br>
 </ul>
 
