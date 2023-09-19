@@ -1,6 +1,6 @@
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE)
-[![Discord chat](https://img.shields.io/discord/1028938271453089852)](https://discord.gg/uhsR97sF)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE)
+[![Discord chat](https://img.shields.io/discord/1028938271453089852?logo=discord)](https://discord.gg/uhsR97sF)
 ![GitHub Repo stars](https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue)
 ![Contributors](https://img.shields.io/github/contributors/mapilio/mapilio-kit-v2?color=orange)
 
