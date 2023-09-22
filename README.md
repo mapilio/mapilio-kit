@@ -1,6 +1,6 @@
 <div align='center'>
    <a href="https://mapilio.com/" target="_blank">
-   <img width="100%" src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/mapilio-banner.png"></a>
+   <img width="100%" src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/banner/mapilio-banner.png"></a>
 </div>
 
 
