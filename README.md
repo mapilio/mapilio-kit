@@ -1,21 +1,25 @@
-<div align='center'>
+<div align="center">
    <a href="https://mapilio.com/" target="_blank">
    <img width="100%" src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/banner/mapilio-banner2.png"></a>
 </div>
 
-
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE)
-[![Discord chat](https://img.shields.io/discord/1028938271453089852?logo=discord)](https://discord.gg/uhsR97sF)
-![GitHub Repo stars](https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue)
-![Contributors](https://img.shields.io/github/contributors/mapilio/mapilio-kit-v2?color=orange)
+<div align="center">
+   <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE" alt="mit-license">
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
+   <a href="https://discord.gg/uhsR97sF" alt="discord">
+      <img src="https://img.shields.io/discord/1028938271453089852?logo=discord"></a>
+   <a href="" alt="stars">
+      <img src="https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue"></a>
+   <a href="" alt="contributors">
+      <img src="https://img.shields.io/github/contributors/mapilio/mapilio-kit-v2?color=orange"></a>
+</div>
 
 # Mapilio Kit
 
 Mapilio Kit is a library for processing and uploading images to [Mapilio](https://www.mapilio.com/).
 <!DOCTYPE html>
 
-
+https://img.shields.io/badge/License-MIT-yellow.svg
 <h1>Kit Contents</h1>
 <ul>
   <li><a href="#introduction">Introduction</a></li>
