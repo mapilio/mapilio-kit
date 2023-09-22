@@ -216,6 +216,9 @@ For Mapilio Kit bug reports and feature requests please visit [GitHub Issues](ht
   <a href="https://twitter.com/mapiliocom" style="text-decoration:none;">
     <img src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/social_logo/logo-twitter.png" width="5%" alt="logo-twitter" /></a>
   <img src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/social_logo/logo-transparent.png" width="5%" alt="logo-transparent" />
+  <a href="https://join.slack.com/t/mapilio/shared_invite/zt-21ocnbsok-Dlr49uKNErAAKMLzGHHvlw" style="text-decoration:none;">
+    <img src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/social_logo/logo-slack.png" width="5%" alt="linkedin-logo" /></a>
+  <img src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/social_logo/logo-transparent.png" width="5%" alt="logo-transparent" />
   <a href="https://discord.com/invite/St5z2sUZ7H" style="text-decoration:none;">
     <img src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/social_logo/logo-discord.png" width="5%" alt="logo-discord" /></a>
 </div>
