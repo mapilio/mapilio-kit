@@ -19,7 +19,6 @@
 Mapilio Kit is a library for processing and uploading images to [Mapilio](https://www.mapilio.com/).
 <!DOCTYPE html>
 
-https://img.shields.io/badge/License-MIT-yellow.svg
 <h1>Kit Contents</h1>
 <ul>
   <li><a href="#introduction">Introduction</a></li>
