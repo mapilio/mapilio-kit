@@ -1,3 +1,15 @@
+<div align='center'>
+   <a href="https://mapilio.com/" target="_blank">
+   <img width="100%" src="https://raw.githubusercontent.com/mapilio/mapilio-kit-v2/main/docs/assets/mapilio-banner.png"></a>
+</div>
+
+
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE)
+[![Discord chat](https://img.shields.io/discord/1028938271453089852?logo=discord)](https://discord.gg/uhsR97sF)
+![GitHub Repo stars](https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue)
+![Contributors](https://img.shields.io/github/contributors/mapilio/mapilio-kit-v2?color=orange)
+
 # Mapilio Kit
 
 Mapilio Kit is a library for processing and uploading images to [Mapilio](https://www.mapilio.com/).
@@ -53,7 +65,7 @@ chmod +x install.sh
 source ./install.sh
 </code></pre>
 <li>
-<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
+<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using Mac Terminal instead of using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
 </li><br>
 </ul>
 
@@ -66,6 +78,11 @@ source ./install.sh
 
 <h4>On Windows:</h4>
 <p>Follow the <a href="https://www.wikihow.com/Install-FFmpeg-on-Windows">ffmeg</a> and <a href="https://exiftool.org/install.html#Windows">exiftool</a> installation guides.</p>
+<p>or</p>
+<p>Open PowerShell:</p>
+<pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco install ffmpeg
+choco install exiftool</pre>
 
 <h4>On macOS, use Homebrew:</h4>
 <pre>
@@ -78,12 +95,6 @@ brew install exiftool
 sudo apt install ffmpeg
 sudo apt install exiftool
 </pre>
-
-<h4>On Windows:</h4>
-<p>Open PowerShell:</p>
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
-choco install ffmpeg
-choco install exiftool
 </ol>
 
 
