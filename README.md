@@ -23,17 +23,16 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
 <ul>
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#getting-started">Getting Started</a></li>
-  <li><a href="#usage">Usage</a></li>
+  <li><a href="#magicusage">Magic Usage</a></li>
+  <li><a href="#advancedusage">Advanced Usage</a></li>
   <li><a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/CONTRIBUTING.md">Contributing</a></li>
   <li><a href="#license">License</a></li>
+  <li><a href="#contact">Contact</a></li>
 </ul>
-
-<hr>
 
 <h1 id="introduction">Introduction</h1>
 
 <p>Our Image Uploader with GPS Metadata is a powerful tool designed to simplify the process of uploading and managing images, while also preserving and utilizing valuable location-based information embedded in photos. With the increasing popularity of geotagging in modern cameras and smartphones, GPS metadata in images can provide valuable context and enhance the user experience. Whether you're a photographer, a traveler, or simply someone who values the story behind each image, our uploader has you covered.
-<hr>
 
 <h1 id="getting-started">Getting Started</h1>
 
@@ -73,14 +72,14 @@ source ./install.sh
 </ul>
 
 
-  <li>
-    <strong>Necessary tools:</strong>
+<li>
+<strong>Necessary tools:</strong>
 <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
 
 <p>You can download <code>ffmpeg</code> from <a href="https://ffmpeg.org/download.html">here</a>. Make sure it is executable and put the downloaded binaries in your <code>$PATH</code>. You can also install <code>ffmpeg</code> with your favorite package manager. For example:</p>
 
 <h4>On Windows:</h4>
-<p>Follow the <a href="https://www.wikihow.com/Install-FFmpeg-on-Windows">ffmeg</a> and <a href="https://exiftool.org/install.html#Windows">exiftool</a> installation guides.</p>
+<p>Follow the <a href="https://www.wikihow.com/Install-FFmpeg-on-Windows">ffmpeg</a> and <a href="https://exiftool.org/install.html#Windows">exiftool</a> installation guides.</p>
 <p>or</p>
 <p>Open PowerShell:</p>
 <pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -101,24 +100,21 @@ sudo apt install exiftool
 </ol>
 
 
-
-<h1 id="usage">Usage</h1>
-<hr>
-<h2>Magic Usage</h2>
+<h1 id="magicusage">Magic Usage</h1>
 <p>To use magic usage simply run this command below:</p>
-<pre><code>mapilio_kit run
-</code></pre>
+<pre>
+<code>mapilio_kit run</code>
+</pre>
 
-<h2>Advanced Usage</h2>
-
+<h1 id="advancedusage">Advanced Usage</h1>
 <h3>User Authentication</h3>
 
 <p>To upload images to mapilio, an account is required and can be created <a href="https://www.mapilio.com/signup" target="_blank">here</a>. When using the tools for the first time, user authentication is required. You will be prompted to enter your account credentials.</p>
 <p>Authenticate new user:</p>
 <pre><code>mapilio_kit authenticate
 </code></pre>
-<p>Authenticate for user `user_name`. If the user is already authenticated, it will update the credentials in the config:</p>
-<pre><code>mapilio_kit authenticate --user_name "mapilio_user_mail"
+<p>If the user is already authenticated earlier, it will update the credentials in the config:</p>
+<pre><code>mapilio_kit authenticate --user_name "mapilio_user_name" --user_email "mapilio_user_email" --user_password "mapilio_user_password"
 </code></pre>
 
 <h3>Images upload</h3>
@@ -174,7 +170,6 @@ mapilio_kit gopro360max_process --video-file ~/Desktop/GS017111.360 --output-fol
 mapilio_kit upload ~/Desktop/OutputData/frames --user_name="username@mapilio.com" \
                     --geotag_source "gpx" \
                     --geotag_source_path "~Desktop/gps_track.gpx"
-
 ```
 
 <h3>Decompose Images</h3>
@@ -198,13 +193,12 @@ Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/mai
 mapiio_kit upload "path/to/zipfolder" --proccessed
 </code></pre>
 
-<hr>
 
-<h2 id="license">License</h2>
+<h1 id="license">License</h1>
 
 <p>This project is licensed under the MIT LICENSE - see the <code>LICENSE.md</code> file for details.</p>
 
-<h2>Contact</h2>
+<h1 id="contact">Contact</h1>
 
 For Mapilio Kit bug reports and feature requests please visit [GitHub Issues](https://github.com/mapilio/mapilio-kit-v2/issues), and join our [Discord](https://discord.com/invite/St5z2sUZ7H) community for questions and discussions!
 
