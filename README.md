@@ -101,12 +101,16 @@ sudo apt install exiftool
 
 
 <h1 id="magicusage">Magic Usage</h1>
+
 <p>To use magic usage simply run this command below:</p>
 <pre>
 <code>mapilio_kit run</code>
 </pre>
 
-<h1 id="advancedusage">Advanced Usage</h1>
+
+<details>
+<summary><h1 id="advancedusage">Advanced Usage</h1></summary>
+
 <h3>User Authentication</h3>
 
 <p>To upload images to mapilio, an account is required and can be created <a href="https://www.mapilio.com/signup" target="_blank">here</a>. When using the tools for the first time, user authentication is required. You will be prompted to enter your account credentials.</p>
@@ -192,7 +196,7 @@ Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/mai
 <pre><code>mapilio_kit zip  "path/to/images"  "path/to/zipfolder"
 mapiio_kit upload "path/to/zipfolder" --proccessed
 </code></pre>
-
+</details>
 
 <h1 id="license">License</h1>
 
