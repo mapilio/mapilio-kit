@@ -106,6 +106,7 @@ sudo apt install exiftool
 <pre>
 <code>mapilio_kit run</code>
 </pre>
+<img src="docs/assets/gifs/mapilio_kit_run.gif">
 
 
 <details>
