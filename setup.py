@@ -109,7 +109,7 @@ else:
     ext_modules = [MakeExtension('extras/max2sphere-batch')]
     cmdclass = dict(build_ext=MakeBuild)
 
-setup(name='mapilio_kit',
+setup(name='mapilio-kit-v2',
       version=about['VERSION'],
       description='MAPILIO Image/Video Upload and Pipeline',
       url='https://github.com/mapilio/mapilio-kit-v2',
