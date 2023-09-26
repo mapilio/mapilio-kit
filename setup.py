@@ -30,10 +30,10 @@ if platform.system() == "Darwin":
 
     setup(name='mapilio-kit-v2',
           version=about['VERSION'],
-          description='MAPILIO Image/Video Upload and Download Pipeline',
-          url='https://github.com/mapilio/mapilio-kit',
+          description='MAPILIO Image/Video Upload Pipeline',
+          url='https://github.com/mapilio/mapilio-kit-v2',
           author='Mapilio',
-          license='BSD',
+          license='MIT License',
           python_requires='>=3.6',
           packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
           entry_points='''
@@ -111,10 +111,10 @@ else:
 
 setup(name='mapilio_kit',
       version=about['VERSION'],
-      description='MAPILIO Image/Video Upload and Download Pipeline',
-      url='https://github.com/mapilio/mapilio-kit',
+      description='MAPILIO Image/Video Upload and Pipeline',
+      url='https://github.com/mapilio/mapilio-kit-v2',
       author='Mapilio',
-      license='BSD',
+      license='MIT License',
       python_requires='>=3.6',
       ext_modules=ext_modules,
       cmdclass=cmdclass,
