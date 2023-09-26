@@ -34,7 +34,8 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
 
 <p>Our Image Uploader with GPS Metadata is a powerful tool designed to simplify the process of uploading and managing images, while also preserving and utilizing valuable location-based information embedded in photos. With the increasing popularity of geotagging in modern cameras and smartphones, GPS metadata in images can provide valuable context and enhance the user experience. Whether you're a photographer, a traveler, or simply someone who values the story behind each image, our uploader has you covered.
 
-<h1 id="getting-started">Getting Started</h1>
+<details>
+<summary><h1 id="getting-started">Getting Started</h1></summary>
 
 <p>These instructions will help contributors get a copy of your project up and running on their local machine for development and testing purposes.</p>
 
@@ -98,6 +99,7 @@ sudo apt install ffmpeg
 sudo apt install exiftool
 </pre>
 </ol>
+</details>
 
 
 <h1 id="magicusage">Magic Usage</h1>
