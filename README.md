@@ -23,8 +23,8 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
 <ul>
   <li><a href="#introduction">Introduction</a></li>
   <li><a href="#getting-started">Getting Started</a></li>
-  <li><a href="#magicusage">Magic Usage</a></li>
-  <li><a href="#advancedusage">Advanced Usage</a></li>
+  <li><a href="#magic-usage">Magic Usage</a></li>
+  <li><a href="#advanced-usage">Advanced Usage</a></li>
   <li><a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/CONTRIBUTING.md">Contributing</a></li>
   <li><a href="#license">License</a></li>
   <li><a href="#contact">Contact</a></li>
@@ -102,7 +102,7 @@ sudo apt install exiftool
 </details>
 
 
-<h1 id="magicusage">Magic Usage</h1>
+<h1 id="magic-usage">Magic Usage</h1>
 
 <p>To use magic usage simply run this command below:</p>
 <pre>
@@ -112,7 +112,7 @@ sudo apt install exiftool
 
 
 <details>
-<summary><h1 id="advancedusage">Advanced Usage</h1></summary>
+<summary><h1 id="advanced-usage">Advanced Usage</h1></summary>
 
 <h3>User Authentication</h3>
 
