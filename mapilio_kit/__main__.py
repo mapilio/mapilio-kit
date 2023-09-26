@@ -1,7 +1,9 @@
 import sys
 import os
 
-sys.path.append(os.getcwd() + r"/mapilio_kit/components")
+project_root = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(project_root, 'components'))
+
 import argparse
 from .components.version import VERSION
 from .base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, gopro360max_processor, Zipper, run_mapi
