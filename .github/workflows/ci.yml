@@ -23,13 +23,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.x
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@v1
       with:
         python-version: '3.x'
 
         
     - name: Install build dependencies
-      uses: py-actions/py-dependency-install@v3
+      uses: py-actions/py-dependency-install@v2
       with: 
            update-pip: "true"
            update-setuptools: "true"
