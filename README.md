@@ -40,7 +40,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
 
 <ol>
   <li><strong>Prerequisites:</strong>
-    <p>To upload images to Mapilio, an account is required and can be created <a href="https://www.mapilio.com/signup" target="_blank">here</a>. When
+    <p>To upload images to Mapilio, an account is required and can be created <a href="https://mapilio.com/app?form=register" target="_blank">here</a>. When
     using the kits for the first time, user authentication is required. You will be prompted to enter your account
     credentials.</p>
   </li>
