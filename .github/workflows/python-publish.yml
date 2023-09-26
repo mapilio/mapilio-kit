@@ -1,0 +1,61 @@
+# This workflow will upload a Python Package using Twine when a release is created
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python#publishing-to-package-registries
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Upload Python Package
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  build-n-publish:
+    name: Mapilio Kit
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
+
+        
+    - name: Install build dependencies
+      uses: py-actions/py-dependency-install@v3
+      with: 
+           update-pip: "true"
+           update-setuptools: "true"
+           update-wheel: "true"
+           path: "requirements.txt"
+
+    - name: Install pypa/build
+      run: >-
+          python -m
+          pip install
+          build
+          --user
+        
+    - name: Creating dist files
+      run: |
+            python setup.py sdist
+            python setup.py bdist_wheel --universal
+      shell: bash
+
+    - name: CheckFiles
+      run: |
+            ls dist
+      shell: bash
+    
+    - name: Publish a Python distribution to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        user: __token__
+        password: ${{ secrets.PYPI_API_TOKEN }}
