@@ -28,7 +28,7 @@ if platform.system() == "Darwin":
     with open(os.path.join(here, 'mapilio_kit', 'components', 'version.py'), 'r') as f:
         exec(f.read(), about)
 
-    setup(name='mapilio-kit-v2',
+    setup(name='mapilio-kit',
           version=about['VERSION'],
           description='MAPILIO Image/Video Upload Pipeline',
           long_description=open('README.md').read(),
@@ -111,7 +111,7 @@ else:
     ext_modules = [MakeExtension('extras/max2sphere-batch')]
     cmdclass = dict(build_ext=MakeBuild)
 
-setup(name='mapilio-kit-v2',
+setup(name='mapilio-kit',
       version=about['VERSION'],
       description='MAPILIO Image/Video Upload and Pipeline',
       long_description=open('README.md').read(),
