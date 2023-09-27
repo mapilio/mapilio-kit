@@ -54,7 +54,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
     credentials.</p>
   </li>
   <li><strong>Installation:</strong>
-    <p>To install Mapilio Kit <strong>Pip and Python (3.6 and above) is required.</strong> If you have them already, then simply run this command below:</p>
+    <p>To install Mapilio Kit <strong>Pip and <a href="https://www.python.org/downloads/">Python</a> (3.6 and above) is required.</strong> If you have them already, then simply run this command below:</p>
     <pre><code>pip install mapilio_kit</code></pre></li>
   <li><strong>Necessary tools:</strong>
     <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
