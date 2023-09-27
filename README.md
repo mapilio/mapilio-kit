@@ -60,7 +60,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
     <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
     <p>You can download <code>ffmpeg</code> from <a href="https://ffmpeg.org/download.html">here</a>. Make sure it is executable and put the downloaded binaries in your <code>$PATH</code>. You can also install <code>ffmpeg</code> with your favorite package manager. For example:</p>
     <h4>On Windows:</h4>
-    <p>Open PowerShell: (Recommended)</p>
+    <p>Open PowerShell as administrator: (Recommended)</p>
     <pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 choco install ffmpeg
 choco install exiftool</pre>
