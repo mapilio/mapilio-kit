@@ -38,8 +38,57 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
 
 <p>Our Image Uploader with GPS Metadata is a powerful tool designed to simplify the process of uploading and managing images, while also preserving and utilizing valuable location-based information embedded in photos. With the increasing popularity of geotagging in modern cameras and smartphones, GPS metadata in images can provide valuable context and enhance the user experience. Whether you're a photographer, a traveler, or simply someone who values the story behind each image, our uploader has you covered.
 
+<h1 id="getting-started">Getting Started</h1>
+
+<p>These instructions will help contributors get a copy of your project up and running on their local machine for development and testing purposes.</p>
+
+
+<ol>
+  <li><strong>Prerequisites:</strong>
+    <p>To upload images to Mapilio, an account is required and can be created <a href="https://mapilio.com/app?form=register" target="_blank">here</a>. When
+    using the kits for the first time, user authentication is required. You will be prompted to enter your account
+    credentials.</p>
+  </li>
+  <li><strong>Installation:</strong></li>
+    <p>To install Mapilio Kit <strong>Pip and Python (3.6 and above) is required.</strong> If you have them already, then simply run this command below:</p>
+    <pre><code>pip install mapilio_kit</code></pre>
+  <li><strong>Necessary tools:</strong></li>
+    <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
+    <p>You can download <code>ffmpeg</code> from <a href="https://ffmpeg.org/download.html">here</a>. Make sure it is executable and put the downloaded binaries in your <code>$PATH</code>. You can also install <code>ffmpeg</code> with your favorite package manager. For example:</p>
+    <h4>On Windows:</h4>
+    <p>Follow the <a href="https://www.wikihow.com/Install-FFmpeg-on-Windows">ffmpeg</a> and <a href="https://exiftool.org/install.html#Windows">exiftool</a> installation guides.</p>
+    <p>or</p>
+    <p>Open PowerShell:</p>
+    <pre>Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+choco install ffmpeg
+choco install exiftool</pre>
+    <h4>On macOS, use Homebrew:</h4>
+    <pre>
+brew install ffmpeg
+brew install exiftool
+    </pre>
+    <h4>On Debian/Ubuntu:</h4>
+    <pre>
+sudo apt install ffmpeg
+sudo apt install exiftool
+    </pre>
+</ol>
+
+
+
+<h1 id="magic-usage">Magic Usage</h1>
+
+<p>To use magic usage simply run this command below:</p>
+<pre>
+<code>mapilio_kit run</code>
+</pre>
+<img src="docs/assets/gifs/mapilio_kit_run.gif">
+
+
 <details>
-<summary><h1 id="getting-started">Getting Started</h1></summary>
+<summary><h1 id="advanced-usage">Advanced Usage</h1></summary>
+
+<h3>Getting Started</h3>
 
 <p>These instructions will help contributors get a copy of your project up and running on their local machine for development and testing purposes.</p>
 
@@ -50,7 +99,6 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
     credentials.</p>
   </li>
   <li><strong>Installation:</strong></li>
-
 <ul>
 
 <li> <p>via Pip on Windows and Python (3.6 and above) and git are required:</p> </li>
@@ -103,20 +151,6 @@ sudo apt install ffmpeg
 sudo apt install exiftool
 </pre>
 </ol>
-</details>
-
-
-<h1 id="magic-usage">Magic Usage</h1>
-
-<p>To use magic usage simply run this command below:</p>
-<pre>
-<code>mapilio_kit run</code>
-</pre>
-<img src="docs/assets/gifs/mapilio_kit_run.gif">
-
-
-<details>
-<summary><h1 id="advanced-usage">Advanced Usage</h1></summary>
 
 <h3>User Authentication</h3>
 
