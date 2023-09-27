@@ -4,10 +4,14 @@
 </div>
 
 <div align="center">
+    <a href="https://github.com/mapilio/mapilio-kit-v2/actions/workflows/ci.yml">
+      <img src="https://github.com/mapilio/mapilio-kit-v2/actions/workflows/ci.yml/badge.svg" alt="Mapilio Kit CI"></a>
    <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/LICENSE" alt="mit-license">
       <img src="https://img.shields.io/badge/License-MIT-yellow.svg"></a>
    <a href="https://discord.gg/uhsR97sF" alt="discord">
       <img src="https://img.shields.io/discord/1028938271453089852?logo=discord"></a>
+   <a href="https://pypi.org/project/mapilio-kit/">
+      <img src="https://img.shields.io/pypi/v/mapilio-kit?color=purple" alt="PyPI version"></a>
    <a href="" alt="stars">
       <img src="https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue"></a>
    <a href="" alt="contributors">
