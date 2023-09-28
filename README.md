@@ -19,7 +19,7 @@
    <a href="">
       <img src="https://img.shields.io/github/issues-raw/mapilio/mapilio-kit-v2?color=darkred" alt="issue-counter"></a>
    <a href="">
-      <img src="https://img.shields.io/github/release-date-pre/mapilio/mapilio-kit-v2?color=00EAB2" alt="release-date-badge"></a>
+      <img src="https://img.shields.io/github/release-date-pre/mapilio/mapilio-kit-v2?color=DD0017 " alt="release-date-badge"></a>
    <a href="">
       <img src="https://img.shields.io/github/last-commit/mapilio/mapilio-kit-v2?color=D60051" alt="last-commit-badge"></a>
 </div>
