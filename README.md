@@ -58,7 +58,7 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
   <li><strong>Installation:</strong>
     <p>To install Mapilio Kit <strong>Pip and <a href="https://www.python.org/downloads/">Python</a> (3.6 and above) is required.</strong> If you have them already, then simply run this command below:</p>
     <pre><code>pip install mapilio_kit</code></pre></li>
-    <p>**Note:** In case you're using Windows, and if python's path wasn't already added to system environment variables you need to add it right after python installation, to be able to run the packages which are installed with **Pip**. You may do that manually or you may run the command prompt as Administrator and then copy the command below, modify it (according to your python's version and path) and lastly run it. This will be set your python's path automatically after rebooting your computer.</p>
+    <p><strong>Note:</strong>In case you're using Windows, and if python's path wasn't already added to system environment variables you need to add it right after python installation, to be able to run the packages which are installed with <strong>Pip</strong>. You may do that manually or you may run the command prompt as Administrator and then copy the command below, modify it (according to your python's version and path) and lastly run it. This will be set your python's path automatically after rebooting your computer.</p>
    <pre><code>setx PATH %"PATH%;C:\Users\User\AppData\Local\Packages\Python\Python3XX\Scripts" /M</code></pre>
   <li><strong>Necessary tools:</strong>
     <p>To process images or videos, you will also need to install <code>ffmpeg</code> and <code>exiftool</code>.</p>
