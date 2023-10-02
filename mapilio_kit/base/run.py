@@ -43,7 +43,11 @@ class Run:
             args["user_name"] = user_name
             args["user_email"] = user_email
             args["user_password"] = user_password
-            return self.authenticator.perform_task(args)
+            check_authenticate = self.authenticator.perform_task(args)
+            if check_authenticate:
+                return check_authenticate
+            else:
+                self.check_auth()
 
         else:
             print("Please enter your username, email and password properly \n\n\n\n\n")
@@ -173,7 +177,7 @@ class Run:
 
         if len(list_all_users()) == 0:
             check_authenticate = self.check_auth()
-        if len(list_all_users()) >= 2:
+        elif len(list_all_users()) >= 2:
             self.username = input("Found multiple Mapilio accounts. Please specify your username.\n")
         else:
             check_authenticate = True
