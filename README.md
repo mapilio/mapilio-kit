@@ -12,6 +12,8 @@
       <img src="https://img.shields.io/discord/1028938271453089852?logo=discord" alt="discord-badge"></a>
    <a href="https://pypi.org/project/mapilio-kit/">
       <img src="https://img.shields.io/pypi/v/mapilio-kit?color=purple" alt="PyPI version"></a>
+   <a href="https://pypistats.org/packages/mapilio-kit">
+      <img src="https://img.shields.io/pypi/dm/mapilio-kit.svg?color=9300B4" alt="kit-download-tracker"></a>
    <a href="">
       <img src="https://img.shields.io/github/stars/mapilio/mapilio-kit-v2?color=blue" alt="stars"></a>
    <a href="">
