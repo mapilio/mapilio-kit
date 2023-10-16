@@ -248,6 +248,14 @@ mapiio_kit upload "path/to/zipfolder" --proccessed
 </code></pre>
 </details>
 
+### Docker Support
+To run the scripts inside a Docker container: 
+
+```
+make docker
+docker run -Pit kit mapilio_kit [ run | advance usage ]
+```
+
 <h1 id="license">License</h1>
 
 <p>This project is licensed under the MIT LICENSE - see the <code>LICENSE.md</code> file for details.</p>
