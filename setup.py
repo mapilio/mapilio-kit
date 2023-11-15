@@ -23,7 +23,7 @@ def read_requirements_macos():
         return [row.strip() for row in fp if row.strip()]
 
 if sys.version_info < (3, 12):
-    sys.exit('requires python version below 3.12 due to imp module removal.)
+    sys.exit('requires python version below 3.12 due to imp module removal.')
 
 if platform.system() == "Darwin":
     about = {}
@@ -38,7 +38,7 @@ if platform.system() == "Darwin":
           url='https://github.com/mapilio/mapilio-kit-v2',
           author='Mapilio',
           license='MIT License',
-          python_requires='>=3.6, <3.12',
+          python_requires='3.8.10',
           packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
           entry_points='''
           [console_scripts]
@@ -121,7 +121,7 @@ setup(name='mapilio-kit',
       url='https://github.com/mapilio/mapilio-kit-v2',
       author='Mapilio',
       license='MIT License',
-      python_requires='>=3.6, <3.12',
+      python_requires='3.8.10',
       ext_modules=ext_modules,
       cmdclass=cmdclass,
       packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
