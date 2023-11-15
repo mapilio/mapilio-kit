@@ -22,9 +22,6 @@ def read_requirements_macos():
     with open('requirements.txt') as fp:
         return [row.strip() for row in fp if row.strip()]
 
-if sys.version_info < (3, 12):
-    sys.exit('requires python version below 3.12 due to imp module removal.')
-
 if platform.system() == "Darwin":
     about = {}
     with open(os.path.join(here, 'mapilio_kit', 'components', 'version.py'), 'r') as f:
