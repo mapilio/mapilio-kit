@@ -38,7 +38,7 @@ if platform.system() == "Darwin":
           url='https://github.com/mapilio/mapilio-kit-v2',
           author='Mapilio',
           license='MIT License',
-          python_requires=">=3.6, !=3.12.*"
+          python_requires=">=3.6, !=3.12.*",
           packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
           entry_points='''
           [console_scripts]
@@ -121,7 +121,7 @@ setup(name='mapilio-kit',
       url='https://github.com/mapilio/mapilio-kit-v2',
       author='Mapilio',
       license='MIT License',
-      python_requires=">=3.6, !=3.12.*"
+      python_requires=">=3.6, !=3.12.*",
       ext_modules=ext_modules,
       cmdclass=cmdclass,
       packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
