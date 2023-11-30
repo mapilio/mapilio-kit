@@ -3,10 +3,10 @@ import datetime
 import os
 import uuid
 
-import image_log, types_fmt
-import types_fmt as types
+from mapilio_kit.components import image_log, types_fmt
+from mapilio_kit.components import types_fmt as types
 from calculation.geospatial_utils import calculate_compass_bearing, gps_distance, calculate_bearing_difference, generate_pairs
-from error import MapilioDuplicationError
+from mapilio_kit.components.error import MapilioDuplicationError
 
 MAX_SEQUENCE_LENGTH = 250
 

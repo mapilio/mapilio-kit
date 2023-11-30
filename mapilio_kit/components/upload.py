@@ -6,11 +6,11 @@ import json
 import logging
 
 
-import uploader, login
-import types_fmt as types
+from mapilio_kit.components import uploader, login
+from mapilio_kit.components import types_fmt as types
 
 from gps_anomaly.detector import Anomaly
-from utilities import photo_uuid_generate
+from .utilities import photo_uuid_generate
 
 LOG = logging.getLogger(__name__)
 
