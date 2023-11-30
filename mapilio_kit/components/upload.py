@@ -129,12 +129,17 @@ def upload(
         LOG.warning(f"If shooting was taken at a point outside the polygon,"
                     f" these points and images will be published publicly...")
         time.sleep(5)
-        
-        uploader.upload_image_dir_and_description(
-            import_path, descs, user_items,
-            dry_run=dry_run,
-            organization_key=organization_key if organization_key else None,
-            project_key=project_key if project_key else None)
+
+        try:
+            uploader.upload_image_dir_and_description(
+                import_path, descs, user_items,
+                dry_run=dry_run,
+                organization_key=organization_key if organization_key else None,
+                project_key=project_key if project_key else None)
+            LOG.warning(f"Upload has been successfully finished.")
+            return {'Success': True}
+        except Exception as e:
+            return {'Success': False, "Error": e}
 
     else:
         raise RuntimeError(f"Expect {import_path} to be either file or directory")
