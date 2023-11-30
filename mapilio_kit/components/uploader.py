@@ -16,10 +16,10 @@ import requests
 from tqdm import tqdm
 import jsonschema
 
-import upload_manager,  exif_metadata_writer,interprocess_communication as ipc
-import types_fmt as types
-from login import wrap_http_exception
-from config import MAPILIO_API_ENDPOINT_UPLOAD
+from mapilio_kit.components import upload_manager, exif_metadata_writer,interprocess_communication as ipc
+from mapilio_kit.components import types_fmt as types
+from .login import wrap_http_exception
+from .config import MAPILIO_API_ENDPOINT_UPLOAD
 
 MIN_CHUNK_SIZE = 1024 * 1024 * 2  # 32MB
 MAX_CHUNK_SIZE = 1024 * 1024 * 16  # 64MB
