@@ -3,7 +3,7 @@ import typing as T
 import gpxpy
 import pynmea2
 
-from types_fmt import GPXPoint
+from mapilio_kit.components.types_fmt import GPXPoint
 
 
 """

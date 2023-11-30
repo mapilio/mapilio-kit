@@ -1,7 +1,6 @@
-from types_fmt import GPXPoint, GPXPointAngle
-from exif_metadata_reader import ExifRead
-from error import MapilioGeoTaggingError
-
+from mapilio_kit.components.types_fmt import GPXPoint, GPXPointAngle
+from mapilio_kit.components.exif_metadata_reader import ExifRead
+from mapilio_kit.components.error import MapilioGeoTaggingError
 
 def gpx_from_exif(image: str) -> GPXPointAngle:
     exif = ExifRead(image)

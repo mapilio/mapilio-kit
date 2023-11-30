@@ -1,6 +1,5 @@
 import argparse
-from gps_from_gopro360 import gopro360max_stitch
-
+from mapilio_kit.components.gps_from_gopro360 import gopro360max_stitch
 
 class gopro360max_process:
     name = "gopro360max_process"
