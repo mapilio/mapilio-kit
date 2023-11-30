@@ -87,7 +87,6 @@ class UploadManager:
                     if (resp.status_code != 204 and
                             resp.headers["content-type"].strip().startswith("application/json")):
                         response_dict = json.loads(resp.text)
-                        LOG.info(f"Images has installed.")
                         return response_dict["hash"]
             except requests.exceptions.HTTPError as e:
                 print(e.response.text)
