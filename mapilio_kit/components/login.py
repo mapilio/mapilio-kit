@@ -5,9 +5,9 @@ import typing as T
 
 import requests
 
-import auth_config, config
-import types_fmt as types
-from config import MAPILIO_CONFIG_PATH
+from .auth_config import get_upload_token
+from .config import load_config, load_user, create_config, update_config, MAPILIO_CONFIG_PATH
+from .types_fmt import *
 
 LOG = logging.getLogger(__name__)
 

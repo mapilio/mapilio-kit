@@ -6,8 +6,8 @@ import uuid
 
 from tqdm import tqdm
 
-import image_log, processing, error
-import types_fmt as types
+from mapilio_kit.components import image_log, processing, error
+from mapilio_kit.components import types_fmt as types
 LOG = logging.getLogger(__name__)
 
 
