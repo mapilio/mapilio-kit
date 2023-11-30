@@ -1,7 +1,7 @@
 import os
 from login import prompt_user_for_user_items
 import auth_config, config
-
+import logging
 
 def edit_config(
         config_file=None,
@@ -106,3 +106,54 @@ def edit_config(
 
     config.update_config(config_file, user_name, user_items)
     return True
+
+
+def edit_config_gui(
+    config_file=None,
+    user_email=None,
+    user_password=None,
+    jwt=None,
+    user_key=None,
+    gui=None,
+    verbose=False,
+):
+    if config_file is None:
+        config_file = config.MAPILIO_CONFIG_PATH
+
+    if not os.path.isfile(config_file):
+        config.create_config(config_file)
+
+    config_object = config.load_config(config_file)
+    user_items = {}  # Initialize user_items outside the if block
+
+    if user_email and user_password:
+        try:
+            data = auth_config.get_upload_token(user_email, user_password)
+            upload_token, user_key = data.get("token"), data.get("id")
+
+            if upload_token:
+                user_items = {
+                    "SettingsUsername": user_email,
+                    "SettingsUserPassword": user_password,
+                    "SettingsUserKey": str(user_key),
+                    "user_upload_token": upload_token,
+                }
+
+                config.update_config(config_file, user_email, user_items)
+                response = {'status': True, "message": "Authentication successfully done"}
+                return response
+            
+            else:
+                response = {'status': False, "message": data.get("message")[0]}
+                return response
+
+        except Exception as e:
+            response = {'status': False, "message": f"{str(e)}. Please try again."}
+
+            logging.error(f"Authentication failed: {str(e)}. Please try again.")
+            return response
+    else:
+        response = {'status': False, "message": "User email and password are required for authentication."}
+        logging.warning("User email and password are required for authentication.")
+        return response
+
