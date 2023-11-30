@@ -1,9 +1,8 @@
 import os
 import typing as T
 
-import image_log
-import processing
-
+from mapilio_kit.components import image_log
+from mapilio_kit.components import processing
 
 def geotag_property_handler(
     import_path: T.Optional[str] = None,
