@@ -1,5 +1,5 @@
 import argparse
-from edit_config import edit_config
+from mapilio_kit.components.edit_config import edit_config
 
 class Authenticate:
     name = "authenticate"

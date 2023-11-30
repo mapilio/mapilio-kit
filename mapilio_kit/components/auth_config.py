@@ -1,7 +1,8 @@
 import os
 import requests
 from typing import Union
-from config import MAPILIO_API_ENDPOINT
+from mapilio_kit.components.upload import zip_images
+
 def get_upload_token(email: str, password: str) -> dict:
     resp = requests.post(
         f"{MAPILIO_API_ENDPOINT}login",
@@ -10,7 +11,6 @@ def get_upload_token(email: str, password: str) -> dict:
     resp.raise_for_status()
 
     return resp.json()
-
 
 def fetch_organization(
         user_access_token: str, organization_id: Union[int, str]

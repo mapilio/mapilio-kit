@@ -1,8 +1,8 @@
 import argparse
-from insert_MAPJson import insert_MAPJson
-from geotag_property_handler import geotag_property_handler
-from metadata_property_handler import metadata_property_handler
-from sequence_property_handler import sequence_property_handler
+from mapilio_kit.components import insert_MAPJson
+from mapilio_kit.components.geotag_property_handler import geotag_property_handler
+from mapilio_kit.components.metadata_property_handler import metadata_property_handler
+from mapilio_kit.components.sequence_property_handler import sequence_property_handler
 
 
 class Decompose():
