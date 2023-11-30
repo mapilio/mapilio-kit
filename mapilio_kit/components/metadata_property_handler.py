@@ -2,12 +2,12 @@ import os
 import time
 
 from tqdm import tqdm
-import image_log
-import processing
-from exif_metadata_reader import ExifRead
-from types_fmt import MetaProperties
-from utilities import get_exiftool_specific_feature
-from version import VERSION
+from mapilio_kit.components import image_log
+from mapilio_kit.components import processing
+from mapilio_kit.components.exif_metadata_reader import ExifRead
+from mapilio_kit.components.types_fmt import MetaProperties
+from mapilio_kit.components.utilities import get_exiftool_specific_feature
+from mapilio_kit.components.version import VERSION
 
 META_DATA_TYPES = {
     "strings": str,

@@ -6,15 +6,15 @@ import logging
 
 from tqdm import tqdm
 
-import image_log
-import types_fmt as types
-from error import MapilioGeoTaggingError
-from exif_metadata_reader import ExifRead
-from exif_metadata_writer import ImageExifModifier
+from mapilio_kit.components import image_log
+from mapilio_kit.components import types_fmt as types
+from mapilio_kit.components.error import MapilioGeoTaggingError
+from mapilio_kit.components.exif_metadata_reader import ExifRead
+from mapilio_kit.components.exif_metadata_writer import ImageExifModifier
 from calculation.geospatial_utils import normalize_bearing, interpolate_lat_lon, Point
-from gps_parser import get_lat_lon_time_from_gpx, get_lat_lon_time_from_nmea
-from gpx_from_exif import gpx_from_exif
-from gpx_from_gopro import gpx_from_gopro
+from mapilio_kit.components.gps_parser import get_lat_lon_time_from_gpx, get_lat_lon_time_from_nmea
+from mapilio_kit.components.gpx_from_exif import gpx_from_exif
+from mapilio_kit.components.gpx_from_gopro import gpx_from_gopro
 
 LOG = logging.getLogger(__name__)
 
