@@ -3,7 +3,6 @@ forked by https://github.com/aurvis/gopromax-frame-extractor
 """
 
 import argparse
-from curses import meta
 import os
 import sys
 import pathlib
