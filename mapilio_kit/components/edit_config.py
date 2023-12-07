@@ -140,7 +140,7 @@ def edit_config_gui(
                 }
 
                 config.update_config(config_file, user_email, user_items)
-                response = {'status': True, "message": "Authentication successfully done"}
+                response = {'status': True, "message": "Authentication successfully done", "token": upload_token}
                 return response
             
             else:
