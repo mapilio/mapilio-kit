@@ -3,6 +3,7 @@ import requests
 from typing import Union
 from config import MAPILIO_API_ENDPOINT
 
+
 def get_upload_token(email: str, password: str) -> dict:
     resp = requests.post(
         f"{MAPILIO_API_ENDPOINT}login",
