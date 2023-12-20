@@ -1,5 +1,5 @@
 set -e
-mkdir -p mapilio_kit/base/bin
+mkdir -p bin
 mkdir -p dependencies
 
 #
@@ -7,6 +7,6 @@ mkdir -p dependencies
 #
 git -C dependencies  clone https://github.com/mcvarer/max2sphere-batch
 
-make -C dependencies/max2sphere-batch -j
+make -C dependencies/max2sphere-batch -j4
 
-cp dependencies/max2sphere-batch/MAX2spherebatch mapilio_kit/base/bin/
+cp dependencies/max2sphere-batch/MAX2spherebatch bin/

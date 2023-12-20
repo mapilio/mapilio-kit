@@ -135,7 +135,6 @@ def gopro360max_stitch(video_file: str,
 
     assert_file_exists(video_file, "video file")
 
-    bin_dir = os.path.join(script_dir, bin_dir)
     assert_folder_exists(bin_dir)
 
     eac_stitcher_exe = os.path.join(bin_dir, 'MAX2spherebatch')
