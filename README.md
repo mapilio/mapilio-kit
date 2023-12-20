@@ -215,7 +215,7 @@ python script config
 - --bin-dir {equirectanguler bin path}
 
 ```shell
-mapilio_kit gopro360max_process --video-file ~/Desktop/GS017111.360 --output-folder ~/Desktop/OutputData/ --bin-dir ../../bin
+mapilio_kit gopro360max_process --video-file ~/Desktop/GS017111.360 --output-folder ~/Desktop/OutputData/ --bin-dir bin
 ```
 
 2. Now we can upload frames
