@@ -351,8 +351,10 @@ class ExifRead:
 
         fields = ["EXIF CameraElevationAngle", "Image CameraElevationAngle"]
         field_of_view = self._extract_alternative_fields(
-            fields, default="none", field_type=float
+            fields, default=None, field_type=float
         )
+        if field_of_view[0] is None:
+            field_of_view = 0
         return field_of_view
 
     def extract_vfov(self):
@@ -361,6 +363,8 @@ class ExifRead:
         vfov = self._extract_alternative_fields(
             fields, default=0, field_type=float
         )
+        if vfov[0] == 0:
+            vfov = 0
         return vfov
 
 if __name__ == "__main__":
