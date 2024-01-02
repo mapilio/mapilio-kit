@@ -165,14 +165,12 @@ def get_exiftool_specific_feature(video_or_image_path: str) -> Dict[str, Union[N
                                                                aspect_ratio)
             vfov_str = calculation_vfov(dict_object['field_of_view'], aspect_ratio)
             dict_object['vfov'] = vfov_str
-        return dict_object
     if isinstance(fov_str, str):
         aspect_ratio = calculate_aspect_ratio(dict_object['image_size'])
         dict_object['field_of_view'], vfov_str = find_fov2(dict_object['device_make'],
                                                            dict_object['field_of_view'],
                                                            aspect_ratio)
         dict_object['vfov'] = vfov_str
-        return dict_object
     if isinstance(fov_deg, float):
         dict_object['field_of_view'] = fov_deg
         if fov_deg == 360:
@@ -181,8 +179,7 @@ def get_exiftool_specific_feature(video_or_image_path: str) -> Dict[str, Union[N
         else:
             dict_object['vfov'] = vfov_str
 
-        return dict_object
-
+    return dict_object
 
 def photo_uuid_generate(user_email: str, descs: list) -> list:
     """
