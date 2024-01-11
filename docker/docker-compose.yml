@@ -1,0 +1,10 @@
+version: '3'
+services:
+  kit:
+    image: kit
+    container_name: kit
+    build: .
+    stdin_open: true
+    tty: true
+    volumes:
+      - /home/visio-ai/PycharmProjects/kitdemo/go_pro_data/gopro360/video/:/app/data/
