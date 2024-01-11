@@ -3,6 +3,7 @@ from typing import Dict, Union
 import math
 from collections import ChainMap
 import platform
+from calculation.util import calculate_vfov
 
 
 __RULES__ = [{('hero7', 'wide', '4:3'): [122.6, 94.4]}, {('hero7', 'wide', '16:9'): [118.2, 69.5]},
@@ -177,7 +178,8 @@ def get_exiftool_specific_feature(video_or_image_path: str) -> Dict[str, Union[N
             vfov_str = fov_deg / 2
             dict_object['vfov'] = vfov_str
         else:
-            dict_object['vfov'] = vfov_str
+            width, height = int(dict_object['image_size'].split("x")[0]), int(dict_object['image_size'].split("x")[1])
+            dict_object['vfov'] = calculate_vfov(fov_deg, width, height)
 
     return dict_object
 
