@@ -249,12 +249,7 @@ mapiio_kit upload "path/to/zipfolder" --proccessed
 </details>
 
 ### Docker Support
-To run the scripts inside a Docker container: 
-
-```
-make docker
-docker run -Pit kit mapilio_kit [ run | advance usage ]
-```
+For docker support please visit; [Docker.md](https://github.com/mapilio/mapilio-kit/blob/main/Docker.md)
 
 <h1 id="license">License</h1>
 
