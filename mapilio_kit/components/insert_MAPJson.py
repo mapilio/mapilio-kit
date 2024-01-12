@@ -8,7 +8,17 @@ from tqdm import tqdm
 
 import image_log, processing, error
 import types_fmt as types
-LOG = logging.getLogger(__name__)
+
+from colorama import init, Fore
+init(autoreset=True)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter()
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
 
 
 def get_final_mapilio_image_description(
@@ -86,7 +96,7 @@ def insert_MAPJson(
                     overwrite_EXIF_orientation_tag,
                 )
             except Exception:
-                LOG.warning(f"Failed to overwrite EXIF", exc_info=True)
+                logger.warning(f"Failed to overwrite EXIF", exc_info=True)
 
         relpath = os.path.relpath(image, import_path)
         dirname = os.path.dirname(relpath)
@@ -133,13 +143,13 @@ def insert_MAPJson(
         with open(desc_path, "w") as fp:
             json.dump(descs, fp, indent=4)
 
-    LOG.info(json.dumps(summary, indent=4))
+    logger.info(json.dumps(summary, indent=4))
     if 0 < summary['Information']["failed_images"]:
         if skip_process_errors:
-            LOG.warning("Skipping %s failed images", summary['Information']["failed_images"])
+            logger.warning(f"{Fore.YELLOW}Skipping %s failed images{Fore.RESET}", summary['Information']["failed_images"])
         else:
             raise RuntimeError(
                 f"Failed to process {summary['Information']['failed_images']} images. "
                 f"Check {desc_path} for details. Specify --skip_process_errors to skip these errors"
             )
-    LOG.info(f"Check {desc_path} for details")
+    logger.info(f"{Fore.YELLOW}For more information, please check mapilio image description file which is located here: {desc_path}.{Fore.RESET}")

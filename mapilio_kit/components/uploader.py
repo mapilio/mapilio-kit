@@ -21,10 +21,20 @@ import types_fmt as types
 from login import wrap_http_exception
 from config import MAPILIO_API_ENDPOINT_UPLOAD
 
+from colorama import init, Fore
+init(autoreset=True)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter()
+ch.setFormatter(formatter)
+logger.addHandler(ch)
+
 MIN_CHUNK_SIZE = 1024 * 1024 * 2  # 32MB
 MAX_CHUNK_SIZE = 1024 * 1024 * 16  # 64MB
 MAX_UPLOAD_SIZE = 1024 * 1024 * 750  # 750MB
-LOG = logging.getLogger(__name__)
+
 
 
 def _find_root_dir(file_list: Iterable[str]) -> Optional[str]:
@@ -124,9 +134,9 @@ def upload_desc(
             json.dump(payload, f)
         resp.raise_for_status()
         if not resp.status_code // 100 == 2:
-            LOG.warning(resp.text)
+            logger.warning(resp.text)
             return f"Error: Unexpected response {resp}"
-        LOG.info(f"Exif has installed.")
+        logger.warning(f"{Fore.GREEN}Upload has been successfully finished. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
     except requests.exceptions.HTTPError as e:
         print(e.response.text)
 
@@ -147,7 +157,7 @@ def upload_image_dir_and_description(
 
     sequences = _group_sequences_by_uuid(image_descs)
     for sequence_idx, images in enumerate(sequences.values()):
-        LOG.info(f"Images has started for uploading.")
+        logger.info(f"{Fore.GREEN}Upload has been started. Currently at: Sequence {sequence_idx + 1}, Total Number of Sequences: {len(sequences)}{Fore.RESET}")
         sequence_information = _zip_and_upload_single_sequence(
             image_dir,
             images,
@@ -360,7 +370,7 @@ def _upload_zipfile_fp(
                 if retries < 200 and is_retriable_exception(ex):
                     retries += 1
                     sleep_for = min(2 ** retries, 16)
-                    LOG.warning(
+                    logger.warning(
                         f"Error uploading, resuming in {sleep_for} seconds",
                         exc_info=True,
                     )

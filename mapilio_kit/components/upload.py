@@ -5,15 +5,21 @@ import typing as T
 import json
 import logging
 
-
 import uploader, login
 import types_fmt as types
 
 from gps_anomaly.detector import Anomaly
 from utilities import photo_uuid_generate
 
-LOG = logging.getLogger(__name__)
-
+from colorama import init, Fore
+init(autoreset=True)
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
+ch = logging.StreamHandler()
+ch.setLevel(logging.DEBUG)
+formatter = logging.Formatter()
+ch.setFormatter(formatter)
+logger.addHandler(ch)
 
 def read_image_descriptions(desc_path: str):
     if not os.path.isfile(desc_path):
@@ -52,13 +58,13 @@ def zip_images(
     descs = read_image_descriptions(desc_path)
 
     if not descs:
-        LOG.warning(f"No images found in {desc_path}. Exiting...")
+        logger.warning(f"No images found in {desc_path}. Exiting...")
         return
     try:
         uploader.zip_image_dir(import_path, descs, zip_dir)
         return True
     except Exception as ex:
-        LOG.error(f"Error zipping {import_path}: {ex}")
+        logger.error(f"Error zipping {import_path}: {ex}")
         return False
 
 
@@ -118,16 +124,17 @@ def upload(
 
         if len(failed_imgs) > 0:
 
-            LOG.warning(f"Some images has failed."
-                        f" These images is => {failed_imgs}")
+            logger.warning(f"{Fore.RED}Some images has failed to upload due to "
+                        "anomaly detection."
+                        f" These images are => {failed_imgs}{Fore.RESET}")
         if not descs:
-            LOG.warning(f"No images found in {desc_path}. Exiting...")
+            logger.warning(f"No images found in {desc_path}. Exiting...")
 
             return
         user_items = user_items_retriever(user_name, organization_key)
 
-        LOG.warning(f"If shooting was taken at a point outside the polygon,"
-                    f" these points and images will be published publicly...")
+        logger.warning(f"{Fore.BLUE}If shooting was taken at a point outside the polygon,"
+                    f" these points and images will be published publicly...{Fore.RESET}")
         time.sleep(5)
 
         try:
@@ -136,7 +143,7 @@ def upload(
                 dry_run=dry_run,
                 organization_key=organization_key if organization_key else None,
                 project_key=project_key if project_key else None)
-            LOG.warning(f"Upload has been successfully finished.")
+            #logger.warning(f"{Fore.GREEN}Upload has been successfully finished. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
             return {'Success': True}
         except Exception as e:
             return {'Success': False, "Error": e}
