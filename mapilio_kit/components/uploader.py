@@ -168,7 +168,6 @@ def upload_image_dir_and_description(
             project_key,
             dry_run=dry_run,
         )
-        LOG.info(f"Exif has started for uploading.")
         upload_desc(
             image_desc=descs,
             user_items=user_items,
