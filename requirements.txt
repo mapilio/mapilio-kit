@@ -23,5 +23,5 @@ typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
 gps-anomaly
-calculation-mapilio>=0.1.36
+calculation-mapilio
 windows-curses; platform_system  == "Windows"
