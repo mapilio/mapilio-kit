@@ -19,6 +19,7 @@ Shapely
 colorama==0.4.6
 six==1.16.0
 tqdm==4.62.3
+pandas
 typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
