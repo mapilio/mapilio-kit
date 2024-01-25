@@ -135,8 +135,8 @@ def upload_desc(
         resp.raise_for_status()
         if not resp.status_code // 100 == 2:
             logger.warning(resp.text)
-            return f"Error: Unexpected response {resp}"
-        logger.warning(f"{Fore.GREEN}Upload has been successfully finished. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
+            return {"Success": False, "Error": f"Unexpected response {resp}"}
+        return {"Success": True}
     except requests.exceptions.HTTPError as e:
         print(e.response.text)
 
@@ -156,8 +156,10 @@ def upload_image_dir_and_description(
     _validate_descs(image_dir, image_descs)
 
     sequences = _group_sequences_by_uuid(image_descs)
+    response_list = []
+    logger.info(f"{Fore.GREEN}Upload has been started.{Fore.RESET}")
     for sequence_idx, images in enumerate(sequences.values()):
-        logger.info(f"{Fore.GREEN}Upload has been started. Currently at: Sequence {sequence_idx + 1}, Total Number of Sequences: {len(sequences)}{Fore.RESET}")
+        logger.info(f"🗺️{Fore.GREEN} Currently at: Sequence {sequence_idx + 1}, Total Number of Sequences: {len(sequences)}{Fore.RESET}")
         sequence_information = _zip_and_upload_single_sequence(
             image_dir,
             images,
@@ -168,13 +170,18 @@ def upload_image_dir_and_description(
             project_key,
             dry_run=dry_run,
         )
-        upload_desc(
+        response = upload_desc(
             image_desc=descs,
             user_items=user_items,
             organization_key=organization_key if organization_key else None,
             project_key=project_key if project_key else None,
             seq_info=sequence_information
         )
+
+        response_list.append(response['Success'])
+
+    if any(response_list):
+        logger.warning(f"{Fore.GREEN}Upload has been successfully finished. {sum(response_list)} sequence(s) out of {len(response_list)} sequences were uploaded correctly. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
 
 
 def zip_image_dir(
