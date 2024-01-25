@@ -1,4 +1,6 @@
 import argparse
+import os
+from ..components.export import export
 
 class image_and_csv_upload:
     name = "image_and_csv_upload"
@@ -11,5 +13,13 @@ class image_and_csv_upload:
 
     def perform_task(self, args: dict):
         from . import uploader, CSVprocessor
+        export(
+            csv_path = args["csv_path"],
+            images_dir = args["import_path"],
+            output_csv_name = os.path.join(args["import_path"], "out.csv")
+        )
+        args["csv_path"] = os.path.join(args["import_path"], "out.csv")
+        args["processed"] = True
         CSVprocessor().perform_task(args)
         uploader().perform_task(args)
+

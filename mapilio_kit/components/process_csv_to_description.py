@@ -23,8 +23,9 @@ def process_csv_to_description(
                          'roll', 'pitch', 'altitude', 'orientation']
         mapilio_description = [
             {
-                k: float(v) if k in float_columns else v for k, v in row.items()
+                k: float(v) if k in float_columns and v.replace('.', '').isdigit() else v for k, v in row.items()
             } for row in csv.DictReader(f, skipinitialspace=True)]
+
 
         processed = len(mapilio_description)
         description_information = {
