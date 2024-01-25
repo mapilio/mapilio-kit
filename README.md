@@ -234,10 +234,14 @@ The decompose command geotags images in the given directory. It extracts the req
 
 
 <h3>360 panorama image upload</h3>
+<div align="center">
+   <img src="docs/assets/gifs/panoramic.gif">
+</div>
+<p>Note that <strong>the heading angle and the center of the image must be overlapped</strong> for calculation purposes. You may see an example above. <strong></strong></p>
 <p>
 Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/main/schema/panoromic_image_description_shecma.csv">panoramic image description schema.</a>
 </p>
-<pre><code>mapilio_kit image_and_csv_upload "path/to/images" --csv_path "path/to/test.csv" --user_name "example@mapilio.com"
+<pre><code>mapilio_kit image_and_csv_upload path/to/images --csv_path path/to/test.csv
 </code></pre>
 
 
