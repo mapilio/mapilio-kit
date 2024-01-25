@@ -1,2 +1,2 @@
 # TODO check before commit
-VERSION = "2.0.17"
+VERSION = "2.0.18"
