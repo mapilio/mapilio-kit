@@ -94,8 +94,10 @@ sudo apt install exiftool
 <img src="docs/assets/gifs/mapilio_kit_run.gif">
 
 
-<details>
-<summary><h1 id="advanced-usage">Advanced Usage</h1></summary>
+<!--<details> -->
+<!-- <summary> -->
+<h1 id="advanced-usage">Advanced Usage</h1>
+<!-- </summary> -->
 
 <h3>Getting Started</h3>
 
@@ -250,7 +252,7 @@ Check the CSV format <a href="https://github.com/mapilio/mapilio-kit-v2/blob/mai
 <pre><code>mapilio_kit zip  "path/to/images"  "path/to/zipfolder"
 mapiio_kit upload "path/to/zipfolder" --proccessed
 </code></pre>
-</details>
+<!-- </details> -->
 
 ### Docker Support
 For docker support please visit; [Docker.md](https://github.com/mapilio/mapilio-kit/blob/main/Docker.md)
