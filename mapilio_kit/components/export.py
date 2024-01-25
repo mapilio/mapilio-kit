@@ -162,7 +162,7 @@ def export(csv_path, images_dir, output_geojson_name="out.geojson", output_csv_n
     features_geo: list = []
 
     sequenceUuid = unique_sequence_id_generator(letter_count=8, digit_count=4)
-    for index, img_path in enumerate(tqdm(capture_images)):
+    for index, img_path in enumerate(capture_images):
 
         image_name = os.path.basename(img_path)
 
