@@ -255,7 +255,8 @@ mapiio_kit upload "path/to/zipfolder" --proccessed
 <!-- </details> -->
 
 ### Docker Support
-For docker support please visit; [Docker.md](https://github.com/mapilio/mapilio-kit/blob/main/Docker.md)
+For docker support please visit; [Docker.md](https://github.com/mapilio/mapilio-kit/blob/main/Docker.md)<br>
+For 360 Upload with docker take a look at here; [GoPro360Max.md](https://github.com/mapilio/mapilio-kit/blob/main/GoPro360Max.md)
 
 <h1 id="license">License</h1>
 
