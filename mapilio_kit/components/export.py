@@ -109,7 +109,7 @@ def save_format(DataFormat, CsvFormat):
 
     data = [[DataFormat.latitude, DataFormat.longitude,
              DataFormat.captureTime, DataFormat.altitude,
-             DataFormat.roll, DataFormat.pitch, DataFormat.heading,
+             DataFormat.roll, DataFormat.pitch, DataFormat.yaw, DataFormat.heading,
              DataFormat.sequenceUuid, DataFormat.orientation, DataFormat.deviceMake,
              DataFormat.deviceModel,
              DataFormat.imageSize, DataFormat.fov,
@@ -126,7 +126,7 @@ def save_titles(output_fie_name: str):
     :return: Write titles to csv
     """
     data = [['latitude', 'longitude', 'captureTime', 'altitude', 'roll',
-             'pitch', 'heading', 'sequenceUuid', 'orientation',
+             'pitch', 'yaw', 'heading', 'sequenceUuid', 'orientation',
              'deviceMake', 'deviceModel', 'imageSize', 'fov',
              'photoUuid', 'filename', 'path']]
 
@@ -198,7 +198,7 @@ def export(csv_path, images_dir, output_geojson_name="out.geojson", output_csv_n
         DataFormat.altitude = 0
         DataFormat.roll = 0
         DataFormat.pitch = 0
-        DataFormat.roll = 0
+        DataFormat.yaw = 0
         DataFormat.heading = heading_cal
         DataFormat.sequenceUuid = sequenceUuid
         DataFormat.orientation = 1
