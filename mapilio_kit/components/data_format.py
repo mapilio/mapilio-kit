@@ -5,6 +5,7 @@ class DataFormat:
     captureTime: str
     roll: float
     pitch: float
+    yaw: float
     heading: float
     sequenceUuid: str
     orientation: int
