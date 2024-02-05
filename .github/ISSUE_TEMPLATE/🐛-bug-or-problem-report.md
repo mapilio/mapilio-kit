@@ -1,14 +1,13 @@
 ---
 name: "\U0001F41B Bug or Problem Report"
-about: Bug or problems faced with the toolkit
+about: Bug or problems faced with the MapSyncer
 title: ''
 labels: ''
 assignees: ''
 
 ---
 
-Short Information 
-* Used Device: `iPhone(iOS)` | `Samsung, Xiaomi, (Android)` | `Camera (Go Pro, Action Camera and so on.)` | `...`
+Short Information
 * Used Toolkit version: `0.0.0` | `0.0.1` | `...`
 * Operating System:  `Linux` |  `macOS` |  `Windows`
 
