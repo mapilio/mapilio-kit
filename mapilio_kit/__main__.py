@@ -9,6 +9,19 @@ import argparse
 from .components.version import VERSION
 from .base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, gopro360max_processor, Zipper, run_mapi
 from .components import arguments
+import requests
+from colorama import Fore
+def get_latest_version():
+    url = "https://raw.githubusercontent.com/mapilio/mapilio-kit/main/mapilio_kit/components/version.py"
+    response = requests.get(url)
+    if response.status_code == 200:
+        content = response.text
+        version_line = [line for line in content.split('\n') if 'VERSION' in line][0]
+        latest_version = version_line.split('"')[1]
+        return latest_version
+    return None
+
+
 
 FUNCTION_MAP = {'Upload': uploader,
                 'Decompose': decomposer,
@@ -31,6 +44,17 @@ def get_parser(subparsers, funtion_map):
 
 
 def main():
+    latest_version = get_latest_version()
+
+    if latest_version:
+        if latest_version > VERSION:
+            print(f"{Fore.RED}A newer version ({latest_version}) is available!")
+            print(f'{Fore.RED}For latest Mapilio-kit version please update with "pip install mapilio_kit --upgrade" \n')
+        else:
+            print(f"{Fore.GREEN}You have the latest Mapilio-kit version ({VERSION}) installed.\n")
+    else:
+        print(f"{Fore.RED}Unable to fetch the latest Mapilio-kit version information.\n")
+
     parser = argparse.ArgumentParser(description="mapi-kit-v2")
 
     parser.add_argument(
