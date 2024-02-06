@@ -129,7 +129,9 @@ FinalImageDescriptionMetadata = {
         "orientation": {"type": "integer"},
         "acceleration": {"type": "string"},
         "gyroscope": {"type": "string"},
-        "vfov": {"type": "number"}
+        "vfov": {"type": "number"},
+        "accuracy_level": {"type": "number"},
+        "source": {"type": "string"},
     },
     "required": [
         "latitude",

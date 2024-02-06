@@ -224,6 +224,7 @@ def process_sequence(
                     "sequenceUuid": sequence_uuid,
                 }
                 heading = image.desc.get("heading")
+                desc["source"] = "Mapilio_Kit"
                 if heading is not None:
                     desc["heading"] = heading
                 image_log.log_in_memory(image.filename, "sequence_process", desc)
