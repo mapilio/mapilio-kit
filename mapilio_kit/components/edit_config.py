@@ -25,6 +25,7 @@ def edit_config(
             pass
 
         user_items = {
+            "SettingsEmail": user_email,
             "SettingsUsername": user_name,
             "SettingsUserPassword": user_password,
             "SettingsUserKey": user_key,
@@ -37,6 +38,7 @@ def edit_config(
     if user_key and user_name:  # Manually add user_key
         user_items = {
             "SettingsUsername": "Dummy_SettingsUsername",
+            "SettingsEmail": "Dummy_SettingsEmail",
             "SettingsUserKey": user_key,
             "user_upload_token": "Dummy_upload_token",
         }
@@ -91,6 +93,7 @@ def edit_config(
             )
 
         user_items = {
+            "SettingsEmail": user_email,
             "SettingsUsername": user_name,
             "SettingsUserPassword": user_password,
             "SettingsUserKey": str(user_key),
@@ -133,6 +136,7 @@ def edit_config_gui(
 
             if upload_token:
                 user_items = {
+                    "SettingsEmail": user_email,
                     "SettingsUsername": user_email,
                     "SettingsUserPassword": user_password,
                     "SettingsUserKey": str(user_key),

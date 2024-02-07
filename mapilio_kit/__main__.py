@@ -11,6 +11,9 @@ from .base import uploader, decomposer, authenticator, video_loader, image_and_c
 from .components import arguments
 import requests
 from colorama import Fore
+from .components.login import list_all_users
+from .components.config import delete_user
+
 def get_latest_version():
     url = "https://raw.githubusercontent.com/mapilio/mapilio-kit/main/mapilio_kit/components/version.py"
     response = requests.get(url)
@@ -42,18 +45,27 @@ def get_parser(subparsers, funtion_map):
         value().fundamental_arguments(cmd_parser)
         cmd_parser.set_defaults(func=value().perform_task)
 
+def del_useless_users():
+       deleted_users= [delete_user(user_info['SettingsUsername']) for user_info in list_all_users() if 'SettingsEmail' not in user_info]
+       if len(deleted_users):
+           print(f"{Fore.RED}Useless account or accounts found and deleted! \n {Fore.RESET}")
 
 def main():
+    print(f"{Fore.BLUE}Welcome to Mapilio-kit\n"
+         f"Mapilio allows you to upload your images, videos and 360 degree panorama images to Mapilio map.{Fore.RESET}\n")
+
     latest_version = get_latest_version()
 
     if latest_version:
         if latest_version > VERSION:
-            print(f"{Fore.RED}A newer version ({latest_version}) is available!")
-            print(f'{Fore.RED}For latest Mapilio-kit version please update with "pip install mapilio_kit --upgrade" \n')
+            print(f"{Fore.RED}A newer version ({latest_version}) is available!{Fore.RESET}")
+            print(f'{Fore.RED}For latest Mapilio-kit version please update with "pip install mapilio_kit --upgrade"{Fore.RESET} \n')
         else:
-            print(f"{Fore.GREEN}You have the latest Mapilio-kit version ({VERSION}) installed.\n")
+            print(f"{Fore.GREEN}You have the latest Mapilio-kit version ({VERSION}) installed.{Fore.RESET}\n")
     else:
-        print(f"{Fore.RED}Unable to fetch the latest Mapilio-kit version information.\n")
+        print(f"{Fore.RED}Unable to fetch the latest Mapilio-kit version information.{Fore.RESET}\n")
+
+    del_useless_users() # checks auth file and deletes users that are not included SettingsEmail
 
     parser = argparse.ArgumentParser(description="mapi-kit-v2")
 

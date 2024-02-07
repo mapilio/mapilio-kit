@@ -64,6 +64,7 @@ def prompt_user_for_user_items(user_name, user_password, user_email) -> types.Us
         user_key = str(user_key)
 
     return {
+        "SettingsEmail": user_email,
         "SettingsUsername": user_name,
         "SettingsUserPassword": user_password,
         "SettingsUserKey": user_key,
@@ -82,7 +83,7 @@ def list_all_users() -> T.List[types.User]:
         return []
 
 
-def authenticate_user(user_name: str, ) -> types.User:
+def authenticate_user(user_name: str, user_password) -> types.User:
     if os.path.isfile(MAPILIO_CONFIG_PATH):
         global_config_object = config.load_config(MAPILIO_CONFIG_PATH)
         if user_name in global_config_object.sections():

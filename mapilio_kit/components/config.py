@@ -61,7 +61,8 @@ def add_user(
         print(f"Error, user {user_name} already exists")
     save_config(config, config_path)
 
-def delete_user(config: configparser.ConfigParser, user_name: str, config_path: str) -> None:
+def delete_user(user_name: str, config_path: str= MAPILIO_CONFIG_PATH) -> None:
+    config = load_config(config_path)
     if user_name in config.sections():
         config.remove_section(user_name)
         save_config(config, config_path)

@@ -97,9 +97,9 @@ def upload_desc(
     :return: None
     """
 
-    if not os.path.exists(os.path.join(backup_path, user_items['SettingsUsername'])):
-        os.makedirs(os.path.join(backup_path, user_items['SettingsUsername']))
-    export_backup_path = os.path.join(backup_path, user_items['SettingsUsername'])
+    if not os.path.exists(os.path.join(backup_path, user_items['SettingsEmail'])):
+        os.makedirs(os.path.join(backup_path, user_items['SettingsEmail']))
+    export_backup_path = os.path.join(backup_path, user_items['SettingsEmail'])
 
     summary = list(image_desc).pop()
     image_desc = list(image_desc)[:-1]
@@ -358,7 +358,7 @@ def _upload_zipfile_fp(
             fp.seek(0, io.SEEK_SET)
             update_pbar = lambda chunk, _: pbar.update(len(chunk))
             try:
-                offset = upload_service.fetch_offset(email=user_items['SettingsUsername'])
+                offset = upload_service.fetch_offset(email=user_items['SettingsEmail'])
                 # set the initial progress
                 pbar.update(offset)
                 upload_service.callbacks = [
