@@ -12,6 +12,7 @@ class User(TypedDict, total=False):
     OrganizationKey: str
     OrganizationProjectKey: str
     SettingsUsername: str
+    SettingsEmail: str
     SettingsUserKey: str
     user_upload_token: str
 
@@ -89,6 +90,7 @@ UserItemAttributes = {
         "OrganizationKey": {"type": "string"},
         "OrganizationProjectKey": {"type": "string"},
         "SettingsUsername": {"type": "string"},
+        "SettingsEmail": {"type": "string"},
         "SettingsUserPassword": {"type": "string"},
         "SettingsUserKey": {"type": "string"},
         "user_upload_token": {"type": "string"},
@@ -132,6 +134,7 @@ FinalImageDescriptionMetadata = {
         "vfov": {"type": "number"},
         "accuracy_level": {"type": "number"},
         "source": {"type": "string"},
+        "sourceUser": {"type": "string"},
     },
     "required": [
         "latitude",
