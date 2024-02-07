@@ -171,9 +171,6 @@ class Run:
         return {arg: None for arg in arg_names}
 
     def perform_task(self, vars_args: dict):
-        if vars_args is not None:
-            print("Welcome to Mapilio-kit\n"
-                  "Mapilio allows you to upload your images, videos and 360 degree panorama images to Mapilio map.\n")
 
         if len(list_all_users()) == 0:
             check_authenticate = self.check_auth()

@@ -54,7 +54,7 @@ class UploadManager:
         if chunk_size <= 0:
             raise ValueError("Expect positive chunk size")
 
-        email = user_items['SettingsUsername']
+        email = user_items['SettingsEmail']
         if offset is None:
             offset = self.fetch_offset(email=email)
 
