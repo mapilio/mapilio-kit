@@ -126,6 +126,7 @@ FinalImageDescriptionMetadata = {
         "pitch": {"type": "number"},
         "roll": {"type": "number"},
         "megapixels": {"type": "number"},
+        "focalLength": {"type": "number"},
         "path": {"type": "string"},
         "filename": {"type": "string"},
         "orientation": {"type": "integer"},
