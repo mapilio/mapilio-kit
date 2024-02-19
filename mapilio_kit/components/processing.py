@@ -251,11 +251,11 @@ def overwrite_exif_tags(
     # qc purposes
     if overwrite_all_EXIF_tags or overwrite_EXIF_time_tag:
         dt = types.map_capture_time_to_datetime(desc["captureTime"])
-        image_exif.add_date_time_original(dt)
+        image_exif.set_date_time_original(dt)
         modified = True
 
     if overwrite_all_EXIF_tags or overwrite_EXIF_gps_tag:
-        image_exif.add_lat_lon(
+        image_exif.set_lat_lon(
             desc["latitude"],
             desc["longitude"],
         )
@@ -264,12 +264,12 @@ def overwrite_exif_tags(
     if overwrite_all_EXIF_tags or overwrite_EXIF_direction_tag:
         heading = desc.get("heading")
         if heading is not None:
-            image_exif.add_direction(heading["heading"])
+            image_exif.set_direction(heading["heading"])
             modified = True
 
     if overwrite_all_EXIF_tags or overwrite_EXIF_orientation_tag:
         if "orientation" in desc:
-            image_exif.add_orientation(desc["orientation"])
+            image_exif.set_orientation(desc["orientation"])
             modified = True
 
     if modified:
