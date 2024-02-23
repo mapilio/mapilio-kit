@@ -6,6 +6,7 @@ import uuid
 import image_log, types_fmt
 import types_fmt as types
 from calculation.geospatial_utils import calculate_compass_bearing, gps_distance, calculate_bearing_difference, generate_pairs
+import version
 from error import MapilioDuplicationError
 
 MAX_SEQUENCE_LENGTH = 250
@@ -224,7 +225,7 @@ def process_sequence(
                     "sequenceUuid": sequence_uuid,
                 }
                 heading = image.desc.get("heading")
-                desc["source"] = "Mapilio_Kit"
+                desc["source"] = f"Mapilio_Kit-v{version.VERSION}"
                 if heading is not None:
                     desc["heading"] = heading
                 image_log.log_in_memory(image.filename, "sequence_process", desc)
