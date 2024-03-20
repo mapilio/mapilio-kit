@@ -7,4 +7,4 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - /home/visio-ai/PycharmProjects/kitdemo/go_pro_data/gopro360/video/:/app/data/
+      - <your_local_videos_path>:/app/data/
