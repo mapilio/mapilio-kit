@@ -50,6 +50,7 @@ def edit_config(
         if gui is not None:
             user_name = input(
                 "Please enter your user_name (this will be used to identify your mail): ")
+            print(f"\n Sign in for user {user_name}")
         else:
             return
 
@@ -77,35 +78,12 @@ def edit_config(
     else:
         config_object.add_section(user_name)
 
-    if user_email and user_password:
-        try:
-            data = auth_config.get_upload_token(user_email, user_password)
-            print("Authentication successfully done.")
-        except:
-            print("Authentication failed, please try again.")
-            return False
-        upload_token = data["token"]
-        user_key = data["id"]
-
-        if not upload_token:
-            raise RuntimeError(
-                f"Authentication failed for user {user_name}, please try again."
-            )
-
-        user_items = {
-            "SettingsEmail": user_email,
-            "SettingsUsername": user_name,
-            "SettingsUserPassword": user_password,
-            "SettingsUserKey": str(user_key),
-            "user_upload_token": upload_token,
-        }
-    else:
-        # fill in the items and save
-        if gui is None:
-            return False
-        else:
-            user_items = prompt_user_for_user_items(user_name, user_password, user_email)
-
+    try:
+        user_items = prompt_user_for_user_items(user_name, user_password, user_email)
+        print("Authentication successfully done. \n")
+    except:
+        print("Authentication process failed, please try again. \n")
+        return False
 
     config.update_config(config_file, user_name, user_items)
     return True
