@@ -54,6 +54,7 @@ def prompt_user_for_user_items(user_name, user_password, user_email) -> types.Us
 
     if 'success' in data:
         if not data['success']:
+            print(data['message'][0])
             print("Authentication failed, please try again. \n")
             return prompt_user_for_user_items(user_name, None, None)
 
