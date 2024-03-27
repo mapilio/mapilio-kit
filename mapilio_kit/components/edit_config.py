@@ -3,6 +3,7 @@ from login import prompt_user_for_user_items
 import auth_config, config
 import logging
 
+
 def edit_config(
         config_file=None,
         user_name=None,
@@ -14,6 +15,11 @@ def edit_config(
         gui=None,
         verbose=False,
 ):
+    if gui: return edit_config_gui(user_name,
+                                   user_email,
+                                   user_password,
+                                   config_file=config_file)
+
     if config_file is None:
         config_file = config.MAPILIO_CONFIG_PATH
 
@@ -90,13 +96,10 @@ def edit_config(
 
 
 def edit_config_gui(
-    config_file=None,
-    user_email=None,
-    user_password=None,
-    jwt=None,
-    user_key=None,
-    gui=None,
-    verbose=False,
+        user_name,
+        user_email,
+        user_password,
+        config_file=None
 ):
     if config_file is None:
         config_file = config.MAPILIO_CONFIG_PATH
@@ -105,37 +108,31 @@ def edit_config_gui(
         config.create_config(config_file)
 
     config_object = config.load_config(config_file)
-    user_items = {}  # Initialize user_items outside the if block
 
-    if user_email and user_password:
-        try:
-            data = auth_config.get_upload_token(user_email, user_password)
-            upload_token, user_key = data.get("token"), data.get("id")
+    config_object.add_section(user_name)
 
-            if upload_token:
-                user_items = {
-                    "SettingsEmail": user_email,
-                    "SettingsUsername": user_email,
-                    "SettingsUserPassword": user_password,
-                    "SettingsUserKey": str(user_key),
-                    "user_upload_token": upload_token,
-                }
+    try:
+        data = auth_config.get_upload_token(user_email, user_password)
+        upload_token, user_key = data.get("token"), data.get("id")
 
-                config.update_config(config_file, user_email, user_items)
-                response = {'status': True, "message": "Authentication successfully done", "token": upload_token}
-                return response
-            
-            else:
-                response = {'status': False, "message": data.get("message")[0]}
-                return response
+        if upload_token:
+            user_items = {
+                "SettingsEmail": user_email,
+                "SettingsUsername": user_name,
+                "SettingsUserPassword": user_password,
+                "SettingsUserKey": str(user_key),
+                "user_upload_token": upload_token,
+            }
 
-        except Exception as e:
-            response = {'status': False, "message": f"{str(e)}. Please try again."}
-
-            logging.error(f"Authentication failed: {str(e)}. Please try again.")
+            config.update_config(config_file, user_email, user_items)
+            response = {'status': True, "message": "Authentication successfully done", "token": upload_token}
             return response
-    else:
-        response = {'status': False, "message": "User email and password are required for authentication."}
-        logging.warning("User email and password are required for authentication.")
-        return response
 
+        else:
+            response = {'status': False, "message": data.get("message")[0]}
+            return response
+
+    except Exception as e:
+        response = {'status': False, "message": f"{str(e)}. Please try again."}
+        logging.error(f"Authentication failed: {str(e)}. Please try again.")
+        return response
