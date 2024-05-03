@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Mapilio Uploader</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/mapilio_ico-modified.png') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-5 d-flex justify-content-center align-items-center" style="background-color: rgb(2, 25, 54); height: 100vh; position: relative;">
+                <img src="{{ url_for('static', filename='images/mapilio.png') }}" alt="Image" class="img-fluid">
+                <img src="{{ url_for('static', filename='images/mapilio_beta.svg') }}" alt="SVG Image" class="img-fluid svg-image mb-5 ms-4" style="position: absolute; bottom: 0; left: 0;">
+                <p class="ms-3 mt-3 text-white" style="position: absolute; bottom: 0; left: 0;">&#169; Mapilio. 2024. All rights reserved</p>
+            </div>
+            <div class="col-5 ms-5 mx-5 my-auto">
+                <div class="body">
+                    <h3 class="">Mapilio Account Login</h3>
+                    <form action="/login" method="POST" class="w-100">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Enter your email</label>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Enter your password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <p class="mt-2">Don't have an account yet? <a href="https://mapilio.com/signup" target="_blank">Sign up here.</a></p>
+                        {% if message %}
+                            <div class="alert alert-danger alert-dismissible fade show mt-4" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endif %}
+                    </form>
+                </div>
+        </div>
+    </div>
+
+</body>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</html>
