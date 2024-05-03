@@ -161,5 +161,5 @@ def mapilio_about_page():
 
 if __name__ == "__main__":
     # webbrowser.open("http://127.0.0.1:8080/")
-    app.run(host="0.0.0.0", port=8080, debug=True)
-    # FlaskUI(app=app, server="flask", port=5050, width=1200, height=800).run()
+    # app.run(host="0.0.0.0", port=8080, debug=True)
+    FlaskUI(app=app, server="flask", port=8080, width=1200, height=800).run()
