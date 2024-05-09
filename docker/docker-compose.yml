@@ -1,10 +1,9 @@
-version: '3'
 services:
-  kit:
+  mapiliokit:
     image: kit
     container_name: kit
     build: .
     stdin_open: true
     tty: true
-    volumes:
-      - <your_local_videos_path>:/app/data/
+    ports:
+      - "8080:8080"

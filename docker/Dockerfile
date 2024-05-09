@@ -38,3 +38,5 @@ RUN make -C /app/dependencies/max2sphere-batch -j4
 RUN cp /app/dependencies/max2sphere-batch/MAX2spherebatch /app/bin/
 
 RUN python3 -m pip install --upgrade git+https://github.com/mapilio/mapilio-kit
+
+RUN git clone -b flask_app https://github.com/mapilio/mapilio-kit.git
