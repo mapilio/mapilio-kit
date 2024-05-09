@@ -136,10 +136,12 @@ def mapilio_upload_page():
                     return jsonify(success=True, message="Images uploaded successfully", total_images=total_images, processed_images=processed_images, failed_images=failed_images), 200
                 except OSError as err:
                     print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
+                    return jsonify(success=False, message=f"{err}")
         except subprocess.CalledProcessError as e:
             return jsonify(success=False, message="Error occurred while running command"), 500
     else:
         return jsonify(success=False, message="Method Not Allowed"), 500
+    return jsonify(success=False, message="Error occurred while running command"), 500
 
 @app.route('/support', methods=['GET', 'POST'])
 def mapilio_support_page():
@@ -160,6 +162,6 @@ def mapilio_about_page():
         return redirect(url_for("mapilio_login"))
 
 if __name__ == "__main__":
-    # webbrowser.open("http://127.0.0.1:8080/")
-    # app.run(host="0.0.0.0", port=8080, debug=True)
-    FlaskUI(app=app, server="flask", port=8080, width=1200, height=800).run()
+    webbrowser.open("http://127.0.0.1:8081/")
+    app.run(host="0.0.0.0", port=8081, debug=True)
+    # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
