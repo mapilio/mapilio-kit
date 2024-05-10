@@ -14,6 +14,17 @@ app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.join(os.path.expanduser("~"), ".cache", "mapilio", "MapilioKit", "images/")
 
+MAPILIO_CONFIG_PATH = os.getenv(
+        "MAPILIO_CONFIG_PATH",
+        os.path.join(
+            os.path.expanduser("~"),
+            ".config",
+            "mapilio",
+            "configs",
+            "CLIENT_USERS",
+        ),
+    )
+
 
 def get_args_mapilio(func):
     arg_names = func.__code__.co_varnames[:func.__code__.co_argcount]
@@ -28,7 +39,7 @@ def check_authenticate():
     elif len(list_all_users()) >= 2:
         token = None
         authentication_status = False
-        username = input("Found multiple Mapilio accounts. Please specify your username.\n")
+        remove_accounts()
     else:
         token = list_all_users()[0]['user_upload_token']
         authentication_status = True
@@ -74,21 +85,11 @@ def mapilio_login():
 
 @app.route('/logout', methods=['GET'])
 def remove_accounts():
-    MAPILIO_CONFIG_PATH = os.getenv(
-        "MAPILIO_CONFIG_PATH",
-        os.path.join(
-            os.path.expanduser("~"),
-            ".config",
-            "mapilio",
-            "configs",
-            "CLIENT_USERS",
-        ),
-    )
     if os.path.exists(MAPILIO_CONFIG_PATH):
         os.remove(MAPILIO_CONFIG_PATH)
+        return jsonify(success=True, message="Account successfully removed!"), 200
     else:
         return jsonify(success=True, message="No accounts found!"), 200
-    return jsonify(success=True, message="Account successfully removed!"), 200
 
 
 @app.route('/image-upload', methods=['GET', 'POST'])
@@ -144,7 +145,7 @@ def mapilio_upload_page():
     return jsonify(success=False, message="Error occurred while running command"), 500
 
 @app.route('/video-upload', methods=['GET', 'POST'])
-def mapilio_support_page():
+def mapilio_video_upload_page():
     token, authentication_status = check_authenticate()
 
     if authentication_status:
