@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
             allowEnterKey: false
         });
 
-        fetch('/upload', {
+        fetch('/image-upload', {
             method: 'POST',
             body: formData
         })
