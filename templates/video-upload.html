@@ -26,21 +26,15 @@
                 <span class="border mb-3 rounded"></span>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="upload" class="nav-link text-white">
+                        <a href="image-upload" class="nav-link text-white">
                             <i class="fa-solid fa-upload fs-6 me-1"></i>
                             Image Upload
                         </a>
                     </li>
                     <li>
-                        <a href="about" class="nav-link text-white">
-                            <i class="fa-solid fa-circle-info fs-6 me-1"></i>
-                            About
-                        </a>
-                    </li>
-                    <li>
-                        <a href="support" class="nav-link text-white active" aria-current="page">
-                            <i class="fa-solid fa-ticket fs-6 me-1"></i>
-                            Support
+                        <a href="video-upload" class="nav-link text-white active" aria-current="page">
+                            <i class="fa-solid fa-video fs-6 me-1"></i>
+                           Video Upload
                         </a>
                     </li>
                 </ul>
@@ -57,8 +51,12 @@
                     </ul>
                 </div>
             </div>
+            <div class="col-6 my-auto mx-auto">
+                <p class="h3 fw-bold text-center mt-4">Coming Soon</p>
+            </div>
         </div>
     </div>
+
 <script>
     const token = "{{ token }}"
 
@@ -78,6 +76,7 @@
         console.error('Error:', error);
     });
 </script>
+
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/style.css') }}">
 <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
 </body>

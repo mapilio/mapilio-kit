@@ -40,7 +40,7 @@ def check_authenticate():
 def index():
     token, authentication_status = check_authenticate()
     if authentication_status:
-        return render_template("upload.html", token=token)
+        return render_template("image-upload.html", token=token)
     else:
         return render_template('login.html')
 
@@ -64,7 +64,7 @@ def mapilio_login():
         if check_authenticate['status']:
             message = check_authenticate['message']
             token = check_authenticate['token']
-            return render_template("upload.html", message=message, token=token)
+            return render_template("image-upload.html", message=message, token=token)
         else:
             message = check_authenticate['message']
             return render_template('login.html', message=message)
@@ -91,13 +91,13 @@ def remove_accounts():
     return jsonify(success=True, message="Account successfully removed!"), 200
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/image-upload', methods=['GET', 'POST'])
 def mapilio_upload_page():
     if request.method == 'GET':
         token, authentication_status = check_authenticate()
 
         if authentication_status:
-            return render_template('upload.html', token=token)
+            return render_template('image-upload.html', token=token)
         else:
             return redirect(url_for("mapilio_login"))
     elif request.method == 'POST':
@@ -143,21 +143,12 @@ def mapilio_upload_page():
         return jsonify(success=False, message="Method Not Allowed"), 500
     return jsonify(success=False, message="Error occurred while running command"), 500
 
-@app.route('/support', methods=['GET', 'POST'])
+@app.route('/video-upload', methods=['GET', 'POST'])
 def mapilio_support_page():
     token, authentication_status = check_authenticate()
 
     if authentication_status:
-        return render_template('support.html', token=token)
-    else:
-        return redirect(url_for("mapilio_login"))
-
-@app.route('/about', methods=['GET', 'POST'])
-def mapilio_about_page():
-    token, authentication_status = check_authenticate()
-
-    if authentication_status:
-        return render_template('about.html', token=token)
+        return render_template('video-upload.html', token=token)
     else:
         return redirect(url_for("mapilio_login"))
 
