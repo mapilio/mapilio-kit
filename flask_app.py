@@ -104,7 +104,6 @@ def mapilio_upload_page():
     elif request.method == 'POST':
         if 'file' not in request.files:
             return jsonify(success=False, message="No file part")
-
         for file in request.files.getlist('file'):
             if file.filename == '':
                 continue
@@ -139,10 +138,16 @@ def mapilio_upload_page():
                     print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
                     return jsonify(success=False, message=f"{err}")
         except subprocess.CalledProcessError as e:
-            return jsonify(success=False, message="Error occurred while running command"), 500
+            return jsonify(success=False, message={e}), 500
     else:
         return jsonify(success=False, message="Method Not Allowed"), 500
-    return jsonify(success=False, message="Error occurred while running command"), 500
+    error_message = result.stderr.split()
+    error_message = ' '.join(error_message)
+    error_index = error_message.find("error:")
+    if error_index != -1:
+        error_message = error_message[error_index:]
+    return jsonify(success=False, message=f"Error: {error_message}"), 500
+
 
 @app.route('/video-upload', methods=['GET', 'POST'])
 def mapilio_video_upload_page():
