@@ -28,3 +28,4 @@ calculation-mapilio
 windows-curses; platform_system  == "Windows"
 flask
 flaskwebgui
+pytest
