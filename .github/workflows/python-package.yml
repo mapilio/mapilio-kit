@@ -57,7 +57,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install .
-          python -m pip install -r requirements-dev.txt
 
       - name: Test with pytest
         run: |
@@ -65,4 +64,4 @@ jobs:
           pytest -s -vv tests
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit
-          MAPILLARY_TOOLS__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
+          MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
