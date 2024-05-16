@@ -62,12 +62,14 @@ jobs:
 
       - name: Validate version
         run: |
-          EXPECTED_GITHUB_REF=$(mapilio_kit --version | awk '{print "refs/tags/v" $3}')
+          EXPECTED_GITHUB_REF=$(mapilio_kit --version | awk '{print "refs/tags/v" $1}')
           if [[ "$EXPECTED_GITHUB_REF" != "$GITHUB_REF" ]]; then
             echo "Version mismatch: $EXPECTED_GITHUB_REF != $GITHUB_REF"
             exit 1
           fi
         if: matrix.platform != 'windows-latest'
+
+
 
       - name: Build and test with Pyinstaller on MacOS
         if: matrix.platform == 'macos-latest'
