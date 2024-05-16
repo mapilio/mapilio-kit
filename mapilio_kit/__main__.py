@@ -51,19 +51,19 @@ def del_useless_users():
            print(f"{Fore.RED}Useless account or accounts found and deleted! \n {Fore.RESET}")
 
 def main():
-    print(f"{Fore.BLUE}Welcome to Mapilio-kit\n"
-         f"Mapilio allows you to upload your images, videos and 360 degree panorama images to Mapilio map.{Fore.RESET}\n")
-
-    latest_version = get_latest_version()
-
-    if latest_version:
-        if latest_version > VERSION:
-            print(f"{Fore.RED}A newer version ({latest_version}) is available!{Fore.RESET}")
-            print(f'{Fore.RED}For latest Mapilio-kit version please update with "pip install mapilio_kit --upgrade"{Fore.RESET} \n')
-        else:
-            print(f"{Fore.GREEN}You have the latest Mapilio-kit version ({VERSION}) installed.{Fore.RESET}\n")
-    else:
-        print(f"{Fore.RED}Unable to fetch the latest Mapilio-kit version information.{Fore.RESET}\n")
+    # print(f"{Fore.BLUE}Welcome to Mapilio-kit\n"
+    #      f"Mapilio allows you to upload your images, videos and 360 degree panorama images to Mapilio map.{Fore.RESET}\n")
+    #
+    # latest_version = get_latest_version()
+    #
+    # if latest_version:
+    #     if latest_version > VERSION:
+    #         print(f"{Fore.RED}A newer version ({latest_version}) is available!{Fore.RESET}")
+    #         print(f'{Fore.RED}For latest Mapilio-kit version please update with "pip install mapilio_kit --upgrade"{Fore.RESET} \n')
+    #     else:
+    #         print(f"{Fore.GREEN}You have the latest Mapilio-kit version ({VERSION}) installed.{Fore.RESET}\n")
+    # else:
+    #     print(f"{Fore.RED}Unable to fetch the latest Mapilio-kit version information.{Fore.RESET}\n")
 
     del_useless_users() # checks auth file and deletes users that are not included SettingsEmail
 
