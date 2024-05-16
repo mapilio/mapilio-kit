@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+OS=osx
+
+# build
+mkdir -p dist
+rm -rf dist/${OS}
+pyinstaller --version
+pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
+
+# check
+SOURCE=dist/${OS}/mapilio-kit.app/Contents/MacOS/mapilio-kit
+$SOURCE --version
+VERSION=$($SOURCE --version | awk '{print $3}')
+ARCH=$(uname -m)
+TARGET=dist/releases/mapilio-kit-${VERSION}-${OS}-${ARCH}.zip
+
+# package
+mkdir -p dist/releases
+zip -j "$TARGET" "$SOURCE" README_osx_package.txt
+
+# sha256
+TARGET_BASENAME=$(basename "$TARGET")
+cd dist/releases
+shasum -a256 "$TARGET_BASENAME" | tee "${TARGET_BASENAME}.sha256.txt"
+cd ../../
+
+# summary
+ls -l dist/releases

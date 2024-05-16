@@ -1,0 +1,141 @@
+# This workflow will build the package with Pyinstaller, upload it to GitHub Releases
+
+name: Release
+
+on:
+    push:
+      branches: [flask_app]
+
+jobs:
+  build_and_release:
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+
+    strategy:
+      matrix:
+        python-version: ["3.11"]
+        platform: ["ubuntu-20.04", "macos-latest", "windows-latest"]
+        architecture: ["x64"]
+        include:
+          - architecture: "x86"
+            platform: "windows-latest"
+            python-version: "3.11"
+
+    runs-on: ${{ matrix.platform }}
+
+    defaults:
+      run:
+        working-directory: ./main
+
+    steps:
+      # https://github.com/actions/checkout#Checkout-multiple-repos-side-by-side
+      - uses: actions/checkout@v4
+        with:
+          path: main
+
+      - name: Setup ExifTool
+        uses: actions/checkout@v4
+        with:
+          repository: "exiftool/exiftool"
+          path: exiftool
+
+      - name: Check ExifTool version
+        run: |
+          mv ${{ github.workspace }}/exiftool/exiftool ${{ github.workspace }}/exiftool/exiftool.pl
+          perl ${{ github.workspace }}/exiftool/exiftool.pl -ver
+
+      - name: Setup FFmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v3
+
+        if: matrix.platform != 'macos-latest'
+
+      - name: Set up ${{ matrix.architecture }} Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }
+          architecture: ${{ matrix.architecture }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install .
+
+      - name: Validate version
+        run: |
+          EXPECTED_GITHUB_REF=$(mapilio_kit --version | awk '{print "refs/tags/v" $3}')
+          if [[ "$EXPECTED_GITHUB_REF" != "$GITHUB_REF" ]]; then
+            echo "Version mismatch: $EXPECTED_GITHUB_REF != $GITHUB_REF"
+            exit 1
+          fi
+        if: matrix.platform != 'windows-latest'
+
+      - name: Build and test with Pyinstaller on MacOS
+        if: matrix.platform == 'macos-latest'
+        run: |
+          python3 -m pip install pysocks
+          ./script/build_osx
+        env:
+          MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/osx/mapilio-kit
+          MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
+
+      - name: Build and test with Pyinstaller on Ubuntu
+        if: matrix.platform == 'ubuntu-20.04'
+        run: |
+          python3 -m pip install pysocks
+          ./script/build_linux
+        env:
+          MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/linux/mapilio-kit
+          MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
+
+      - name: Build and test with Pyinstaller on Windows
+        if: matrix.platform == 'windows-latest'
+        run: |
+          python3 -m pip install pysocks
+          ./script/build_bootloader.ps1
+          ./script/build_win.ps1
+          cp ./dist/win/mapilio-kit.exe mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
+        env:
+          MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
+          MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            ./main/dist/releases/*
+
+#  pypi-publish:
+#    if: ${{ startsWith(github.ref, 'refs/tags/') }}
+#    name: Upload release to PyPI
+#    needs: ["build_and_release"]
+#    runs-on: "ubuntu-20.04"
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Set up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: "3.x"
+#
+#      # https://packaging.python.org/en/latest/guides/publishing-package-distribution-releases-using-github-actions-ci-cd-workflows/
+#      - name: Install pypa/build
+#        run: python3 -m pip install build
+#
+#      - name: Build
+#        # the default ouput dir dist/ was used by pyinstaller
+#        run: python3 -m build --outdir pypa_dist/ .
+#
+#      - name: Publish package distributions to TestPyPI
+#        uses: pypa/gh-action-pypi-publish@v1.8.6
+#        with:
+#          repository-url: https://test.pypi.org/legacy/
+#          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+#          packages-dir: pypa_dist/
+#
+#      - name: Publish package distributions to PyPI
+#        uses: pypa/gh-action-pypi-publish@v1.8.6
+#        with:
+#          password: ${{ secrets.PYPI_API_TOKEN }}
+#          packages-dir: pypa_dist/
