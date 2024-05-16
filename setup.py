@@ -22,31 +22,6 @@ def read_requirements_macos():
     with open('requirements.txt') as fp:
         return [row.strip() for row in fp if row.strip()]
 
-if platform.system() == "Darwin":
-    about = {}
-    with open(os.path.join(here, 'mapilio_kit', 'components', 'version.py'), 'r') as f:
-        exec(f.read(), about)
-
-    setup(name='mapilio-kit',
-          version=about['VERSION'],
-          description='MAPILIO Image/Video Upload Pipeline',
-          long_description=open('README.md').read(),
-          long_description_content_type='text/markdown',
-          url='https://github.com/mapilio/mapilio-kit-v2',
-          author='Mapilio',
-          license='MIT License',
-          python_requires=">=3.6, !=3.12.*",
-          packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
-          entry_points='''
-          [console_scripts]
-          mapilio_kit=mapilio_kit.__main__:main
-          ''',
-          install_requires=read_requirements_macos(),
-
-          )
-    print("Installed")
-
-
 class MakeExtension(Extension):
     def __init__(self, name, sourcedir=''):
         Extension.__init__(self, name, sources=[])
