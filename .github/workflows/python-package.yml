@@ -22,7 +22,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: ./flask_app
+        working-directory: ./main
 
     steps:
       # https://github.com/actions/checkout#Checkout-multiple-repos-side-by-side
