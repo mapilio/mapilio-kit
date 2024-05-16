@@ -3,8 +3,9 @@
 name: Release
 
 on:
-    push:
-      branches: [flask_app]
+  push:
+    tags:
+      - "v*.*.*"
 
 jobs:
   build_and_release:
@@ -12,9 +13,9 @@ jobs:
 
     strategy:
       matrix:
-        python-version: ["3.11"]
-        platform: ["ubuntu-20.04", "macos-latest", "windows-latest"]
-        architecture: ["x64"]
+        python-version: [ "3.11" ]
+        platform: [ "ubuntu-20.04", "macos-latest", "windows-latest" ]
+        architecture: [ "x64" ]
         include:
           - architecture: "x86"
             platform: "windows-latest"
@@ -51,7 +52,7 @@ jobs:
       - name: Set up ${{ matrix.architecture }} Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }
+          python-version: ${{ matrix.python-version }}
           architecture: ${{ matrix.architecture }}
 
       - name: Install dependencies
