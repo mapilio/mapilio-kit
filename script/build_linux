@@ -12,7 +12,7 @@ pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
 # check
 SOURCE=dist/${OS}/mapilio-kit
 $SOURCE --version
-VERSION=$($SOURCE --version | awk '{print $3}')
+VERSION=$($SOURCE --version | awk '{print $1}')
 ARCH=$(uname -m)
 TARGET=dist/releases/mapilio-kit-${VERSION}-${OS}-${ARCH}
 

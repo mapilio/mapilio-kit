@@ -75,6 +75,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           python3 -m pip install pysocks
+          chmod +x ./script/build_osx
           ./script/build_osx
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/osx/mapilio-kit
@@ -84,6 +85,7 @@ jobs:
         if: matrix.platform == 'ubuntu-20.04'
         run: |
           python3 -m pip install pysocks
+          chmod +x ./script/build_osx
           ./script/build_linux
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/linux/mapilio-kit
