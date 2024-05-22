@@ -75,6 +75,7 @@ jobs:
         if: matrix.platform == 'macos-latest'
         run: |
           python3 -m pip install pysocks
+          python3 -m pip install pyinstaller
           chmod +x ./script/build_osx
           ./script/build_osx
         env:
@@ -85,6 +86,7 @@ jobs:
         if: matrix.platform == 'ubuntu-20.04'
         run: |
           python3 -m pip install pysocks
+          python3 -m pip install pyinstaller
           chmod +x ./script/build_osx
           ./script/build_linux
         env:
@@ -95,6 +97,7 @@ jobs:
         if: matrix.platform == 'windows-latest'
         run: |
           python3 -m pip install pysocks
+          python3 -m pip install pyinstaller
           ./script/build_bootloader.ps1
           ./script/build_win.ps1
           cp ./dist/win/mapilio-kit.exe mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
