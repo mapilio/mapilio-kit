@@ -25,8 +25,9 @@ def create_spec_file():
     for package in packages:
         try:
             package_path = get_installed_package_path(package)
-            datas.append((package_path, package))
             hiddenimports.append(package)
+            # Add the package path to datas
+            datas.append((package_path, package))
         except ValueError as e:
             print(f"Warning: {e}")
 
