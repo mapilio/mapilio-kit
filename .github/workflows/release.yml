@@ -91,6 +91,7 @@ jobs:
         run: |
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
+          python3 -m pip install configparser
           chmod +x ./script/build_osx
           ./script/build_linux
         env:
