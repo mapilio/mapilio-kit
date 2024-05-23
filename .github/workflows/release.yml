@@ -110,14 +110,16 @@ jobs:
           MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
 
-      - name: Release
-        uses: softprops/action-gh-release@v1
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
+          tag: ${{ github.ref }}
+          name: Release ${{ github.ref }}
+          body: "Description of the release"
           draft: true
-          generate_release_notes: true
-          fail_on_unmatched_files: true
           files: |
             ./main/dist/releases/*
 
