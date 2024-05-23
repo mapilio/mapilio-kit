@@ -46,7 +46,7 @@ def create_spec_file():
     spec_file = 'flask_app.spec'
 
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
-    hiddenimports = []
+    hiddenimports = ['configparser']
 
     with open(requirements_file) as f:
         packages = [line.split('==')[0].strip() for line in f if line.strip() and not line.startswith('#')]
