@@ -118,7 +118,4 @@ jobs:
         run: gh release create ${{ github.ref }} --draft --notes "Automated release by GitHub Actions"
 
       - name: Upload Assets
-        run: |
-          for file in ./dist/releases/*; do
-            gh release upload ${{ github.ref }} "$file"
-          done
+        run: gh release upload ${{ github.ref }} ./dist/releases/*
