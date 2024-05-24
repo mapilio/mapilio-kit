@@ -89,12 +89,13 @@ jobs:
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
           python3 -m pip install configparser
-          python3 -m pip install types-requests
-          python3 -m pip install types-appdirs
-          python3 -m pip install usort
-          python3 -m pip install pyre-check
-          chmod +x ./script/build_linux
-          ./script/build_linux
+#          python3 -m pip install types-requests
+#          python3 -m pip install types-appdirs
+#          python3 -m pip install usort
+#          python3 -m pip install pyre-check
+#          chmod +x ./script/build_linux
+#          ./script/build_linux
+          git clone https://github.com/mapilio/mapilio-kit.git
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/linux/mapilio-kit
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
