@@ -119,6 +119,6 @@ jobs:
 
       - name: Upload Assets
         run: |
-          for file in ./main/dist/releases/*; do
+          for file in ./dist/releases/*; do
             gh release upload ${{ github.ref }} "$file"
           done
