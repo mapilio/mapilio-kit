@@ -111,8 +111,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install -g @actions/github-script
-
       - name: Authenticate GitHub CLI
         run: gh auth login --with-token <<< "${{ secrets.GH_TOKEN }}"
 
