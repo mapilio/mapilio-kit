@@ -119,7 +119,7 @@ jobs:
           generate_release_notes: true
           fail_on_unmatched_files: true
           files: |
-            ./dist/releases/*
+            ./main/dist/releases/*
 
 #      - name: Install GitHub CLI
 #        uses: actions/setup-node@v4
