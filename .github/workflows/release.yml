@@ -111,15 +111,25 @@ jobs:
           MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
 
-      - name: Install GitHub CLI
-        uses: actions/setup-node@v4
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          node-version: '20'
-      - name: Authenticate GitHub CLI
-        run: gh auth login --with-token <<< "${{ secrets.GH_TOKEN }}"
+          draft: true
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+          files: |
+            ./dist/releases/*
 
-      - name: Create Release
-        run: gh release create ${{ github.ref }} --draft --notes "Automated release by GitHub Actions"
-
-      - name: Upload Assets
-        run: gh release upload ${{ github.ref }} ./dist/releases/*
+#      - name: Install GitHub CLI
+#        uses: actions/setup-node@v4
+#        with:
+#          node-version: '20'
+#      - name: Authenticate GitHub CLI
+#        run: gh auth login --with-token <<< "${{ secrets.GH_TOKEN }}"
+#
+#      - name: Create Release
+#        run: gh release create ${{ github.ref }} --draft --notes "Automated release by GitHub Actions"
+#
+#      - name: Upload Assets
+#        run: gh release upload ${{ github.ref }} ./dist/releases/*
