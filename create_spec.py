@@ -46,6 +46,7 @@ def create_spec_file():
     spec_file = 'flask_app.spec'
 
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
+    hiddenimports = ['configparser']
 
     with open(requirements_file) as f:
         packages = [line.split('==')[0].strip() for line in f if line.strip() and not line.startswith('#')]
@@ -56,6 +57,7 @@ def create_spec_file():
             if package == 'ExifRead':
                 package = 'exifread'
             package_path = get_installed_package_path(package)
+            hiddenimports.append(package)
 
             package_folder_name = package.replace('-', '_')
 
@@ -82,7 +84,7 @@ a = Analysis(
     pathex=[SPECPATH],
     binaries=[],
     datas={datas},
-    hiddenimports=[],
+    hiddenimports={hiddenimports},
     hookspath=[],
     runtime_hooks=[],
     excludes=[],
