@@ -13,16 +13,17 @@ piexif==1.1.3
 pymp4==1.1.0
 pynmea2==1.19.0
 pyrsistent==0.18.0
-python-dateutil==2.8.1
-requests==2.20.0
+python-dateutil==2.8.2
+requests==2.32.3
 Shapely
 colorama==0.4.6
 six==1.16.0
 tqdm==4.62.3
-pandas
+pandas==2.2.2
 typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
 gps-anomaly
 calculation-mapilio
 windows-curses; platform_system  == "Windows"
+urllib3==2.2.1
