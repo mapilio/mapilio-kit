@@ -12,6 +12,7 @@ pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
 # check
 SOURCE=dist/${OS}/MapilioKit-Flask
 
+chmod +x "$SOURCE"
 #nohup $SOURCE --version > /dev/null 2>&1 &
 
 #VERSION=$($SOURCE --version | awk '{print $1}')
