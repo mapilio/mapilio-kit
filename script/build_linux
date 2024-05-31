@@ -12,7 +12,6 @@ pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
 # check
 SOURCE=dist/${OS}/MapilioKit-Flask
 
-chmod +x "$SOURCE"
 #nohup $SOURCE --version > /dev/null 2>&1 &
 
 #VERSION=$($SOURCE --version | awk '{print $1}')
@@ -22,7 +21,7 @@ TARGET=dist/releases/mapilio-kit-${VERSION}-${OS}-${ARCH}
 # package
 mkdir -p dist/releases
 cp "$SOURCE" "$TARGET"
-
+chmod +x "$TARGET"
 # sha256
 TARGET_BASENAME=$(basename "$TARGET")
 cd dist/releases
