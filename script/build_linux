@@ -12,12 +12,9 @@ pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
 # check
 SOURCE=dist/${OS}/MapilioKit-Flask
 
-nohup $SOURCE --version > /dev/null 2>&1 &
-PID=$!
+#nohup $SOURCE --version > /dev/null 2>&1 &
 
-sleep 5
-
-VERSION=$($SOURCE --version | awk '{print $1}')
+#VERSION=$($SOURCE --version | awk '{print $1}')
 ARCH=$(uname -m)
 TARGET=dist/releases/mapilio-kit-${VERSION}-${OS}-${ARCH}
 
@@ -35,8 +32,6 @@ shasum -a 256 "$TARGET_BASENAME" | tee "${TARGET_BASENAME}.sha256.txt"
 
 
 cd ../../
-
-kill $PID
 
 # summary
 ls -l dist/releases
