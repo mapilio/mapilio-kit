@@ -3,6 +3,17 @@ import subprocess
 import sys
 from pathlib import Path
 
+def install_exiftool():
+    try:
+        subprocess.run(['sudo', 'apt', 'install', '-y', 'exiftool'], check=True)
+    except subprocess.CalledProcessError as e:
+        print(f"Error installing exiftool: {e}")
+
+def get_exiftool_path():
+    result = subprocess.run(['which', 'exiftool'], capture_output=True, text=True)
+    if result.returncode != 0:
+        raise ValueError("ExifTool not found")
+    return result.stdout.strip()
 
 def get_installed_package_path(package_name):
     result = subprocess.run([sys.executable, '-m', 'pip', 'show', package_name], capture_output=True, text=True)
@@ -40,13 +51,20 @@ def get_installed_package_path(package_name):
 
     raise ValueError(f"Package path not found for {package_name}")
 
-
 def create_spec_file():
     requirements_file = 'requirements.txt'
     spec_file = 'flask_app.spec'
 
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
     hiddenimports = ['configparser']
+
+    # ExifTool'u kur ve yolunu bul
+    install_exiftool()
+    try:
+        exiftool_path = get_exiftool_path()
+        datas.append((exiftool_path, 'exiftool'))
+    except ValueError as e:
+        print(f"Warning: {e}")
 
     with open(requirements_file) as f:
         packages = [line.split('==')[0].strip() for line in f if line.strip() and not line.startswith('#')]
