@@ -131,7 +131,7 @@ class Run:
             target_path = os.path.join(import_path, "mapilio_image_description.json")
             args["import_path"] = import_path
             if os.path.exists(target_path):
-                with open("mapilio_image_description.json", "r") as f:
+                with open(target_path, "r") as f:
                     json_data = f.read()
                 data = json.loads(json_data)
 
