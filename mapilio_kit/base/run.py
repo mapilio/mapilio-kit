@@ -66,8 +66,9 @@ class Run:
 
         if import_path:
             args["import_path"] = import_path
-            if os.path.exists('mapilio_image_description.json'):
-                with open("mapilio_image_description.json", "r") as f:
+            target_path = os.path.join(import_path, "mapilio_image_description.json")
+            if os.path.exists(target_path):
+                with open(target_path, "r") as f:
                     json_data = f.read()
                 data = json.loads(json_data)
 
@@ -86,7 +87,7 @@ class Run:
             return self.uploader.perform_task(args)
 
         else:
-            print("Please enter your image path and processed properly \n\n\n\n\n")
+            print("Please enter your image path. \n\n\n\n\n")
             self.perform_image_upload()
 
     def panorama_image_upload(self):
