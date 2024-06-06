@@ -116,7 +116,7 @@ def extract_frames(
 ) -> None:
     video_filename, ext = os.path.splitext(os.path.basename(video_file))
     command = [
-        "ffmpeg",
+        "ffpb",
         "-i",
         video_file,
         "-vf",

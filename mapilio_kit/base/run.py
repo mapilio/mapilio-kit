@@ -1,4 +1,5 @@
 import os
+import json
 import getpass
 import subprocess
 from login import list_all_users
@@ -62,21 +63,31 @@ class Run:
         args = self.get_args(upload)
         args["user_name"] = self.username
         import_path = input("Enter your image path: ").strip()
-        processed = input(
-            "Are your images processed already [y,Y,yes,Yes]? (Hint: will convert your images to exif data and write them to a json file):").strip()
 
-        if import_path and processed:
+        if import_path:
             args["import_path"] = import_path
+            target_path = os.path.join(import_path, "mapilio_image_description.json")
+            if os.path.exists(target_path):
+                with open(target_path, "r") as f:
+                    json_data = f.read()
+                data = json.loads(json_data)
 
-            if processed not in ["y", "Y", "yes", "Yes"]:
-                args["processed"] = False
+                info_key_exists = any('Information' in item for item in data)
+
+                total_images = next((item['Information']['total_images'] for item in data if 'Information' in item),
+                                    None)
+
+                correct_number_of_dicts = len(data) - 1 == total_images
+                if info_key_exists and correct_number_of_dicts:
+                    args["processed"] = True
+                else:
+                    args["processed"] = False
             else:
-                args["processed"] = True
-
+                args["processed"] = False
             return self.uploader.perform_task(args)
 
         else:
-            print("Please enter your image path and processed properly \n\n\n\n\n")
+            print("Please enter your image path. \n\n\n\n\n")
             self.perform_image_upload()
 
     def panorama_image_upload(self):
@@ -115,29 +126,53 @@ class Run:
         args = self.get_args(upload)
         args["user_name"] = self.username
         video_import_path = input("Enter your video folder path: ").strip()
-        processed = input("Are your images processed already [y,Y,yes,Yes]?").strip()
         if video_import_path:
             import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
+            target_path = os.path.join(import_path, "mapilio_image_description.json")
             args["import_path"] = import_path
-            if processed not in ["y", "Y", "yes", "Yes"]:
+            if os.path.exists(target_path):
+                with open(target_path, "r") as f:
+                    json_data = f.read()
+                data = json.loads(json_data)
+
+                info_key_exists = any('Information' in item for item in data)
+
+                total_images = next((item['Information']['total_images'] for item in data if 'Information' in item),
+                                    None)
+
+                correct_number_of_dicts = len(data) - 1 == total_images
+                if info_key_exists and correct_number_of_dicts:
+                    args["processed"] = True
+                else:
+                    args["processed"] = False
+                return self.uploader.perform_task(args)
+            else:
                 args["video_import_path"] = video_import_path
-                geotag_source = input(
-                    "Enter your geotag source (choices=['exif', 'gpx', 'gopro_videos', 'nmea']): ").strip()
-                # self.video_sample_interval = int(input("Enter your video sample interval: ").strip())
+
+                geotag_options = {
+                    "1": "exif (Image metadata containing GPS coordinates)",
+                    "2": "gpx (GPS data file format for storing tracks and waypoints)",
+                    "3": "gopro_videos (GPS data extracted from GoPro video files)",
+                    "4": "nmea (GPS data format used by many GPS devices)"
+                }
+
+                print("Please select your geotag source:")
+                for key, value in geotag_options.items():
+                    print(f"{key}: {value}")
+
+                while True:
+                    geotag_choice = input("Enter the number corresponding to your geotag source: ").strip()
+                    if geotag_choice in geotag_options:
+                        geotag_source = geotag_options[geotag_choice].split()[0]
+                        break
+                    else:
+                        print("Invalid choice, please enter a number between 1 and 4.")
+
                 args["processed"] = False
                 args["geotag_source"] = geotag_source
                 args["interpolate_directions"] = self.interpolate_directions
                 args["video_sample_interval"] = self.video_sample_interval
                 return self.video_loader.perform_task(args)
-
-
-            else:
-                # desc_path = input("Enter your description json path: ").strip()
-                # args["desc_path"] = desc_path
-                args["processed"] = True
-                return self.uploader.perform_task(args)
-
-
         else:
             print("Please enter your video path properly \n\n\n\n\n")
             self.perform_video_upload()
@@ -181,9 +216,9 @@ class Run:
 
         if check_authenticate:
             func = input("Choose your process:\n\
-                         1. Image upload (Hint: Basically, Image Upload takes your images or timelapse images, processes and uploads them to Mapilio.)\n\
-                         2. Video upload (Hint: Briefly, Video Upload takes your video or panoramic video that obtained from gopro360max, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
-                         3. Advanced options (Hint: This option gives access to more advanced processing options.)\n"
+                         1. Image upload (Image Upload takes your images or timelapse images, processes and uploads them to Mapilio.)\n\
+                         2. Video upload (Video Upload takes your video or panoramic video that obtained from gopro360max, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
+                         3. Advanced options (This option gives access to more advanced processing options.)\n"
                          )
 
             if func == "1" or func == "Image upload":
@@ -191,8 +226,8 @@ class Run:
 
             elif func == "2" or func == "Video upload":
                 video_func = input("Choose your video process:\n\
-                             1. Video upload (Hint: Briefly, Video Upload takes your video, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
-                             2. gopro360max panoramic video upload (Hint: Takes your panoramic images, processes and uploads to Mapilio.) still in progress!\n"
+                             1. Video upload (Briefly, Video Upload takes your video, processes it (as 1 second timelapse photos) and uploads to Mapilio.)\n\
+                             2. gopro360max panoramic video upload (Takes your panoramic images, processes and uploads to Mapilio.) still in progress!\n"
                                    )
                 if video_func == "1" or video_func == "Video upload":
                     self.perform_video_upload()
@@ -205,8 +240,8 @@ class Run:
                     Run().perform_task(vars_args=None)
             elif func == "3" or func == "Advance options":
                 advanced_func = input("Choose your advanced process:\n\
-                                         1 Decompose (Hint: Shortly, Decompose extracts metadata information to json file from images by using EXIF Tool.)\n\
-                                         2 360 panorama image upload (Hint: In Short, 360 panorama image upload takes 360 degree panorama images with their csv file which taken from surveying car and then uploads to Mapilio.)\n"
+                                         1 Decompose (Shortly, Decompose extracts metadata information to json file from images by using EXIF Tool.)\n\
+                                         2 360 panorama image upload (In Short, 360 panorama image upload takes 360 degree panorama images with their csv file which taken from surveying car and then uploads to Mapilio.)\n"
                                       )
                 if advanced_func == "1" or advanced_func == "Decompose":
                     self.perform_decompose()
