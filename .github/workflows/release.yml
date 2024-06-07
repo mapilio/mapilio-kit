@@ -102,7 +102,7 @@ jobs:
           python3 -m pip install pyinstaller
           ./script/build_bootloader.ps1
           ./script/build_win.ps1
-          cp ./dist/win/mapilio-kit.exe mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
+          cp ./dist/win/mapilio-kit--win-64bit.exe mapilio-kit--win-64bit.exe
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
