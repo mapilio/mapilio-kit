@@ -82,7 +82,7 @@ def calculate_aspect_ratio(image_size: str) -> str:
     return f"{x}:{y}"
 
 
-def get_exiftool_specific_feature(video_or_image_path: str) -> Dict[str, Union[None, str, float]]:
+def get_exiftool_specific_feature(video_or_image_path: str, exiftool_path=None) -> Dict[str, Union[None, str, float]]:
     """
 
     Args:
@@ -96,7 +96,12 @@ def get_exiftool_specific_feature(video_or_image_path: str) -> Dict[str, Union[N
     if os_name == "Windows":
         process = subprocess.Popen(["exiftool", video_or_image_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
     else:
-        process = subprocess.Popen(["exiftool", video_or_image_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if exiftool_path is not None:
+            process = subprocess.Popen([exiftool_path, video_or_image_path], stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
+        else:
+            process = subprocess.Popen(["exiftool", video_or_image_path], stdout=subprocess.PIPE,
+                             stderr=subprocess.PIPE)
 
     dict_object = {
         'field_of_view': None,
