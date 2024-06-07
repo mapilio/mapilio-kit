@@ -163,6 +163,6 @@ def mapilio_video_upload_page():
         return redirect(url_for("mapilio_login"))
 
 if __name__ == "__main__":
-    # webbrowser.open("http://127.0.0.1:8081/")
-    # app.run(host="0.0.0.0", port=8081, debug=True)
-    FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
+    webbrowser.open("http://127.0.0.1:8081/")
+    app.run(host="0.0.0.0", port=8081, debug=True)
+    # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
