@@ -12,12 +12,12 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.10" ]
-        platform: ["ubuntu-20.04", "windows-latest"] # "macos-latest",
+        platform: ["ubuntu-20.04"] # "macos-latest", "windows-latest"
         architecture: [ "x64" ]
-        include:
-          - architecture: "x86"
-            platform: "windows-latest"
-            python-version: "3.10"
+#        include:
+#          - architecture: "x86"
+#            platform: "windows-latest"
+#            python-version: "3.10"
 
     runs-on: ${{ matrix.platform }}
 
@@ -102,14 +102,14 @@ jobs:
           python3 -m pip install pyinstaller
           ./script/build_bootloader.ps1
           ./script/build_win.ps1
-          if Test-Path ./dist/win/mapilio-kit--win-64bit.exe; then
-            cp ./dist/win/mapilio-kit--win-64bit.exe mapilio-kit--win-64bit.exe
-          elif Test-Path ./dist/win/mapilio-kit--win-32bit.exe; then
-            cp ./dist/win/mapilio-kit--win-32bit.exe mapilio-kit--win-32bit.exe
-          else
-            echo "Unable to find a suitable Windows executable."
-            exit 1
-          fi
+          if (Test-Path ./dist/win/mapilio-kit--win-64bit.exe) {
+              cp ./dist/win/mapilio-kit--win-64bit.exe mapilio-kit--win-32bit.exe
+          } elseif (Test-Path ./dist/win/mapilio-kit--win-32bit.exe) {
+              cp ./dist/win/mapilio-kit--win-32bit.exe mapilio-kit--win-32bit.exe
+          } else {
+              echo "mapilio-kit.exe not found"
+              exit 1
+          }
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: mapilio-kit_WINDOWS_VERY_HARD_TO_FIND_YOU_IN_ANOTHER_DIR_SO_I_MOVE_YOU_HERE.exe
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
