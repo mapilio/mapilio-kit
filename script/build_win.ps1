@@ -15,9 +15,9 @@ pyinstaller --noconfirm --distpath dist\win flask_app.spec
 
 # check
 $SOURCE="dist\win\MapilioKit-Flask.exe"
-dist\win\mapilio-kit.exe --version
-$VERSION_OUTPUT=dist\win\mapilio-kit.exe --version
-$VERSION=$VERSION_OUTPUT.split(' ')[2]
+# dist\win\mapilio-kit.exe --version
+# $VERSION_OUTPUT=dist\win\mapilio-kit.exe --version
+# $VERSION=$VERSION_OUTPUT.split(' ')[2]
 $TARGET="dist\releases\mapilio-kit-$VERSION-$OS-$ARCH.exe"
 
 # package
