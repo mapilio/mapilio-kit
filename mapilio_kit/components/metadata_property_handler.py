@@ -108,11 +108,11 @@ def finalize_import_properties_process(
     return desc
 
 
-def get_import_meta_properties_exif(image: str) -> MetaProperties:
+def get_import_meta_properties_exif(image: str, exiftool_path: str) -> MetaProperties:
     import_meta_data_properties: MetaProperties = {}
     exif = ExifRead(image)
     import_meta_data_properties["orientation"] = exif.extract_orientation()
-    ebi = get_exiftool_specific_feature(image) # ebi = exif_basic_information
+    ebi = get_exiftool_specific_feature(image, exiftool_path) # ebi = exif_basic_information
     import_meta_data_properties["roll"] = ebi['roll'] if ebi['roll'] else exif.extract_roll()
     import_meta_data_properties["pitch"] = ebi["pitch"] if ebi["pitch"] else exif.extract_pitch()
     import_meta_data_properties["yaw"] = ebi["yaw"] if ebi["yaw"] else exif.extract_yaw()
@@ -143,6 +143,7 @@ def metadata_property_handler(
     windows_path=False,
     exclude_import_path=False,
     exclude_path=None,
+    exiftool_path=None,
 ) -> None:
     if not import_path or not os.path.isdir(import_path):
         raise RuntimeError(f"Image directory {import_path} does not exist")
@@ -161,7 +162,7 @@ def metadata_property_handler(
     for image in tqdm(
         process_file_list, unit="files", desc="metadata properties being processed"
     ):
-        import_meta_data_properties = get_import_meta_properties_exif(image)
+        import_meta_data_properties = get_import_meta_properties_exif(image, exiftool_path)
         desc = finalize_import_properties_process(
             image,
             import_meta_data_properties,

@@ -46,6 +46,12 @@ class Upload:
             default=False,
             required=False,
         )
+        group.add_argument(
+            "--exiftool_path",
+            help="Path to your exiftool executable",
+            default=None,
+            required=False,
+        )
         from . import decomposer
         decomposer().fundamental_arguments(parser)
     def filter_args(self, args):
