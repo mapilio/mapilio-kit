@@ -4,16 +4,38 @@ import sys
 from pathlib import Path
 
 def install_exiftool():
-    try:
+    if sys.platform == 'linux':
         subprocess.run(['sudo', 'apt', 'install', '-y', 'exiftool'], check=True)
-    except subprocess.CalledProcessError as e:
-        print(f"Error installing exiftool: {e}")
+    elif sys.platform == 'darwin':
+        subprocess.run(['brew', 'install', 'exiftool'], check=True)
+    elif sys.platform == 'win32':
+        subprocess.run(['powershell', '-Command',
+                        'Set-ExecutionPolicy Bypass -Scope Process -Force; '
+                        '[System.Net.ServicePointManager]::SecurityProtocol = '
+                        '[System.Net.ServicePointManager]::SecurityProtocol -bor 3072; '
+                        'iex ((New-Object System.Net.WebClient).DownloadString(\'https://community.chocolatey.org/install.ps1\'))'],
+                       check=True)
+        subprocess.run(['choco', 'install', 'exiftool', '-y'], check=True)
+    else:
+        raise ValueError("Unsupported platform")
+
 
 def get_exiftool_path():
-    result = subprocess.run(['which', 'exiftool'], capture_output=True, text=True)
-    if result.returncode != 0:
-        raise ValueError("ExifTool not found")
-    return result.stdout.strip()
+    try:
+        if sys.platform == 'linux' or sys.platform == 'darwin':
+            # Unix-based systems (Linux, macOS)
+            result = subprocess.run(['which', 'exiftool'], capture_output=True, text=True)
+        elif sys.platform == 'win32':
+            # Windows
+            result = subprocess.run(['where', 'exiftool'], capture_output=True, text=True)
+        else:
+            raise ValueError("Unsupported operating system")
+
+        if result.returncode != 0:
+            raise ValueError("ExifTool not found")
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        raise ValueError(f"Error finding ExifTool: {e}")
 
 def get_installed_package_path(package_name):
     result = subprocess.run([sys.executable, '-m', 'pip', 'show', package_name], capture_output=True, text=True)
