@@ -103,9 +103,9 @@ jobs:
           ./script/build_bootloader.ps1
           ./script/build_win.ps1
           if Test-Path ./dist/win/mapilio-kit--win-64bit.exe; then
-            cp ./dist/win/mapilio-kit--win-64bit.exe mapilio-kit.exe
+            cp ./dist/win/mapilio-kit--win-64bit.exe mapilio-kit--win-64bit.exe
           elif Test-Path ./dist/win/mapilio-kit--win-32bit.exe; then
-            cp ./dist/win/mapilio-kit--win-32bit.exe mapilio-kit.exe
+            cp ./dist/win/mapilio-kit--win-32bit.exe mapilio-kit--win-32bit.exe
           else
             echo "Unable to find a suitable Windows executable."
             exit 1
