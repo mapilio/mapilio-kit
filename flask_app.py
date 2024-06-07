@@ -5,6 +5,7 @@ import os
 import subprocess
 import shutil
 import re
+import sys
 
 from mapilio_kit.base import authenticator
 from mapilio_kit.components.edit_config import edit_config
@@ -111,7 +112,10 @@ def mapilio_upload_page():
                 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
             file.save(UPLOAD_FOLDER + file.filename)
 
-        command = f"mapilio_kit upload {UPLOAD_FOLDER} --dry_run"
+        bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+        path_to_exiftool = os.path.abspath(os.path.join(bundle_dir, 'exiftool/exiftool'))
+        print(path_to_exiftool)
+        command = f"mapilio_kit upload {UPLOAD_FOLDER} --dry_run --exiftool_path {path_to_exiftool}"
         try:
             result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
 
@@ -159,6 +163,6 @@ def mapilio_video_upload_page():
         return redirect(url_for("mapilio_login"))
 
 if __name__ == "__main__":
-    # webbrowser.open("http://127.0.0.1:8081/")
-    # app.run(host="0.0.0.0", port=8081, debug=True)
-    FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
+    webbrowser.open("http://127.0.0.1:8081/")
+    app.run(host="0.0.0.0", port=8081, debug=True)
+    # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
