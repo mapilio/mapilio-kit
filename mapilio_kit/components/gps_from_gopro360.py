@@ -151,7 +151,7 @@ def gopro360max_stitch(video_file: str,
     make_directory(t0_folder, remove_if_present=True)
     make_directory(t5_folder, remove_if_present=True)
 
-    cmd = f"ffmpeg -i {video_file} -map 0:0 -r {frame_rate} -q:v {quality} {t0_folder}/img%04d.jpg -map 0:5 -r {frame_rate} -q:v {quality} {t5_folder}/img%04d.jpg"
+    cmd = f"ffpb -i {video_file} -map 0:0 -r {frame_rate} -q:v {quality} {t0_folder}/img%04d.jpg -map 0:5 -r {frame_rate} -q:v {quality} {t5_folder}/img%04d.jpg"
     print(f"cmd: {cmd}")
     run_command(cmd, show_progress=False)
 

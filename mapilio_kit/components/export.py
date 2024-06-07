@@ -7,7 +7,6 @@ import random
 import string
 import hashlib
 import json
-import pandas as pd
 
 def photo_uuid_creater(time: str, image_name: str) -> str:
     """
@@ -38,15 +37,22 @@ def unique_sequence_id_generator(letter_count: int = 8, digit_count: int = 4) ->
 
 def gps_file_reader(gps_file_path: str) -> tuple:
     """
-    :param gps_file_path: The csv file that obtain gps values
-    :return: Latitude, longitude and time values as type list
-    """
+    Reads a CSV file containing GPS values and returns the latitude, longitude, and time values.
 
-    with open(gps_file_path) as csv_file:
-        csv_reader = pd.read_csv(csv_file, delimiter=',')
-        lats = csv_reader['lat'].tolist()
-        lons = csv_reader['lon'].tolist()
-        times = csv_reader['captureTime'].tolist()
+    :param gps_file_path: The path to the CSV file that contains GPS values
+    :return: Latitude, longitude, and time values as lists
+    """
+    lats = []
+    lons = []
+    times = []
+
+    with open(gps_file_path, mode='r', newline='') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+        for row in csv_reader:
+            lats.append(float(row['lat']))
+            lons.append(float(row['lon']))
+            times.append(row['captureTime'])
+
     return lats, lons, times
 
 def geojson_add_feature(lat: float, lon: float, time: str, order: float, color: str, heading: float) -> dict:
