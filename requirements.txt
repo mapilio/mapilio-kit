@@ -26,3 +26,4 @@ gps-anomaly
 calculation-mapilio
 windows-curses; platform_system  == "Windows"
 urllib3==2.2.1
+ffpb
