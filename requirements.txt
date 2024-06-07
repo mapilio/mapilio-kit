@@ -32,3 +32,4 @@ flaskwebgui
 pytest
 configparser
 ffpb
+sentry-sdk
