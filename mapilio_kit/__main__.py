@@ -13,6 +13,18 @@ import requests
 from colorama import Fore
 from .components.login import list_all_users
 from .components.config import delete_user
+import sentry_sdk
+
+sentry_sdk.init(
+    dsn="https://e64e5a7900578f279015f1c573318337@o4506428096577536.ingest.us.sentry.io/4507385354387456",
+    # Set traces_sample_rate to 1.0 to capture 100%
+    # of transactions for performance monitoring.
+    traces_sample_rate=1.0,
+    # Set profiles_sample_rate to 1.0 to profile 100%
+    # of sampled transactions.
+    # We recommend adjusting this value in production.
+    profiles_sample_rate=1.0,
+)
 
 def get_latest_version():
     url = "https://raw.githubusercontent.com/mapilio/mapilio-kit/main/mapilio_kit/components/version.py"
