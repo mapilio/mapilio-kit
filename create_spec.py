@@ -110,7 +110,7 @@ def create_spec_file():
 
         except ValueError as e:
             print(f"Warning: {e}")
-
+    print(datas)
     with open(spec_file, 'w') as f:
         f.write(f"""
 # -*- mode: python ; coding: utf-8 -*-
