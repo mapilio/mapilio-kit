@@ -97,7 +97,7 @@ def create_spec_file():
             if package == 'ExifRead':
                 package = 'exifread'
             package_path = get_installed_package_path(package)
-            # hiddenimports.append(package)
+            hiddenimports.append(package)
 
             package_folder_name = package.replace('-', '_')
 
