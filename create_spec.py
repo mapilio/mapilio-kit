@@ -97,11 +97,9 @@ def create_spec_file():
             if package == 'ExifRead':
                 package = 'exifread'
             package_path = get_installed_package_path(package)
-            if package == 'charset-normalizer':
-                package = 'charset_normalizer'
-            hiddenimports.append(package)
 
             package_folder_name = package.replace('-', '_')
+            hiddenimports.append(package_folder_name)
 
             if package_folder_name == package:
                 package_data_name = package
