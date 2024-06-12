@@ -165,7 +165,7 @@ def mapilio_video_upload_page():
 if __name__ == "__main__":
     bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
     path_to_mapilio_kit = os.path.abspath(os.path.join(bundle_dir, 'mapilio_kit'))
-    command = f"pip install ."
+    command = f"pip install {path_to_mapilio_kit}"
     subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     webbrowser.open("http://127.0.0.1:8081/")
     app.run(host="0.0.0.0", port=8081, debug=True)
