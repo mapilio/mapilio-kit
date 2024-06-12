@@ -163,6 +163,10 @@ def mapilio_video_upload_page():
         return redirect(url_for("mapilio_login"))
 
 if __name__ == "__main__":
+    bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
+    path_to_mapilio_kit = os.path.abspath(os.path.join(bundle_dir, 'mapilio_kit'))
+    command = f"pip install ."
+    subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     webbrowser.open("http://127.0.0.1:8081/")
     app.run(host="0.0.0.0", port=8081, debug=True)
     # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
