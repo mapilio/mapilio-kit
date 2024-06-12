@@ -78,7 +78,7 @@ def create_spec_file():
     spec_file = 'flask_app.spec'
 
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
-    hiddenimports = ['attrs']
+    hiddenimports = []
 
     # ExifTool'u kur ve yolunu bul
     install_exiftool()
@@ -97,7 +97,7 @@ def create_spec_file():
             if package == 'ExifRead':
                 package = 'exifread'
             package_path = get_installed_package_path(package)
-            # hiddenimports.append(package)
+            hiddenimports.append(package)
 
             package_folder_name = package.replace('-', '_')
 
