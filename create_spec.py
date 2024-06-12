@@ -78,7 +78,7 @@ def create_spec_file():
     spec_file = 'flask_app.spec'
 
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
-    hiddenimports = []
+    hiddenimports = ['configparser']
 
     # ExifTool'u kur ve yolunu bul
     install_exiftool()
