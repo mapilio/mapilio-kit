@@ -143,6 +143,9 @@ def mapilio_upload_page():
                 except OSError as err:
                     print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
                     return jsonify(success=False, message=f"{err}")
+            else:
+                e = upload_status.get("Error")
+                return jsonify(success=False, message=f"Error: {e}"), 500
         except:
             e = upload_status.get("Error")
             return jsonify(success=False, message=f"Error: {e}"), 500
