@@ -1,30 +1,34 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
-from flaskwebgui import FlaskUI
-import webbrowser
+import json
 import os
-import subprocess
 import shutil
-import re
 import sys
+import webbrowser
+
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 from mapilio_kit.base import authenticator
 from mapilio_kit.components.edit_config import edit_config
+from mapilio_kit.components.geotag_property_handler import geotag_property_handler
+from mapilio_kit.components.insert_MAPJson import insert_MAPJson
 from mapilio_kit.components.login import list_all_users
+from mapilio_kit.components.metadata_property_handler import metadata_property_handler
+from mapilio_kit.components.sequence_property_handler import sequence_property_handler
+from mapilio_kit.components.upload import upload
 
 app = Flask(__name__)
 
 UPLOAD_FOLDER = os.path.join(os.path.expanduser("~"), ".cache", "mapilio", "MapilioKit", "images/")
 
 MAPILIO_CONFIG_PATH = os.getenv(
-        "MAPILIO_CONFIG_PATH",
-        os.path.join(
-            os.path.expanduser("~"),
-            ".config",
-            "mapilio",
-            "configs",
-            "CLIENT_USERS",
-        ),
-    )
+    "MAPILIO_CONFIG_PATH",
+    os.path.join(
+        os.path.expanduser("~"),
+        ".config",
+        "mapilio",
+        "configs",
+        "CLIENT_USERS",
+    ),
+)
 
 
 def get_args_mapilio(func):
@@ -48,6 +52,13 @@ def check_authenticate():
     return token, authentication_status
 
 
+def decompose(import_path, exiftool_path):
+    metadata_property_handler(import_path=import_path, exiftool_path=exiftool_path)
+    geotag_property_handler(import_path=import_path)
+    sequence_property_handler(import_path=import_path)
+    insert_MAPJson(import_path=import_path)
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     token, authentication_status = check_authenticate()
@@ -57,9 +68,8 @@ def index():
         return render_template('login.html')
 
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def mapilio_login():
-
     if request.method == 'POST':
         args = get_args_mapilio(edit_config)
         email = request.form['email'].strip()
@@ -114,43 +124,30 @@ def mapilio_upload_page():
 
         bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
         path_to_exiftool = os.path.abspath(os.path.join(bundle_dir, 'exiftool/exiftool'))
-        print(path_to_exiftool)
-        command = f"mapilio_kit upload {UPLOAD_FOLDER} --dry_run --exiftool_path {path_to_exiftool}"
+
         try:
-            result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-
-            if result.returncode == 0:
+            decompose(import_path=UPLOAD_FOLDER, exiftool_path=path_to_exiftool)
+            upload_status = upload(import_path=UPLOAD_FOLDER, dry_run=True)
+            if upload_status.get("Success"):
                 try:
+                    jsonPath = os.path.join(UPLOAD_FOLDER, "mapilio_image_description.json")
+                    with open(jsonPath, 'r') as f:
+                        data = json.load(f)
+                    total_images = data[-1]["Information"]["total_images"]
+                    processed_images = data[-1]["Information"]["processed_images"]
+                    failed_images = data[-1]["Information"]["failed_images"]
                     shutil.rmtree(UPLOAD_FOLDER)
-                    output_lines = result.stderr.split('\n')
-                    output_text = '\n'.join(output_lines)
 
-                    total_images_pattern = r'"total_images": (\d+)'
-                    processed_images_pattern = r'"processed_images": (\d+)'
-                    failed_images_pattern = r'"failed_images": (\d+)'
-
-                    total_images_match = re.search(total_images_pattern, output_text)
-                    processed_images_match = re.search(processed_images_pattern, output_text)
-                    failed_images_match = re.search(failed_images_pattern, output_text)
-
-                    total_images = int(total_images_match.group(1)) if total_images_match else 0
-                    processed_images = int(processed_images_match.group(1)) if processed_images_match else 0
-                    failed_images = int(failed_images_match.group(1)) if failed_images_match else 0
-
-                    return jsonify(success=True, message="Images uploaded successfully", total_images=total_images, processed_images=processed_images, failed_images=failed_images), 200
+                    return jsonify(success=True, message="Images uploaded successfully", total_images=total_images,
+                                   processed_images=processed_images, failed_images=failed_images), 200
                 except OSError as err:
                     print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
                     return jsonify(success=False, message=f"{err}")
-        except subprocess.CalledProcessError as e:
-            return jsonify(success=False, message={e}), 500
+        except:
+            e = upload_status.get("Error")
+            return jsonify(success=False, message=f"Error: {e}"), 500
     else:
         return jsonify(success=False, message="Method Not Allowed"), 500
-    error_message = result.stderr.split()
-    error_message = ' '.join(error_message)
-    error_index = error_message.find("error:")
-    if error_index != -1:
-        error_message = error_message[error_index:]
-    return jsonify(success=False, message=f"Error: {error_message}"), 500
 
 
 @app.route('/video-upload', methods=['GET', 'POST'])
@@ -162,11 +159,8 @@ def mapilio_video_upload_page():
     else:
         return redirect(url_for("mapilio_login"))
 
+
 if __name__ == "__main__":
-    bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
-    path_to_mapilio_kit = os.path.abspath(os.path.join(bundle_dir, 'mapilio_kit'))
-    command = f"pip install {path_to_mapilio_kit}"
-    subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     webbrowser.open("http://127.0.0.1:8081/")
     app.run(host="0.0.0.0", port=8081, debug=True)
     # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
