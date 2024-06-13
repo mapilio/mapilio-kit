@@ -60,6 +60,8 @@ jobs:
 
       - name: Create spec file
         run: |
+          ls
+          pwd
           python create_spec.py
 
       - name: Validate version
@@ -86,6 +88,8 @@ jobs:
       - name: Build and test with Pyinstaller on Ubuntu
         if: matrix.platform == 'ubuntu-20.04'
         run: |
+          ls 
+          pwd
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
           chmod +x ./script/build_linux
@@ -98,6 +102,8 @@ jobs:
       - name: Build and test with Pyinstaller on Windows
         if: matrix.platform == 'windows-latest'
         run: |
+          ls 
+          pwd
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
           ./script/build_bootloader.ps1
