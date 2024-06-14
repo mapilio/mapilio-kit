@@ -99,7 +99,7 @@ def find_duplicates(
             (cur.lat, cur.lon),
         )
         distance_duplicated = False
-        if 4 <= distance <= 6:
+        if distance <= duplicate_distance:
             distance_duplicated = True
 
         # Deprecated because of gps-anomaly do

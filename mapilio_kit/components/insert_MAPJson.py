@@ -143,7 +143,7 @@ def insert_MAPJson(
         with open(desc_path, "w") as fp:
             json.dump(descs, fp, indent=4)
 
-    logger.info(json.dumps(summary, indent=4))
+    # logger.info(json.dumps(summary, indent=4))
     if 0 < summary['Information']["failed_images"]:
         if skip_process_errors:
             logger.warning(f"{Fore.YELLOW}Skipping %s failed images{Fore.RESET}", summary['Information']["failed_images"])
