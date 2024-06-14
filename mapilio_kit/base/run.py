@@ -126,13 +126,8 @@ class Run:
         args = self.get_args(upload)
         args["user_name"] = self.username
         video_import_path = input("Enter your video folder path: ").strip()
-        video_file_name = os.path.basename(video_import_path)
-        folder_name = os.path.splitext(video_file_name)[0]
-        import_path,folder_name = '/'.join(video_import_path.split('/')[:-1]) ,  folder_name
-        import_path = os.path.join(import_path, folder_name)
-        if not os.path.exists(import_path):
-            os.makedirs(import_path)
         if video_import_path:
+            import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
             target_path = os.path.join(import_path, "mapilio_image_description.json")
             args["import_path"] = import_path
             if os.path.exists(target_path):
@@ -181,7 +176,6 @@ class Run:
         else:
             print("Please enter your video path properly \n\n\n\n\n")
             self.perform_video_upload()
-
 
     def gopro360max_upload(self):
         pass
