@@ -130,7 +130,10 @@ class FakeUploadManager(UploadManager):
 
     def upload(
         self,
+        user_items: types.User,
         data: T.IO[bytes],
+        organization_key: str = None,
+        project_key: str = None,
         offset: T.Optional[int] = None,
         chunk_size: int = DEFAULT_CHUNK_SIZE,
     ) -> str:
@@ -154,13 +157,18 @@ class FakeUploadManager(UploadManager):
     # ) -> int:
     #     return 1
 
-    def fetch_offset(self) -> int:
-        try:
-            with open(self.session_key, "rb") as fp:
-                fp.seek(0, io.SEEK_END)
-                return fp.tell()
-        except FileNotFoundError:
-            return 0
+    def fetch_offset(self, email) -> int:
+        headers = {
+            "Authorization": f"OAuth {self.user_access_token}"
+        }
+        resp = requests.get(
+            f"{MAPILIO_UPLOAD_ENDPOINT_ZIP}?fileName={self.session_key}&email={email}",
+            headers=headers
+        )
+        resp.raise_for_status()
+        data = resp.json()
+
+        return data["totalChunkUploaded"]
 
 
 def _file_stats(fp: T.IO[bytes]):
