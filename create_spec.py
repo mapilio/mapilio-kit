@@ -148,6 +148,7 @@ exe = EXE(
     upx=True,
     runtime_tmpdir=None,
     console=True,
+    icon='/home/ai/Desktop/mapilio-kit/docs/assets/icon/mapilio_ico.ico'
 )
 
 app = BUNDLE(exe, name='kit-gui.app', icon=None, bundle_identifier=None)
