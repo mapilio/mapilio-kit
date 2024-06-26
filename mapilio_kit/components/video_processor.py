@@ -74,30 +74,10 @@ def video_sampler(
         if os.path.isdir(per_video_import_path):
             images = image_log.get_total_file_list(per_video_import_path)
             if images:
-                if force_overwrite:
-                    shutil.rmtree(per_video_import_path)
-                else:
-                    answer = input(
-                        f"The sample folder {per_video_import_path} already contains {len(images)} images."
-                        f"\nTo proceed, "
-                        f"either DELETE the whole folder to restart the extraction (y), "
-                        f"or skip the extraction (N)? [y/N] "
-                    )
-                    if answer in ["y", "Y"]:
-                        shutil.rmtree(per_video_import_path)
+                shutil.rmtree(per_video_import_path)
         elif os.path.isfile(per_video_import_path):
-            if force_overwrite:
-                os.remove(per_video_import_path)
-            else:
-                answer = input(
-                f"The sample path {per_video_import_path} is found to be a file. To proceed, either "
-                f"DELETE it to restart the extraction (y), or skip the extraction (N)? [y/N] "
-            )
-                if answer in ["y", "Y"]:
-                    os.remove(per_video_import_path)
+            os.remove(per_video_import_path)
 
-    for video in video_list:
-        per_video_import_path = processing.video_sample_path(import_path, video)
         if not os.path.exists(per_video_import_path):
             os.makedirs(per_video_import_path)
             extract_frames(
