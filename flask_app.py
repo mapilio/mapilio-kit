@@ -127,7 +127,7 @@ def mapilio_upload_page():
 
         try:
             decompose(import_path=UPLOAD_FOLDER, exiftool_path=path_to_exiftool)
-            upload_status = upload(import_path=UPLOAD_FOLDER, dry_run=True)
+            upload_status = upload(import_path=UPLOAD_FOLDER, dry_run=False)
             if upload_status.get("Success"):
                 try:
                     jsonPath = os.path.join(UPLOAD_FOLDER, "mapilio_image_description.json")
