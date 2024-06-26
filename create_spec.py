@@ -76,6 +76,7 @@ def get_installed_package_path(package_name):
 def create_spec_file():
     requirements_file = 'requirements.txt'
     spec_file = 'flask_app.spec'
+    icon_file = 'mapilio_ico.ico'
 
     current_directory = os.getcwd()
     datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
@@ -148,7 +149,7 @@ exe = EXE(
     upx=True,
     runtime_tmpdir=None,
     console=True,
-    icon='/home/ai/Desktop/mapilio-kit/docs/assets/icon/mapilio_ico.ico'
+    icon='{icon_file}'
 )
 
 app = BUNDLE(exe, name='kit-gui.app', icon=None, bundle_identifier=None)
