@@ -152,7 +152,7 @@ exe = EXE(
     icon='{icon_file}'
 )
 
-app = BUNDLE(exe, name='kit-gui.app', icon=None, bundle_identifier=None)
+app = BUNDLE(exe, name='kit-gui.app', icon='{icon_file}', bundle_identifier=None)
 """)
 
 if __name__ == "__main__":
