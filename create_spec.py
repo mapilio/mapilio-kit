@@ -79,7 +79,7 @@ def create_spec_file():
     icon_file = 'mapilio_ico.ico'
 
     current_directory = os.getcwd()
-    datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit')]
+    datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit'), ('mapilio_ico.ico', 'mapilio_ico.ico')]
     hiddenimports = ['configparser']
 
     install_exiftool()
