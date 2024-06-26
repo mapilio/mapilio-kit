@@ -71,13 +71,13 @@
                 <p class="h3 fw-bold text-center mt-4">Mapilio Kit Uploader</p>
                 <div id="drop-area" class="text-center rounded-3">
                     <img src="{{ url_for('static', filename='images/uploadIcon.svg') }}" alt="SVG Image" class="img-fluid svg-image mb-3">
-                    <p>Drag or click files here.</p>
+                    <p>Drag files or click here to choose.</p>
                     <input type="file" for="fileElem" id="fileElem" name="file" multiple accept="image/*" style="display:none">
                     <label class="btn btn-primary" for="fileElem" >Select File</label>
                 </div>
                 
                 <p class="h4 d-inline-block mt-3">Files to Upload</p>
-                <p class="float-end fs-5 mt-3">Total images of count: <span id="totalImagesCount" class="">0</span></p>
+                <p class="float-end fs-5 mt-3">Total number of images: <span id="totalImagesCount" class="">0</span></p>
                 <div id="fileList" class="file-preview" style="max-height: 55vh; overflow-y: auto;">
                     <ul class="mt-3 list-group"></ul>
                 </div>
