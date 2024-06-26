@@ -91,16 +91,16 @@ def get_exiftool_specific_feature(video_or_image_path: str, exiftool_path=None) 
     Returns:
 
     """
-
+    exiftool_path = exiftool_path if exiftool_path is not None else "exiftool"
     os_name = platform.system()
     if os_name == "Windows":
-        process = subprocess.Popen(["exiftool", video_or_image_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
+        process = subprocess.Popen([exiftool_path, video_or_image_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, creationflags=subprocess.CREATE_NO_WINDOW)
     else:
         if exiftool_path is not None:
             process = subprocess.Popen([exiftool_path, video_or_image_path], stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
         else:
-            process = subprocess.Popen(["exiftool", video_or_image_path], stdout=subprocess.PIPE,
+            process = subprocess.Popen([exiftool_path, video_or_image_path], stdout=subprocess.PIPE,
                              stderr=subprocess.PIPE)
 
     dict_object = {
