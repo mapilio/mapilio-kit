@@ -122,6 +122,10 @@ def upload(
 
         descs, failed_imgs, anomaly_points = anomaly.anomaly_detector(descs)
 
+        logger.info(json.dumps(descs[-1]['Information'],indent=4))
+        logger.info("Anomalies can occur due to a combination of factors, including GPS distance being out of range,"
+                    "heading angle limit being exceeded, and altitude surpassing the upper limit. "
+                    "This contributes to the existence of failed images.")
         if len(failed_imgs) > 0:
 
             logger.warning(f"{Fore.RED}Some images has failed to upload due to "
