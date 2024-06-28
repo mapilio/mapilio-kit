@@ -26,6 +26,13 @@
       <img src="https://img.shields.io/github/last-commit/mapilio/mapilio-kit-v2?color=D60051" alt="last-commit-badge"></a>
 </div>
 
+# News 
+We are back with marvelous news! Linux version of Mapilio Uploader released as beta, and Other versions will be available soon.
+To use Linux Version please visit: [Mapilio Linux Uploader (BETA)](https://mapilio.com/uploader)<br>
+<div align="center">
+   <img src="https://github.com/mapilio/mapilio-kit/blob/main/docs/assets/readme-pics/linux-uploader.png" alt="linux-uploader" width="700px">
+</div>
+
 # Mapilio Kit
 
 Mapilio Kit is a library for processing and uploading images to [Mapilio](https://www.mapilio.com/).
