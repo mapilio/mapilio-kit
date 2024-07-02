@@ -151,6 +151,9 @@ def upload(
             return {'Success': True}
         except Exception as e:
             return {'Success': False, "Error": e}
+        finally:
+            os.remove(desc_path)
+
 
     else:
         raise RuntimeError(f"Expect {import_path} to be either file or directory")
