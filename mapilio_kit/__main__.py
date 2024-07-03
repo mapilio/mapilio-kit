@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 import sys
 import os
+import sentry_sdk
+import requests
+from colorama import Fore
+import argparse
 
 project_root = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(project_root, 'components'))
 
-import argparse
-from .components.version import VERSION
-from .base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, gopro360max_processor, Zipper, run_mapi
-from .components import arguments
-import requests
-from colorama import Fore
-from .components.login import list_all_users
-from .components.config import delete_user
-import sentry_sdk
+from mapilio_kit.components.version import VERSION
+from mapilio_kit.base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, gopro360max_processor, Zipper, run_mapi
+from mapilio_kit.components import arguments
+from mapilio_kit.components.login import list_all_users
+from mapilio_kit.components.config import delete_user
 
 sentry_sdk.init(
     dsn="https://e64e5a7900578f279015f1c573318337@o4506428096577536.ingest.us.sentry.io/4507385354387456",

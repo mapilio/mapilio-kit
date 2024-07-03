@@ -5,10 +5,10 @@ import subprocess
 import typing as T
 import logging
 
-import image_log
-import processing
-from exif_metadata_writer import ImageExifModifier
-from utilities import get_exiftool_specific_feature
+from mapilio_kit.components import image_log
+from mapilio_kit.components import processing
+from mapilio_kit.components.exif_metadata_writer import ImageExifModifier
+from mapilio_kit.components.utilities import get_exiftool_specific_feature
 
 ZERO_PADDING = 6
 LOG = logging.getLogger(__name__)

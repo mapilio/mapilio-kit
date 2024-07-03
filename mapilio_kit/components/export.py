@@ -1,6 +1,5 @@
 import os
-from tqdm import tqdm
-from data_format import DataFormat, CsvFormat
+from mapilio_kit.components.data_format import DataFormat, CsvFormat
 from calculation.distance import Distance
 import csv
 import random

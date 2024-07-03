@@ -12,7 +12,6 @@ import glob
 import xml.etree.ElementTree as XET
 import re
 import fnmatch
-from arguments import general_arguments
 
 def assert_file_exists(filename, tag=""):
     stag = "file "

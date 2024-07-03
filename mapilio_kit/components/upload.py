@@ -5,11 +5,11 @@ import typing as T
 import json
 import logging
 
-import uploader, login
-import types_fmt as types
+from mapilio_kit.components import uploader, login
+from mapilio_kit.components import types_fmt as types
 
 from gps_anomaly.detector import Anomaly
-from utilities import photo_uuid_generate
+from mapilio_kit.components.utilities import photo_uuid_generate
 
 from colorama import init, Fore
 init(autoreset=True)
