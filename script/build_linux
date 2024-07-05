@@ -25,7 +25,7 @@ chmod +x "$TARGET"
 # sha256
 TARGET_BASENAME=$(basename "$TARGET")
 cd dist/releases
-shasum -a 256 "$TARGET_BASENAME" | tee "${TARGET_BASENAME}.sha256.txt"
+#shasum -a 256 "$TARGET_BASENAME" | tee "${TARGET_BASENAME}.sha256.txt"
 #ZIP_FILE=mapilio-kit-${VERSION}-${OS}-${ARCH}.zip
 #zip -r "$ZIP_FILE" .
 #find . -mindepth 1 ! -name '*.zip' -delete
