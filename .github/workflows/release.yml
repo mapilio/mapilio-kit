@@ -11,13 +11,13 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [ "3.10" ]
-        platform: ["ubuntu-20.04", "windows-latest"] # "macos-latest", "windows-latest"
+        python-version: [ "3.11" ]
+        platform: ["ubuntu-20.04", "windows-latest", "macos-latest"]
         architecture: [ "x64" ]
         include:
           - architecture: "x86"
             platform: "windows-latest"
-            python-version: "3.10"
+            python-version: "3.11"
 
     runs-on: ${{ matrix.platform }}
 
@@ -77,8 +77,10 @@ jobs:
         run: |
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
+          python3 -m pip install pillow
           chmod +x ./script/build_osx
           ./script/build_osx
+          ./dist/releases/mapilio-kit--osx-arm64
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/osx/mapilio-kit
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
@@ -88,6 +90,7 @@ jobs:
         run: |
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
+          python3 -m pip install pillow
           chmod +x ./script/build_linux
           ./script/build_linux
           chmod +x ./dist/releases/mapilio-kit--linux-x86_64
