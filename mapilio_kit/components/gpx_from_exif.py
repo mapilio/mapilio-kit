@@ -1,5 +1,5 @@
-from types_fmt import GPXPoint, GPXPointAngle
-from exif_metadata_reader import ExifRead
+from mapilio_kit.components.types_fmt import GPXPoint, GPXPointAngle
+from mapilio_kit.components.exif_metadata_reader import ExifRead
 from error import MapilioGeoTaggingError
 
 

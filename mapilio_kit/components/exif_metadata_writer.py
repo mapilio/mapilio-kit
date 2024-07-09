@@ -5,7 +5,7 @@ import io
 import piexif
 
 from calculation.geospatial_utils import decimal_to_dms
-from types_fmt import FinalImageDescription
+from mapilio_kit.components.types_fmt import FinalImageDescription
 
 
 class ImageExifModifier:

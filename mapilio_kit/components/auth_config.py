@@ -1,7 +1,6 @@
-import os
 import requests
 from typing import Union
-from config import MAPILIO_API_ENDPOINT
+from mapilio_kit.components.config import MAPILIO_API_ENDPOINT
 
 
 def get_upload_token(email: str, password: str) -> dict:

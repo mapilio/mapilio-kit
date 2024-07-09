@@ -2,7 +2,7 @@ import os
 import typing as T
 from typing import Generator, List, Optional
 
-import types_fmt as types
+from mapilio_kit.components import types_fmt as types
 
 
 def is_image_file(path: str) -> bool:

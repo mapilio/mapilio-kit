@@ -1,6 +1,6 @@
 import os
-from login import prompt_user_for_user_items
-import auth_config, config
+from mapilio_kit.components.login import prompt_user_for_user_items
+from mapilio_kit.components import auth_config, config
 import logging
 
 

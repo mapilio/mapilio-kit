@@ -1,6 +1,6 @@
 import os
 import argparse
-from video_processor import video_sampler
+from mapilio_kit.components.video_processor import video_sampler
 
 
 class Sampler:

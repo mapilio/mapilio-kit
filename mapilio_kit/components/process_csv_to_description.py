@@ -1,7 +1,7 @@
 import csv
 import json
 import os.path
-import version
+from mapilio_kit.components import version
 
 
 def process_csv_to_description(

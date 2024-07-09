@@ -5,8 +5,8 @@ import os
 import io
 import typing as T
 
-from config import MAPILIO_UPLOAD_ENDPOINT_ZIP
-import types_fmt as types
+from mapilio_kit.components.config import MAPILIO_UPLOAD_ENDPOINT_ZIP
+from mapilio_kit.components import types_fmt as types
 import logging
 
 LOG = logging.getLogger(__name__)

@@ -2,9 +2,9 @@ import datetime
 import os
 import typing as T
 
-from ffmpeg import extract_stream, get_ffprobe
-from gpmf import parse_bin, interpolate_times
-from types_fmt import GPXPoint
+from mapilio_kit.components.ffmpeg import extract_stream, get_ffprobe
+from mapilio_kit.components.gpmf import parse_bin, interpolate_times
+from mapilio_kit.components.types_fmt import GPXPoint
 
 
 def extract_bin(path: str) -> str:
