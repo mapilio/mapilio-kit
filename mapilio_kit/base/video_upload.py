@@ -20,7 +20,7 @@ class VideoUpload:
         for video_path in video_paths:
             vars_args_copy["video_import_path"] = os.path.join(vars_args["video_import_path"],video_path)
             if vars_args_copy["video_import_path"].endswith(video_formats):
-                if not vars_args['processed']:
+                if not vars_args_copy['processed']:
                     sampler().perform_task(vars_args_copy)
                 else:
                     vars_args_copy["import_path"] = vars_args_copy["video_import_path"]
