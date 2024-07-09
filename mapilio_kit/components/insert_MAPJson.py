@@ -130,6 +130,7 @@ def insert_MAPJson(
             "failed_images": len(not_processed_images) - len(duplicated_images),
             "duplicated_images": len(duplicated_images),
             "id": uuid.uuid4().hex,
+            "group_key": str(uuid.uuid4()),
             "device_type": "Desktop"
         }
     }
@@ -152,4 +153,5 @@ def insert_MAPJson(
                 f"Failed to process {summary['Information']['failed_images']} images. "
                 f"Check {desc_path} for details. Specify --skip_process_errors to skip these errors"
             )
-    logger.info(f"{Fore.YELLOW}For more information, please check mapilio image description file which is located here: {desc_path}.{Fore.RESET}")
+        # Deprecated, because we do not provide description.json to users anymore
+    # logger.info(f"{Fore.YELLOW}For more information, please check mapilio image description file which is located here: {desc_path}.{Fore.RESET}")
