@@ -51,5 +51,6 @@ class Sampler:
                 import_path = os.path.join(os.path.dirname(video_import_path), "mapilio_sampled_video_frames")
             vars_args["import_path"] = import_path
 
+        vars_args["video_sample_distance"] = 5
         video_sampler_args = self.filter_args(vars_args)
         video_sampler(**video_sampler_args)

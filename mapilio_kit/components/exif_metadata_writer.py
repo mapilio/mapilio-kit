@@ -32,7 +32,17 @@ class ImageExifModifier:
         """Add date time original."""
         DateTimeOriginal = date_time.strftime(time_format)[:-3]
         self._ef["Exif"][piexif.ExifIFD.DateTimeOriginal] = DateTimeOriginal
-
+    def set_gps_datetime(self, dt: datetime.datetime) -> None:
+        """Add GPSDateStamp and GPSTimeStamp."""
+        dt = dt.astimezone(datetime.timezone.utc)
+        # YYYY:MM:DD
+        self._ef["GPS"][piexif.GPSIFD.GPSDateStamp] = dt.strftime("%Y:%m:%d")
+        self._ef["GPS"][piexif.GPSIFD.GPSTimeStamp] = (
+            (dt.hour, 1),
+            (dt.minute, 1),
+            # num / den = (dt.second * 1e6 + dt.microsecond) / 1e6
+            (int(dt.second * 1e6 + dt.microsecond), int(1e6)),
+        )
     def set_device_information(self, device_model: str, device_make: str):
         self._ef["Exif"][piexif.ExifIFD.LensMake] = device_make
         self._ef["Exif"][piexif.ExifIFD.LensModel] = device_model
@@ -54,7 +64,14 @@ class ImageExifModifier:
         self._ef["GPS"][piexif.GPSIFD.GPSLatitude] = decimal_to_dms(
             abs(lat), int(precision)
         )
-
+    def set_make(self, make: str) -> None:
+        if not make:
+            raise ValueError("Make cannot be empty")
+        self._ef["0th"][piexif.ImageIFD.Make] = make
+    def set_model(self, model: str) -> None:
+        if not model:
+            raise ValueError("Model cannot be empty")
+        self._ef["0th"][piexif.ImageIFD.Model] = model
     def set_altitude(self, altitude: float, precision: int = 100) -> None:
         """Add altitude (pre is the precision)."""
         ref = 0 if altitude > 0 else 1
