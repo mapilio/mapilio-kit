@@ -156,7 +156,7 @@ def _sample_video_stream_by_distance(
 
     # select sample points by sample distance
     selected_interp_sample_points = list(
-        P_exe.sample_points_by_distance(
+        P_exe.filter_points_by_distance(
             interp_sample_points,
             sample_distance,
             point_func=lambda x: x[2],

@@ -45,33 +45,7 @@ class PointWithFix(Point):
     gps_precision: T.Optional[float]
     gps_ground_speed: T.Optional[float]
 
-
-def _ecef_from_lla_DEPRECATED(
-    lat: float, lon: float, alt: float
-) -> T.Tuple[float, float, float]:
-    """
-    Deprecated because it is slow. Keep here for reference and comparison.
-    Use _ecef_from_lla2 instead.
-
-    Compute ECEF XYZ from latitude, longitude and altitude.
-
-    All using the WGS94 model.
-    Altitude is the distance to the WGS94 ellipsoid.
-    Check results here http://www.oc.nps.edu/oc2902w/coord/llhxyz.htm
-
-    """
-    a2 = WGS84_a**2
-    b2 = WGS84_b**2
-    lat = math.radians(lat)
-    lon = math.radians(lon)
-    L = 1.0 / math.sqrt(a2 * math.cos(lat) ** 2 + b2 * math.sin(lat) ** 2)
-    x = (a2 * L + alt) * math.cos(lat) * math.cos(lon)
-    y = (a2 * L + alt) * math.cos(lat) * math.sin(lon)
-    z = (b2 * L + alt) * math.sin(lat)
-    return x, y, z
-
-
-def _ecef_from_lla2(lat: float, lon: float) -> T.Tuple[float, float, float]:
+def calculate_ecef_from_lla(lat: float, lon: float) -> T.Tuple[float, float, float]:
     """
     Compute ECEF XYZ from latitude, longitude and altitude.
 
@@ -92,7 +66,7 @@ def _ecef_from_lla2(lat: float, lon: float) -> T.Tuple[float, float, float]:
     return x, y, z
 
 
-def gps_distance(
+def calculate_gps_distance(
     latlon_1: T.Tuple[float, float], latlon_2: T.Tuple[float, float]
 ) -> float:
     """
@@ -100,16 +74,16 @@ def gps_distance(
 
     >>> p1 = (42.1, -11.1)
     >>> p2 = (42.2, -11.3)
-    >>> 19000 < gps_distance(p1, p2) < 20000
+    >>> 19000 < calculate_gps_distance(p1, p2) < 20000
     True
     """
-    x1, y1, z1 = _ecef_from_lla2(latlon_1[0], latlon_1[1])
-    x2, y2, z2 = _ecef_from_lla2(latlon_2[0], latlon_2[1])
+    x1, y1, z1 = calculate_ecef_from_lla(latlon_1[0], latlon_1[1])
+    x2, y2, z2 = calculate_ecef_from_lla(latlon_2[0], latlon_2[1])
 
     return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2 + (z1 - z2) ** 2)
 
 
-def get_max_distance_from_start(latlons: T.List[T.Tuple[float, float]]) -> float:
+def determine_maximum_distance_from_start(latlons: T.List[T.Tuple[float, float]]) -> float:
     """
     Returns the radius of an entire GPS track. Used to calculate whether or not the entire sequence was just stationary video
     Takes a sequence of points as input
@@ -117,7 +91,7 @@ def get_max_distance_from_start(latlons: T.List[T.Tuple[float, float]]) -> float
     if not latlons:
         return 0
     start = latlons[0]
-    return max(gps_distance(start, latlon) for latlon in latlons)
+    return max(calculate_gps_distance(start, latlon) for latlon in latlons)
 
 
 def compute_bearing(
@@ -152,55 +126,14 @@ def compute_bearing(
     return bearing
 
 
-def diff_bearing(b1: float, b2: float) -> float:
-    """
-    Compute difference between two bearings
-    """
-    d = abs(b2 - b1)
-    d = 360 - d if d > 180 else d
-    return d
-
-
 _IT = T.TypeVar("_IT")
 
-
 # http://stackoverflow.com/a/5434936
-def pairwise(iterable: T.Iterable[_IT]) -> T.Iterable[T.Tuple[_IT, _IT]]:
+def generate_pairs(iterable: T.Iterable[_IT]) -> T.Iterable[T.Tuple[_IT, _IT]]:
     """s -> (s0,s1), (s1,s2), (s2, s3), ..."""
     a, b = itertools.tee(iterable)
     next(b, None)
     return zip(a, b)
-
-
-def group_every(
-    iterable: T.Iterable[_IT], n: int
-) -> T.Generator[T.Generator[_IT, None, None], None, None]:
-    """
-    Return a generator that divides the iterable into groups by N.
-    """
-
-    if not (0 < n):
-        raise ValueError("expect 0 < n but got {0}".format(n))
-
-    for _, group in itertools.groupby(enumerate(iterable), key=lambda t: t[0] // n):
-        yield (item for _, item in group)
-
-
-def as_unix_time(dt: T.Union[datetime.datetime, int, float]) -> float:
-    if isinstance(dt, (int, float)):
-        return dt
-    else:
-        try:
-            # if dt is naive, assume it's in local timezone
-            return dt.timestamp()
-        except ValueError:
-            # Some datetimes can't be converted to timestamp
-            # e.g. 0001-01-01 00:00:00 will throw ValueError: year 0 is out of range
-            try:
-                return dt.replace(year=1970).timestamp()
-            except ValueError:
-                return 0.0
-
 
 def _interpolate_segment(start: Point, end: Point, t: float) -> Point:
     if start.time == end.time:
@@ -239,23 +172,6 @@ def _interpolate_at_index(points: T.Sequence[Point], t: float, idx: int):
             start, end = points[-2], points[-1]
 
     return _interpolate_segment(start, end, t)
-
-
-def interpolate(points: T.Sequence[Point], t: float, lo: int = 0) -> Point:
-    """
-    Interpolate or extrapolate the point at time t along the sequence of points (sorted by time).
-    """
-    if not points:
-        raise ValueError("Expect non-empty points")
-
-    # Make sure that points are sorted (disabled because the check costs O(N)):
-    # for cur, nex in pairwise(points):
-    #     assert cur.time <= nex.time, "Points not sorted"
-
-    p = Point(time=t, lat=float("-inf"), lon=float("-inf"), alt=None, angle=None)
-    idx = bisect.bisect_left(points, p, lo=lo)
-    return _interpolate_at_index(points, t, idx)
-
 
 class Interpolator:
     """
@@ -325,7 +241,7 @@ class Interpolator:
 _PointAbstract = T.TypeVar("_PointAbstract")
 
 
-def sample_points_by_distance(
+def filter_points_by_distance(
     samples: T.Iterable[_PointAbstract],
     min_distance: float,
     point_func: T.Callable[[_PointAbstract], Point],
@@ -337,22 +253,10 @@ def sample_points_by_distance(
             prevp = point_func(sample)
         else:
             p = point_func(sample)
-            if min_distance < gps_distance((prevp.lat, prevp.lon), (p.lat, p.lon)):
+            if min_distance < calculate_gps_distance((prevp.lat, prevp.lon), (p.lat, p.lon)):
                 yield sample
                 prevp = p
 
-
-def interpolate_directions_if_none(sequence: T.Sequence[Point]) -> None:
-    for cur, nex in pairwise(sequence):
-        if cur.angle is None:
-            cur.angle = compute_bearing(cur.lat, cur.lon, nex.lat, nex.lon)
-
-    if len(sequence) == 1:
-        if sequence[-1].angle is None:
-            sequence[-1].angle = 0
-    elif 2 <= len(sequence):
-        if sequence[-1].angle is None:
-            sequence[-1].angle = sequence[-2].angle
 
 
 _PointLike = T.TypeVar("_PointLike", bound=Point)

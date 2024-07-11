@@ -11,24 +11,24 @@ GOPRO_GPS_PRECISION = 15
 GOPRO_GPS_FIXES = {0, 2, 3}
 GOPRO_MAX_DOP100 =  1000
 
-def remove_outliers(
+def purge_outliers(
     sequence: T.Sequence[P_exe.PointWithFix],
 ) -> T.Sequence[P_exe.PointWithFix]:
     distances = [
-        P_exe.gps_distance((left.lat, left.lon), (right.lat, right.lon))
-        for left, right in P_exe.pairwise(sequence)
+        P_exe.calculate_gps_distance((left.lat, left.lon), (right.lat, right.lon))
+        for left, right in P_exe.generate_pairs(sequence)
     ]
     if len(distances) < 2:
         return sequence
 
-    max_distance = upper_whisker(distances)
+    max_distance = calculate_upper_limit(distances)
     LOG.debug("max distance: %f", max_distance)
     max_distance = max(
         # distance between two points hence double
         GOPRO_GPS_PRECISION + GOPRO_GPS_PRECISION,
         max_distance,
     )
-    sequences = split_if(
+    sequences = divide_sequence_if(
         T.cast(T.List[P_exe.Point], sequence),
         distance_gt(max_distance),
     )
@@ -42,19 +42,19 @@ def remove_outliers(
     if len(ground_speeds) < 2:
         return sequence
 
-    max_speed = upper_whisker(ground_speeds)
-    merged = dbscan(sequences, speed_le(max_speed))
+    max_speed = calculate_upper_limit(ground_speeds)
+    merged = cluster_points(sequences, check_speed_below(max_speed))
     LOG.debug(
         "Found %d sequences after merging with max speed %f", len(merged), max_speed
     )
 
     return T.cast(
         T.List[P_exe.PointWithFix],
-        find_majority(merged.values()),
+        find_dominant_sequence(merged.values()),
     )
 
 
-def remove_noisy_points(
+def cleanse_noisy_points(
     sequence: T.Sequence[P_exe.PointWithFix],
 ) -> T.Sequence[P_exe.PointWithFix]:
     num_points = len(sequence)
@@ -86,7 +86,7 @@ def remove_noisy_points(
         )
 
     num_points = len(sequence)
-    sequence = remove_outliers(sequence)
+    sequence = purge_outliers(sequence)
     if len(sequence) < num_points:
         LOG.debug(
             "Removed %d outlier points",
@@ -101,11 +101,11 @@ PointSequence = T.List[P_exe.Point]
 Decider = T.Callable[[P_exe.Point, P_exe.Point], bool]
 
 
-def calculate_point_speed(p1: P_exe.Point, p2: P_exe.Point) -> float:
+def estimate_ground_speed(p1: P_exe.Point, p2: P_exe.Point) -> float:
     """
     Calculate the ground speed between two points (from p1 to p2).
     """
-    s = P_exe.gps_distance((p1.lat, p1.lon), (p2.lat, p2.lon))
+    s = P_exe.calculate_gps_distance((p1.lat, p1.lon), (p2.lat, p2.lon))
     t = abs(p2.time - p1.time)
     try:
         return s / t
@@ -113,7 +113,7 @@ def calculate_point_speed(p1: P_exe.Point, p2: P_exe.Point) -> float:
         return float("inf") if 0 <= s else float("-inf")
 
 
-def upper_whisker(values: T.Sequence[float]) -> float:
+def calculate_upper_limit(values: T.Sequence[float]) -> float:
     """
     Calculate the upper whisker (i.e. Q3 + IRQ * 1.5) of the input values.
     Values larger than it are considered as outliers.
@@ -136,7 +136,7 @@ def upper_whisker(values: T.Sequence[float]) -> float:
     return q3 + irq * 1.5
 
 
-def split_if(
+def divide_sequence_if(
     points: PointSequence,
     split_or_not: Decider,
 ) -> T.List[PointSequence]:
@@ -160,33 +160,23 @@ def distance_gt(
     """Return a callable that checks if two points are farther than the given distance."""
 
     def _split_or_not(p1, p2):
-        distance = P_exe.gps_distance((p1.lat, p1.lon), (p2.lat, p2.lon))
+        distance = P_exe.calculate_gps_distance((p1.lat, p1.lon), (p2.lat, p2.lon))
         return distance > max_distance
 
     return _split_or_not
 
 
-def speed_le(max_speed: float) -> Decider:
+def check_speed_below(max_speed: float) -> Decider:
     """Return a callable that checks if the speed between two points are slower than the given speed."""
 
     def _split_or_not(p1, p2):
-        speed = calculate_point_speed(p1, p2)
+        speed = estimate_ground_speed(p1, p2)
         return speed <= max_speed
 
     return _split_or_not
 
 
-def both(
-    s1: Decider,
-    s2: Decider,
-) -> Decider:
-    def _f(p1, p2):
-        return s1(p1, p2) and s2(p1, p2)
-
-    return _f
-
-
-def dbscan(
+def cluster_points(
     sequences: T.Sequence[PointSequence],
     merge_or_not: Decider,
 ) -> T.Dict[int, PointSequence]:
@@ -219,5 +209,5 @@ def dbscan(
     return merged
 
 
-def find_majority(sequences: T.Collection[PointSequence]) -> PointSequence:
+def find_dominant_sequence(sequences: T.Collection[PointSequence]) -> PointSequence:
     return sorted(sequences, key=lambda g: len(g), reverse=True)[0]

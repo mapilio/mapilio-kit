@@ -21,7 +21,7 @@ LOG = logging.getLogger(__name__)
 
 
 # Camera Motion Metadata Spec https://developers.google.com/streetview/publish/camm-spec
-class CAMMType(Enum):
+class CameraMotionCategory(Enum):
     ANGLE_AXIS = 0
     EXPOSURE_TIME = 1
     GYRO = 2
@@ -38,20 +38,20 @@ Double = C.Float64l
 
 _SWITCH: T.Dict[int, C.Struct] = {
     # angle_axis
-    CAMMType.ANGLE_AXIS.value: Float[3],
-    CAMMType.EXPOSURE_TIME.value: C.Struct(
+    CameraMotionCategory.ANGLE_AXIS.value: Float[3],
+    CameraMotionCategory.EXPOSURE_TIME.value: C.Struct(
         "pixel_exposure_time" / C.Int32sl,
         "rolling_shutter_skew_time" / C.Int32sl,
     ),
     # gyro
-    CAMMType.GYRO.value: Float[3],
+    CameraMotionCategory.GYRO.value: Float[3],
     # acceleration
-    CAMMType.ACCELERATION.value: Float[3],
+    CameraMotionCategory.ACCELERATION.value: Float[3],
     # position
-    CAMMType.POSITION.value: Float[3],
+    CameraMotionCategory.POSITION.value: Float[3],
     # lat, lon, alt
-    CAMMType.MIN_GPS.value: Double[3],
-    CAMMType.GPS.value: C.Struct(
+    CameraMotionCategory.MIN_GPS.value: Double[3],
+    CameraMotionCategory.GPS.value: C.Struct(
         "time_gps_epoch" / Double,
         "gps_fix_type" / C.Int32sl,
         "latitude" / Double,
@@ -65,7 +65,7 @@ _SWITCH: T.Dict[int, C.Struct] = {
         "speed_accuracy" / Float,
     ),
     # magnetic_field
-    CAMMType.MAGNETIC_FIELD.value: Float[3],
+    CameraMotionCategory.MAGNETIC_FIELD.value: Float[3],
 }
 
 CAMMSampleData = C.Struct(
@@ -85,7 +85,7 @@ def _parse_point_from_sample(
     fp.seek(sample.offset, io.SEEK_SET)
     data = fp.read(sample.size)
     box = CAMMSampleData.parse(data)
-    if box.type == CAMMType.MIN_GPS.value:
+    if box.type == CameraMotionCategory.MIN_GPS.value:
         return P_exe.Point(
             time=sample.time_offset,
             lat=box.data[0],
@@ -93,7 +93,7 @@ def _parse_point_from_sample(
             alt=box.data[2],
             angle=None,
         )
-    elif box.type == CAMMType.GPS.value:
+    elif box.type == CameraMotionCategory.GPS.value:
         # Not using box.data.time_gps_epoch as the point timestamp
         # because it is from another clock
         return P_exe.Point(

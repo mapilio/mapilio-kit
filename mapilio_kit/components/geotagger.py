@@ -6,7 +6,7 @@ import abc
 
 from tqdm import tqdm
 
-from mapilio_kit.components import point as P_exe,types_fmt as types
+from mapilio_kit.components import point as P_exe, types_fmt as types
 from mapilio_kit.components import (
     cam_data_processor,
     gopro_location_filter,
@@ -16,14 +16,14 @@ from mapilio_kit.components import (
 
 LOG = logging.getLogger(__name__)
 
-class GeotagVideosFromGeneric(abc.ABC):
+class GenericVideoGeotagger(abc.ABC):
     def __init__(self) -> None:
         pass
 
     @abc.abstractmethod
     def to_description(self):
         raise NotImplementedError
-class GeotagVideosFromVideo(GeotagVideosFromGeneric):
+class VideoGeotagHandler(GenericVideoGeotagger):
     def __init__(
         self,
         video_paths,
@@ -64,7 +64,7 @@ class GeotagVideosFromVideo(GeotagVideosFromGeneric):
         self,
         video_path,
     ):
-        return GeotagVideosFromVideo.geotag_video(video_path, self.filetypes)
+        return VideoGeotagHandler.geotag_video(video_path, self.filetypes)
 
     @staticmethod
     def _extract_video_metadata(
@@ -125,7 +125,7 @@ class GeotagVideosFromVideo(GeotagVideosFromGeneric):
     ):
         video_metadata = None
         try:
-            video_metadata = GeotagVideosFromVideo._extract_video_metadata(
+            video_metadata = VideoGeotagHandler._extract_video_metadata(
                 video_path, filetypes
             )
 
@@ -141,14 +141,14 @@ class GeotagVideosFromVideo(GeotagVideosFromGeneric):
             if all(isinstance(p, P_exe.PointWithFix) for p in video_metadata.points):
                 video_metadata.points = T.cast(
                     T.List[P_exe.Point],
-                    gopro_location_filter.remove_noisy_points(
+                    gopro_location_filter.cleanse_noisy_points(
                         T.cast(T.List[P_exe.PointWithFix], video_metadata.points)
                     ),
                 )
                 if not video_metadata.points:
                     raise Exception("GPS is too noisy")
 
-            stationary = P_exe.get_max_distance_from_start([(p.lat, p.lon) for p in video_metadata.points]) < 10
+            stationary = P_exe.determine_maximum_distance_from_start([(p.lat, p.lon) for p in video_metadata.points]) < 10
             if stationary:
                 raise Exception("Stationary video")
 
