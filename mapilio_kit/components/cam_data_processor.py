@@ -223,14 +223,6 @@ def extract_points(fp: T.BinaryIO) -> T.Optional[T.List[P_exe.Point]]:
     return points
 
 
-def parse_gpx(path: pathlib.Path) -> T.List[P_exe.Point]:
-    with path.open("rb") as fp:
-        points = extract_points(fp)
-    if points is None:
-        return []
-    return points
-
-
 MakeOrModel = C.Struct(
     "size" / C.Int16ub,
     C.Padding(2),
