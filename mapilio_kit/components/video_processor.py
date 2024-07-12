@@ -115,7 +115,6 @@ def extract_frames(
                                      video_sample_distance)
     else:
         _extract_frames_time_slice(video_file, import_path, video_sample_interval, video_duration_ratio)
-    exit(1)
 
 
 def _sample_video_stream_by_distance(
@@ -185,7 +184,7 @@ def _extract_frames_distance_gap(video_file: str,
     if not isinstance(video_file, Path): video_file = Path(video_file)
     if not isinstance(import_path, Path): import_path = Path(import_path)
     LOG.info("Extracting video metdata")
-    video_metadata = geotagger.GeotagVideosFromVideo.geotag_video(
+    video_metadata = geotagger.VideoGeotagHandler.geotag_video(
         video_file
     )
 

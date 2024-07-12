@@ -44,9 +44,7 @@ def purge_outliers(
 
     max_speed = calculate_upper_limit(ground_speeds)
     merged = cluster_points(sequences, check_speed_below(max_speed))
-    LOG.debug(
-        "Found %d sequences after merging with max speed %f", len(merged), max_speed
-    )
+
 
     return T.cast(
         T.List[P_exe.PointWithFix],

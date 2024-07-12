@@ -25,7 +25,7 @@ class Run:
         self.decomposer = decomposer()
         self.image_and_csv_uploader = image_and_csv_uploader()
         self.zipper = Zipper()
-        self.video_sample_interval = 1
+        self.video_sample_distance = 5
         self.interpolate_directions = True
         self.username = None
 
@@ -151,7 +151,7 @@ class Run:
             args["processed"] = False
             args["geotag_source"] = geotag_source
             args["interpolate_directions"] = self.interpolate_directions
-            args["video_sample_interval"] = self.video_sample_interval
+            args["video_sample_distance"] = self.video_sample_distance
             return self.video_loader.perform_task(args)
         else:
             print("Please enter your video path properly \n\n\n\n\n")

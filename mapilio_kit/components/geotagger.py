@@ -14,7 +14,6 @@ from mapilio_kit.components import (
     basics_blender as parser,
 )
 
-LOG = logging.getLogger(__name__)
 
 class GenericVideoGeotagger(abc.ABC):
     def __init__(self) -> None:
@@ -55,7 +54,6 @@ class VideoGeotagHandler(GenericVideoGeotagger):
                     video_metadatas_iter,
                     desc="Extracting GPS tracks from videos",
                     unit="videos",
-                    disable=LOG.getEffectiveLevel() <= logging.DEBUG,
                     total=len(self.video_paths),
                 )
             )
@@ -152,15 +150,8 @@ class VideoGeotagHandler(GenericVideoGeotagger):
             if stationary:
                 raise Exception("Stationary video")
 
-            LOG.debug("Calculating MD5 checksum for %s", str(video_metadata.filename))
             video_metadata.update_md5sum()
         except Exception as ex:
-            LOG.warning(
-                "Failed to geotag video %s: %s",
-                video_path,
-                str(ex),
-                exc_info=LOG.getEffectiveLevel() <= logging.DEBUG,
-            )
             filetype = None if video_metadata is None else video_metadata.filetype
             return types.describe_error_metadata(
                 ex,

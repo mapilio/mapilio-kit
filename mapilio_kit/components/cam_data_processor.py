@@ -3,7 +3,6 @@
 import dataclasses
 import io
 import logging
-import pathlib
 import typing as T
 from enum import Enum
 
@@ -17,7 +16,6 @@ from . import (
 )
 
 
-LOG = logging.getLogger(__name__)
 
 
 # Camera Motion Metadata Spec https://developers.google.com/streetview/publish/camm-spec
@@ -234,7 +232,6 @@ def _decode_quietly(data: bytes, h: parser.Header) -> str:
     try:
         return data.decode("utf-8")
     except UnicodeDecodeError:
-        LOG.warning("Failed to decode %s: %s", h, data[:512])
         return ""
 
 
@@ -242,7 +239,6 @@ def _parse_quietly(data: bytes, h: parser.Header) -> bytes:
     try:
         parsed = MakeOrModel.parse(data)
     except C.ConstructError:
-        LOG.warning("Failed to parse %s: %s", h, data[:512])
         return b""
     return parsed["data"]
 
