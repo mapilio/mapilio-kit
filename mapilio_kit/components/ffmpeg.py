@@ -41,9 +41,6 @@ def get_ffprobe(path: str) -> dict:
     return j_obj
 
 
-# Set up logging
-logging.basicConfig(level=logging.DEBUG)
-LOG = logging.getLogger(__name__)
 
 
 def get_video_info(video_path):
