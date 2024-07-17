@@ -21,7 +21,7 @@ tqdm==4.62.3
 typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
-gps-anomaly
+gps-anomaly-detector
 calculation-mapilio
 windows-curses; platform_system  == "Windows"
 urllib3==2.2.1
