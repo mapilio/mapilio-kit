@@ -1,12 +1,15 @@
 import datetime
+import dataclasses
 import sys
 import typing as T
-
+import enum
+from pathlib import Path
 if sys.version_info >= (3, 8):
     from typing import TypedDict, Literal  # pylint: disable=no-name-in-module
 else:
     from typing_extensions import TypedDict, Literal
 
+from mapilio_kit.components import point as P_exe, utilities
 
 class User(TypedDict, total=False):
     OrganizationKey: str
@@ -34,6 +37,38 @@ class Image(ImageRequired, total=False):
     Heading: float
     Roll: float
     Pitch: float
+
+class FileType(enum.Enum):
+    BLACKVUE = "blackvue"
+    CAMM = "camm"
+    GOPRO = "gopro"
+    IMAGE = "image"
+    VIDEO = "video"
+
+@dataclasses.dataclass
+class VideoMetadata:
+        filename: Path
+        # if None or absent, it will be calculated
+        md5sum: T.Optional[str]
+        filetype: FileType
+        points: T.Sequence[P_exe.Point]
+        make: T.Optional[str] = None
+        model: T.Optional[str] = None
+
+        def update_md5sum(self) -> None:
+            if self.md5sum is None:
+                with self.filename.open("rb") as fp:
+                    self.md5sum = utilities.md5sum_fp(fp).hexdigest()
+
+@dataclasses.dataclass
+class ErrorMetadata:
+    filename: str
+    filetype: T.Optional[FileType]
+    error: Exception
+def describe_error_metadata(
+    exc: Exception, filename: str, filetype: T.Optional[FileType]
+) -> ErrorMetadata:
+    return ErrorMetadata(filename=filename, filetype=filetype, error=exc)
 
 
 class _SequenceOnly(TypedDict, total=True):

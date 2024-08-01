@@ -4,6 +4,8 @@ import math
 from collections import ChainMap
 import platform
 from calculation.util import calculate_vfov
+import hashlib
+import typing as T
 
 
 __RULES__ = [{('hero7', 'wide', '4:3'): [122.6, 94.4]}, {('hero7', 'wide', '16:9'): [118.2, 69.5]},
@@ -46,6 +48,17 @@ https://community.gopro.com/s/article/HERO9-Black-Digital-Lenses-FOV-Information
 https://community.gopro.com/s/article/MAX-Digital-Lenses-formerly-known-as-FOV?language=en_US
 """
 
+def md5sum_fp(
+    fp: T.IO[bytes], md5: T.Optional["hashlib._Hash"] = None
+) -> "hashlib._Hash":
+    if md5 is None:
+        md5 = hashlib.md5()
+    while True:
+        buf = fp.read(1024 * 1024 * 32)
+        if not buf:
+            break
+        md5.update(buf)
+    return md5
 
 def find_fov2(model, mode, asp_rat):
     result = ChainMap(*__RULES__)

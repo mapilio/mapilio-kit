@@ -37,6 +37,13 @@ class Sampler:
             default=False,
             required=False,
         )
+        group.add_argument(
+            "--video_sample_distance",
+            help="The distance of video sampling parameters",
+            type=float,
+            default=5.0,
+            required=True,
+        )
     def filter_args(self, args):
         return {k: v for k, v in args.items() if k in video_sampler.__code__.co_varnames}
 
