@@ -2,10 +2,10 @@ import os
 import json
 import getpass
 import subprocess
-from mapilio_kit.components.login import list_all_users
-from mapilio_kit.components.upload import upload, zip_images
-from mapilio_kit.components.edit_config import edit_config
-from mapilio_kit.components.process_csv_to_description import process_csv_to_description
+from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.upload.upload import upload, zip_images
+from mapilio_kit.components.utilities.edit_config import edit_config
+from mapilio_kit.components.processing.process_csv_to_description import process_csv_to_description
 
 
 class Run:

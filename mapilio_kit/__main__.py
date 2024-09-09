@@ -12,10 +12,10 @@ sys.path.append(os.path.join(project_root, 'components'))
 from mapilio_kit.components.version import VERSION
 from mapilio_kit.base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, \
     gopro360max_processor, Zipper, run_mapi
-from mapilio_kit.components import arguments
-from mapilio_kit.components.login import list_all_users
-from mapilio_kit.components.config import delete_user
-from mapilio_kit.components.info import get_latest_version, maintenance_info
+from mapilio_kit.components.utilities import arguments
+from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.utilities.config import delete_user
+from mapilio_kit.components.utilities.info import get_latest_version, maintenance_info
 
 sentry_sdk.init(
     dsn="https://e64e5a7900578f279015f1c573318337@o4506428096577536.ingest.us.sentry.io/4507385354387456",

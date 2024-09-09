@@ -1,6 +1,6 @@
 import argparse
 import os
-from mapilio_kit.components.export import export
+from mapilio_kit.components.processing.export import export
 
 class image_and_csv_upload:
     name = "image_and_csv_upload"
