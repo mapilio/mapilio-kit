@@ -48,9 +48,10 @@ def gps_file_reader(gps_file_path: str) -> tuple:
     with open(gps_file_path, mode='r', newline='') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         for row in csv_reader:
-            lats.append(float(row['lat']))
-            lons.append(float(row['lon']))
-            times.append(row['captureTime'])
+            print(row)
+            lats.append(float(row.get('lat', row.get('latitude', None))))
+            lons.append(float(row.get('lon', row.get('longitude', None))))
+            times.append(row.get('captureTime', row.get('current_time', None)))
 
     return lats, lons, times
 
