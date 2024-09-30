@@ -100,6 +100,7 @@ def insert_MAPJson(
 
         relpath = os.path.relpath(image, import_path)
         dirname = os.path.dirname(relpath)
+        if not dirname: dirname = os.path.basename(import_path)
         basename = os.path.basename(relpath)
         if status == "success":
             descs.append(
