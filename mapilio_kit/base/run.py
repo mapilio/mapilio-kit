@@ -2,10 +2,10 @@ import os
 import json
 import getpass
 import subprocess
-from mapilio_kit.components.login import list_all_users
-from mapilio_kit.components.upload import upload, zip_images
-from mapilio_kit.components.edit_config import edit_config
-from mapilio_kit.components.process_csv_to_description import process_csv_to_description
+from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.upload.upload import upload, zip_images
+from mapilio_kit.components.utilities.edit_config import edit_config
+from mapilio_kit.components.processing.process_csv_to_description import process_csv_to_description
 
 
 class Run:
@@ -25,7 +25,7 @@ class Run:
         self.decomposer = decomposer()
         self.image_and_csv_uploader = image_and_csv_uploader()
         self.zipper = Zipper()
-        self.video_sample_interval = 1
+        self.video_sample_distance = 5
         self.interpolate_directions = True
         self.username = None
 
@@ -151,7 +151,7 @@ class Run:
             args["processed"] = False
             args["geotag_source"] = geotag_source
             args["interpolate_directions"] = self.interpolate_directions
-            args["video_sample_interval"] = self.video_sample_interval
+            args["video_sample_distance"] = self.video_sample_distance
             return self.video_loader.perform_task(args)
         else:
             print("Please enter your video path properly \n\n\n\n\n")
