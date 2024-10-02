@@ -156,6 +156,7 @@ FinalImageDescriptionMetadata = {
         "imageSize": {"type": "string"},
         "fov": {"type": "number"},
         "anomaly": {"type": "number"},
+        "anomaly_reason" : {"type": "string"},
         "yaw": {"type": "number"},
         "carSpeed": {"type": "number"},
         "pitch": {"type": "number"},
