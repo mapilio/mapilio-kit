@@ -4,7 +4,7 @@ import argparse
 def general_arguments(parser, command):
     if command == "authenticate" or command == "gopro360max_process" or command == "run":
         return
-    if command in ["sampler", "video_process", "video_upload"]:
+    if command in ["Sampler", "video_process", "video_upload"]:
         parser.add_argument(
             "video_import_path",
             help="Path to a video or directory with one or more video files.",
