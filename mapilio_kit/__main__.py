@@ -11,7 +11,7 @@ sys.path.append(os.path.join(project_root, 'components'))
 
 from mapilio_kit.components.version import VERSION
 from mapilio_kit.base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, \
-    gopro360max_processor, Zipper, run_mapi
+    gopro360max_processor, Zipper, run_mapi, sampler
 from mapilio_kit.components.utilities import arguments
 from mapilio_kit.components.auth.login import list_all_users
 from mapilio_kit.components.utilities.config import delete_user
@@ -36,6 +36,7 @@ FUNCTION_MAP = {'Upload': uploader,
                 "CSVprocessor": CSVprocessor,
                 "gopro360max_processor": gopro360max_processor,
                 "Zipper": Zipper,
+                "sampler": sampler,
                 "Run": run_mapi}
 
 
