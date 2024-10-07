@@ -119,19 +119,7 @@ def upload(
 
         descs = read_image_descriptions(desc_path)
         descs = photo_uuid_generate(user_email=user_name, descs=descs)
-        anomaly = Anomaly()
 
-        descs, failed_imgs, anomaly_points = anomaly.anomaly_detector(descs)
-
-        logger.info(json.dumps(descs[-1]['Information'],indent=4))
-        logger.info("Anomalies can occur due to a combination of factors, including GPS distance being out of range,"
-                    "heading angle limit being exceeded, and altitude surpassing the upper limit. "
-                    "This contributes to the existence of failed images.")
-        if len(failed_imgs) > 0:
-
-            logger.warning(f"{Fore.RED}Some images has failed to upload due to "
-                        "anomaly detection."
-                        f" These images are => {failed_imgs}{Fore.RESET}")
         if not descs:
             logger.warning(f"No images found in {desc_path}. Exiting...")
 

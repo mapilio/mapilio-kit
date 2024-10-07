@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 from mapilio_kit.components.logs import image_log
 from mapilio_kit.components.processing import processing
-from mapilio_kit.components.utilities import error
+from gps_anomaly.detector import Anomaly
 from mapilio_kit.components.utilities import types_fmt as types
 
 from colorama import init, Fore
@@ -119,18 +119,14 @@ def insert_MAPJson(
         T.List[types.FinalImageDescriptionError],
         [desc for desc in descs if "error" in desc],
     )
-    duplicated_images = [
-        desc
-        for desc in not_processed_images
-        if desc["error"].get("type") == error.MapilioDuplicationError.__name__
-    ]
+
 
     summary = {
         'Information': {
             "total_images": len(descs),
             "processed_images": len(processed_images),
-            "failed_images": len(not_processed_images) - len(duplicated_images),
-            "duplicated_images": len(duplicated_images),
+            "failed_images": len(not_processed_images),
+            "duplicated_images": 0,
             "id": uuid.uuid4().hex,
             "group_key": str(uuid.uuid4()),
             "device_type": "Desktop"
@@ -139,7 +135,18 @@ def insert_MAPJson(
     descs.append(
         T.cast(types.FinalImageDescription, {**summary})
     )
+    anomaly = Anomaly()
 
+    descs, failed_imgs, anomaly_points = anomaly.anomaly_detector(descs)
+    logger.info(json.dumps(descs[-1]['Information'],indent=4))
+    logger.info("Anomalies can occur due to a combination of factors, including GPS distance being out of range,"
+                "heading angle limit being exceeded, and altitude surpassing the upper limit. "
+                "This contributes to the existence of failed images.")
+    if len(failed_imgs) > 0:
+
+        logger.warning(f"{Fore.RED}Some images has failed to upload due to "
+                       "anomaly detection."
+                       f" These images are => {failed_imgs}{Fore.RESET}")
     if desc_path == "-":
         print(json.dumps(descs, indent=4))
     else:
