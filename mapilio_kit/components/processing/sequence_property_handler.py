@@ -153,20 +153,9 @@ def process_sequence_by_anomaly(
     )
 
     for sequence in splitted_sequences:
-        # duplication check
-
-        # dup_set = set(dup_indices)
-        # dup_sequence = [image for idx, image in enumerate(sequence) if idx in dup_set]
-        # for image in dup_sequence:
-        #     image_log.log_failed_in_memory(
-        #         image.filename,
-        #         "sequence_process",
-        #         MapilioDuplicationError("duplicated", image.desc),
-        #     )
-
         _sequence = [
             image for idx, image in enumerate(sequence)
-        ]
+        
 
         # interpolate angles
         interpolated_dedup_sequence: Sequence = []
@@ -224,12 +213,6 @@ def process_sequence_by_anomaly(
                 if heading is not None:
                     desc["heading"] = heading
                 image_log.log_in_memory(image.filename, "sequence_process", desc)
-
-
-
-
-
-
 
 # Deprecated
 def process_sequence_deprecated(
