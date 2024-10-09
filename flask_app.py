@@ -7,13 +7,13 @@ import webbrowser
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 
 from mapilio_kit.base import authenticator
-from mapilio_kit.components.edit_config import edit_config
-from mapilio_kit.components.geotag_property_handler import geotag_property_handler
-from mapilio_kit.components.insert_MAPJson import insert_MAPJson
-from mapilio_kit.components.login import list_all_users
-from mapilio_kit.components.metadata_property_handler import metadata_property_handler
-from mapilio_kit.components.sequence_property_handler import sequence_property_handler
-from mapilio_kit.components.upload import upload
+from mapilio_kit.components.utilities.edit_config import edit_config
+from mapilio_kit.components.geotagging.geotag_property_handler import geotag_property_handler
+from mapilio_kit.components.utilities.insert_MAPJson import insert_MAPJson
+from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.metadata.metadata_property_handler import metadata_property_handler
+from mapilio_kit.components.processing.sequence_property_handler import sequence_property_handler
+from mapilio_kit.components.upload.upload import upload
 
 app = Flask(__name__)
 
@@ -123,21 +123,27 @@ def mapilio_upload_page():
             file.save(UPLOAD_FOLDER + file.filename)
 
         bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
-        path_to_exiftool = os.path.abspath(os.path.join(bundle_dir, 'exiftool/exiftool'))
+        if app.debug:
+            path_to_exiftool = "/usr/bin/exiftool"
+        else:
+            path_to_exiftool = os.path.abspath(os.path.join(bundle_dir, 'exiftool/exiftool'))
 
         try:
             decompose(import_path=UPLOAD_FOLDER, exiftool_path=path_to_exiftool)
+            jsonPath = os.path.join(UPLOAD_FOLDER, "mapilio_image_description.json")
+            with open(jsonPath, 'r') as f:
+                data = json.load(f)
+            total_images = data[-1]["Information"]["total_images"]
+            processed_images = data[-1]["Information"]["processed_images"]
+            failed_images = data[-1]["Information"]["failed_images"]
+        except:
+            return jsonify(success=False, message="An error occurred during metadata properties extraction.")
+
+        try:
             upload_status = upload(import_path=UPLOAD_FOLDER, dry_run=False)
             if upload_status.get("Success"):
                 try:
-                    jsonPath = os.path.join(UPLOAD_FOLDER, "mapilio_image_description.json")
-                    with open(jsonPath, 'r') as f:
-                        data = json.load(f)
-                    total_images = data[-1]["Information"]["total_images"]
-                    processed_images = data[-1]["Information"]["processed_images"]
-                    failed_images = data[-1]["Information"]["failed_images"]
                     shutil.rmtree(UPLOAD_FOLDER)
-
                     return jsonify(success=True, message="Images uploaded successfully", total_images=total_images,
                                    processed_images=processed_images, failed_images=failed_images), 200
                 except OSError as err:
@@ -165,5 +171,5 @@ def mapilio_video_upload_page():
 
 if __name__ == "__main__":
     webbrowser.open("http://127.0.0.1:8081/")
-    app.run(host="0.0.0.0", port=8081, debug=True)
+    app.run(host="0.0.0.0", port=8081, debug=False)
     # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
