@@ -155,6 +155,7 @@ def process_sequence_by_anomaly(
     for sequence in splitted_sequences:
         _sequence = [
             image for idx, image in enumerate(sequence)
+        ]
         
 
         # interpolate angles
