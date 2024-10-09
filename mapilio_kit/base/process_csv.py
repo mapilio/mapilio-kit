@@ -1,4 +1,4 @@
-from process_csv_to_description import process_csv_to_description
+from mapilio_kit.components.processing.process_csv_to_description import process_csv_to_description
 import argparse
 
 

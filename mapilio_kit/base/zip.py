@@ -1,5 +1,5 @@
 import argparse
-from upload import zip_images
+from mapilio_kit.components.upload.upload import zip_images
 
 
 class Zip:

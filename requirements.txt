@@ -2,7 +2,6 @@ attrs==21.2.0
 certifi==2021.10.8
 chardet==3.0.4
 charset-normalizer==2.0.7
-construct==2.8.8
 ExifRead==2.3.2
 gpxpy==0.9.8
 pip>22.3.0
@@ -10,7 +9,7 @@ idna==2.7
 jsonschema==4.1.1
 key==0.4
 piexif==1.1.3
-pymp4==1.1.0
+construct>=2.10.0,<3.0.0
 pynmea2==1.19.0
 pyrsistent==0.18.0
 python-dateutil==2.8.2
@@ -22,7 +21,7 @@ tqdm==4.62.3
 typing-extensions>=4.7.1
 tzwhere==3.0.3
 simple-term-menu
-gps-anomaly
+gps-anomaly-detector
 calculation-mapilio
 windows-curses; platform_system  == "Windows"
 urllib3==2.2.1
@@ -32,3 +31,4 @@ pytest
 configparser
 ffpb
 sentry-sdk
+typing_extensions

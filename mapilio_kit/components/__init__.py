@@ -1,2 +1,2 @@
-from .edit_config import edit_config
-from .arguments import general_arguments
+from mapilio_kit.components.utilities.arguments import general_arguments
+from mapilio_kit.components.utilities.edit_config import edit_config

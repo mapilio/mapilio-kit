@@ -1,6 +1,6 @@
 import os
 import argparse
-from video_processor import video_sampler
+from mapilio_kit.components.processing.video_processor import video_sampler
 
 
 class Sampler:
@@ -36,6 +36,12 @@ class Sampler:
             action="store_true",
             default=False,
             required=False,
+        )
+        group.add_argument(
+            "--video_sample_distance",
+            help="The distance of video sampling parameters",
+            type=float,
+            default=5.0,
         )
     def filter_args(self, args):
         return {k: v for k, v in args.items() if k in video_sampler.__code__.co_varnames}

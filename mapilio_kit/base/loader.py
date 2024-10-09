@@ -1,5 +1,5 @@
 import argparse
-from upload import upload
+from mapilio_kit.components.upload.upload import upload
 class Upload:
     name = "upload"
     help = "upload images and descriptions to Mapilio"

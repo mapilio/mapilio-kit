@@ -2,10 +2,10 @@ import os
 import json
 import getpass
 import subprocess
-from login import list_all_users
-from upload import upload, zip_images
-from edit_config import edit_config
-from process_csv_to_description import process_csv_to_description
+from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.upload.upload import upload, zip_images
+from mapilio_kit.components.utilities.edit_config import edit_config
+from mapilio_kit.components.processing.process_csv_to_description import process_csv_to_description
 
 
 class Run:
@@ -25,7 +25,7 @@ class Run:
         self.decomposer = decomposer()
         self.image_and_csv_uploader = image_and_csv_uploader()
         self.zipper = Zipper()
-        self.video_sample_interval = 1
+        self.video_sample_distance = 5
         self.interpolate_directions = True
         self.username = None
 
@@ -127,52 +127,32 @@ class Run:
         args["user_name"] = self.username
         video_import_path = input("Enter your video folder path: ").strip()
         if video_import_path:
-            import_path = '/'.join(video_import_path.split('/')[:-1]) + '/' + 'images' + '/'
-            target_path = os.path.join(import_path, "mapilio_image_description.json")
-            args["import_path"] = import_path
-            if os.path.exists(target_path):
-                with open(target_path, "r") as f:
-                    json_data = f.read()
-                data = json.loads(json_data)
+            args["video_import_path"] = video_import_path
 
-                info_key_exists = any('Information' in item for item in data)
+            geotag_options = {
+                "1": "exif (Image metadata containing GPS coordinates)",
+                "2": "gpx (GPS data file format for storing tracks and waypoints)",
+                "3": "gopro_videos (GPS data extracted from GoPro video files)",
+                "4": "nmea (GPS data format used by many GPS devices)"
+            }
 
-                total_images = next((item['Information']['total_images'] for item in data if 'Information' in item),
-                                    None)
+            print("Please select your geotag source:")
+            for key, value in geotag_options.items():
+                print(f"{key}: {value}")
 
-                correct_number_of_dicts = len(data) - 1 == total_images
-                if info_key_exists and correct_number_of_dicts:
-                    args["processed"] = True
+            while True:
+                geotag_choice = input("Enter the number corresponding to your geotag source: ").strip()
+                if geotag_choice in geotag_options:
+                    geotag_source = geotag_options[geotag_choice].split()[0]
+                    break
                 else:
-                    args["processed"] = False
-                return self.uploader.perform_task(args)
-            else:
-                args["video_import_path"] = video_import_path
+                    print("Invalid choice, please enter a number between 1 and 4.")
 
-                geotag_options = {
-                    "1": "exif (Image metadata containing GPS coordinates)",
-                    "2": "gpx (GPS data file format for storing tracks and waypoints)",
-                    "3": "gopro_videos (GPS data extracted from GoPro video files)",
-                    "4": "nmea (GPS data format used by many GPS devices)"
-                }
-
-                print("Please select your geotag source:")
-                for key, value in geotag_options.items():
-                    print(f"{key}: {value}")
-
-                while True:
-                    geotag_choice = input("Enter the number corresponding to your geotag source: ").strip()
-                    if geotag_choice in geotag_options:
-                        geotag_source = geotag_options[geotag_choice].split()[0]
-                        break
-                    else:
-                        print("Invalid choice, please enter a number between 1 and 4.")
-
-                args["processed"] = False
-                args["geotag_source"] = geotag_source
-                args["interpolate_directions"] = self.interpolate_directions
-                args["video_sample_interval"] = self.video_sample_interval
-                return self.video_loader.perform_task(args)
+            args["processed"] = False
+            args["geotag_source"] = geotag_source
+            args["interpolate_directions"] = self.interpolate_directions
+            args["video_sample_distance"] = self.video_sample_distance
+            return self.video_loader.perform_task(args)
         else:
             print("Please enter your video path properly \n\n\n\n\n")
             self.perform_video_upload()

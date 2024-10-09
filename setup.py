@@ -96,7 +96,7 @@ setup(name='mapilio-kit',
       python_requires=">=3.6",
       ext_modules=ext_modules,
       cmdclass=cmdclass,
-      packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components'],
+      packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components','mapilio_kit.components.auth','mapilio_kit.components.geotagging','mapilio_kit.components.ipc','mapilio_kit.components.metadata','mapilio_kit.components.upload','mapilio_kit.components.blending','mapilio_kit.components.logs','mapilio_kit.components.processing','mapilio_kit.components.utilities'],
       entry_points='''
       [console_scripts]
       mapilio_kit=mapilio_kit.__main__:main
