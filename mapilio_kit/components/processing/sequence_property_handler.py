@@ -131,7 +131,7 @@ def sequence_property_handler(
         raise RuntimeError(f"Error, import directory {import_path} does not exist")
     sequences = find_sequences(import_path, skip_subfolders)
     for sequence in sequences:
-        process_sequence(
+        process_sequence_by_anomaly(
             sequence,
             cutoff_distance,
             cutoff_time,
@@ -140,8 +140,82 @@ def sequence_property_handler(
             duplicate_angle,
         )
 
+def process_sequence_by_anomaly(
+        sequence: Sequence,
+        cutoff_distance: float,
+        cutoff_time: float,
+        interpolate_directions: bool,
+        duplicate_distance: float,
+        duplicate_angle: float,
+) -> None:
+    splitted_sequences: T.List[Sequence] = split_sequences(
+        sequence, cutoff_distance, cutoff_time
+    )
 
-def process_sequence(
+    for sequence in splitted_sequences:
+        _sequence = [
+            image for idx, image in enumerate(sequence)
+        
+
+        # interpolate angles
+        interpolated_dedup_sequence: Sequence = []
+        for cur, nex in generate_pairs(_sequence):
+            # should interpolate or not
+            if interpolate_directions or cur.angle is None:
+                new_bearing = calculate_compass_bearing(cur.lat, cur.lon, nex.lat, nex.lon)
+                new_desc: types.Image = T.cast(
+                    types.Image,
+                    {
+                        **cur.desc,
+                        "heading": new_bearing
+                    },
+                )
+                interpolated_dedup_sequence.append(_GPXPoint(new_desc, cur.filename))
+            else:
+                interpolated_dedup_sequence.append(cur)
+
+        if interpolated_dedup_sequence:
+            assert len(interpolated_dedup_sequence) == len(_sequence) - 1
+        else:
+            assert len(_sequence) <= 1
+
+        # interpolate the last image's angle
+        # can interpolate or not
+        if 2 <= len(_sequence) and interpolated_dedup_sequence[-1] is not None:
+            # should interpolate or not
+            if interpolate_directions or _sequence[-1] is None:
+                new_desc = T.cast(
+                    types.Image,
+                    {
+                        **_sequence[-1].desc,
+                        "heading": interpolated_dedup_sequence[-1].angle
+                    },
+                )
+                interpolated_dedup_sequence.append(
+                    _GPXPoint(new_desc, _sequence[-1].filename)
+                )
+            else:
+                interpolated_dedup_sequence.append(_sequence[-1])
+        else:
+            interpolated_dedup_sequence.append(_sequence[-1])
+
+        assert len(interpolated_dedup_sequence) == len(_sequence)
+
+        # cut sequence per MAX_SEQUENCE_LENGTH images
+        for idx in range(0, len(interpolated_dedup_sequence), MAX_SEQUENCE_LENGTH):
+            sequence_uuid = str(uuid.uuid4())
+            for image in interpolated_dedup_sequence[idx: idx + MAX_SEQUENCE_LENGTH]:
+                desc: types.Sequence = {
+                    "sequenceUuid": sequence_uuid,
+                }
+                heading = image.desc.get("heading")
+                desc["source"] = f"Mapilio_Kit-v{version.VERSION}"
+                if heading is not None:
+                    desc["heading"] = heading
+                image_log.log_in_memory(image.filename, "sequence_process", desc)
+
+# Deprecated
+def process_sequence_deprecated(
     sequence: Sequence,
     cutoff_distance: float,
     cutoff_time: float,
