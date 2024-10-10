@@ -237,20 +237,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     Swal.fire({
                         icon: 'success',
                         title: "Upload successfully done!",
-                        html: "<table style='margin: 0 auto;'> \
-                                  <tr> \
-                                      <td style='text-align: left;'>Total images:</td> \
-                                      <td style='padding-left: 10px; font-weight: bold;'>" + data.total_images + "</td> \
-                                  </tr> \
-                                  <tr> \
-                                      <td style='text-align: right;'>Processed images:</td> \
-                                      <td style='padding-left: 10px; font-weight: bold;'>" + data.processed_images + "</td> \
-                                  </tr> \
-                                  <tr> \
-                                      <td style='text-align: left;'>Failed images:</td> \
-                                      <td style='padding-left: 10px; font-weight: bold;'>" + data.failed_images + "</td> \
-                                  </tr> \
-                              </table>",
+                        html: `<table style='margin: 0 auto;'> 
+                                  <tr> 
+                                      <td style='text-align: left;'>Total images:</td> 
+                                      <td style='padding-left: 10px; font-weight: bold;'>${data.total_images}</td> 
+                                  </tr> 
+                                  <tr> 
+                                      <td style='text-align: left;'>Processed images:</td> 
+                                      <td style='padding-left: 10px; font-weight: bold;'>${data.processed_images}</td> 
+                                  </tr> 
+                                  <tr> 
+                                      <td style='text-align: left;'>Failed images:</td> 
+                                      <td style='padding-left: 10px; font-weight: bold;'>${data.failed_images}</td> 
+                                  </tr> 
+                                  <tr> 
+                                      <td style='text-align: left;'>Duplicated images:</td> 
+                                      <td style='padding-left: 10px; font-weight: bold;'>${data.duplicated_images}</td> 
+                                  </tr> 
+                              </table>`,
                         footer: "Thanks for contributions to Mapilio 🎉",
                         timerProgressBar: true,
                         showConfirmButton: false

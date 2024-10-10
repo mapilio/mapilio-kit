@@ -136,6 +136,7 @@ def mapilio_upload_page():
             total_images = data[-1]["Information"]["total_images"]
             processed_images = data[-1]["Information"]["processed_images"]
             failed_images = data[-1]["Information"]["failed_images"]
+            duplicated_images = data[-1]["Information"]["duplicated_images"]
         except:
             return jsonify(success=False, message="An error occurred during metadata properties extraction.")
 
@@ -145,7 +146,7 @@ def mapilio_upload_page():
                 try:
                     shutil.rmtree(UPLOAD_FOLDER)
                     return jsonify(success=True, message="Images uploaded successfully", total_images=total_images,
-                                   processed_images=processed_images, failed_images=failed_images), 200
+                                   processed_images=processed_images, failed_images=failed_images, duplicated_images=duplicated_images), 200
                 except OSError as err:
                     print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
                     return jsonify(success=False, message=f"{err}")
