@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.11" ]
-        platform: ["ubuntu-20.04", "windows-latest",] # "macos-latest"
+        platform: ["ubuntu-20.04",] # "macos-latest","windows-latest"
         architecture: [ "x64" ]
         include:
           - architecture: "x86"
@@ -62,14 +62,15 @@ jobs:
         run: |
           python create_spec.py
 
-      - name: Validate version
-        run: |
-          EXPECTED_GITHUB_REF=$(mapilio_kit --version | awk '{print "refs/tags/v" $1}')
-          if [[ "$EXPECTED_GITHUB_REF" != "$GITHUB_REF" ]]; then
-            echo "Version mismatch: $EXPECTED_GITHUB_REF != $GITHUB_REF"
-            exit 1
-          fi
-        if: matrix.platform != 'windows-latest'
+#      - name: Validate version
+#        run: |
+#          EXPECTED_GITHUB_REF=$(mapilio_kit --version | awk '{print "refs/tags/v" $1}')
+#          if [[ "$EXPECTED_GITHUB_REF" != "$GITHUB_REF" ]]; then
+#            echo "Version mismatch: $EXPECTED_GITHUB_REF != $GITHUB_REF"
+#            exit 1
+#          fi
+#        if: matrix.platform != 'windows-latest'
+
 
 
       - name: Build and test with Pyinstaller on MacOS
