@@ -7,8 +7,8 @@ import subprocess
 import tempfile
 import re
 
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 LOG = logging.getLogger(__name__)
-
 
 def get_ffprobe(path: str) -> dict:
     if not os.path.isfile(path):
@@ -144,6 +144,67 @@ def extract_stream(source: str, dest: str, stream_id: int) -> None:
             "See https://github.com/mapilio/mapilio_tools#video-support for instructions"
         )
 
+def extract_video_by_idx_large(video_path,
+                         sample_dir,
+                         frame_indices,
+                         stream_idx,
+                         chunk_size,
+                         FRAME_EXT=".jpg",
+                         NA_STREAM_IDX="NA",
+                         ):
+
+    if not frame_indices:
+        return
+
+    sample_prefix = sample_dir.joinpath(video_path.stem)
+    if stream_idx is not None:
+        stream_selector = ["-map", f"0:{stream_idx}"]
+        output_template = f"{sample_prefix}_{stream_idx}_%06d{FRAME_EXT}"
+        stream_specifier = f"{stream_idx}"
+    else:
+        stream_selector = []
+        output_template = f"{sample_prefix}_{NA_STREAM_IDX}_%06d{FRAME_EXT}"
+        stream_specifier = "v"
+
+    # Sort frame indices to ensure correct order
+    sorted_indices = sorted(frame_indices)
+
+    # Process frames in chunks
+    for i in range(0, len(sorted_indices), chunk_size):
+        chunk = sorted_indices[i:i + chunk_size]
+
+        # Create a select filter for the current chunk
+        select_expr = "+".join(f"eq(n,{idx})" for idx in chunk)
+
+        cmd = [
+            "ffpb",
+            "-hide_banner",
+            "-nostdin",
+            "-i", str(video_path),
+            *stream_selector,
+            "-vf", f"select='{select_expr}',setpts=N/FRAME_RATE/TB",
+            "-vsync", "0",
+            "-q:v", "2",
+            "-start_number", str(i + 1),
+            f"{sample_prefix}_{stream_idx if stream_idx is not None else NA_STREAM_IDX}_%06d{FRAME_EXT}"
+        ]
+
+        try:
+            subprocess.run(cmd, check=True, capture_output=True, text=True)
+        except subprocess.CalledProcessError as e:
+            LOG.error(f"Error extracting frames: {e}")
+            LOG.error(f"ffpb stdout: {e.stdout}")
+            LOG.error(f"ffpb stderr: {e.stderr}")
+            raise
+
+        LOG.info(f"Extracted chunk {i // chunk_size + 1} with {len(chunk)} frames")
+
+    extracted_files = sorted(sample_dir.glob(f"{video_path.stem}_{stream_idx if stream_idx is not None else NA_STREAM_IDX}_*{FRAME_EXT}"))
+    for index, file in enumerate(extracted_files, start=1):
+        new_name = f"{sample_prefix}_{stream_idx if stream_idx is not None else NA_STREAM_IDX}_{index:06d}{FRAME_EXT}"
+        file.rename(new_name)
+
+    LOG.info(f"Extracted and renamed a total of {len(extracted_files)} frames")
 
 def extract_video_by_idx(video_path,
                          sample_dir,

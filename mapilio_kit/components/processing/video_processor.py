@@ -12,8 +12,8 @@ import mapilio_kit.components.blending.video_blender as video_blender
 from mapilio_kit.components.logs import image_log
 from mapilio_kit.components.processing import processing
 from mapilio_kit.components.metadata.exif_metadata_writer import ImageExifModifier
-from mapilio_kit.components.processing.ffmpeg import get_video_info, extract_video_by_idx, sort_selected_samples
-from mapilio_kit.components.utilities.utilities import get_exiftool_specific_feature
+from mapilio_kit.components.processing.ffmpeg import get_video_info, extract_video_by_idx, extract_video_by_idx_large, sort_selected_samples
+from mapilio_kit.components.utilities.utilities import get_exiftool_specific_feature, get_video_size, calculate_chunk_size, is_large_video
 
 ZERO_PADDING = 6
 LOG = logging.getLogger(__name__)
@@ -199,11 +199,26 @@ def _extract_frames_distance_gap(video_file: str,
         video_metadata.points, video_track_parser, video_sample_distance
     )
     sorted_sample_indices = sorted(sample_points_by_frame_idx.keys())
-    extract_video_by_idx(video_file, import_path, set(sorted_sample_indices), video_stream_idx)
+
+    video_size = get_video_size(video_file)
+    LOG.info(f"Video size is equal to -> {video_size} MB. Chunk size is being calculated.")
+
+    is_large = is_large_video(video_size)
+
+    if is_large:
+
+        chunk_size = calculate_chunk_size(video_size)
+        LOG.info(f"Calculated chunk size is {chunk_size}. Processing...")
+        LOG.info("Note that your video is a large video so, it will take more time more to process.")
+        extract_video_by_idx_large(video_file, import_path, set(sorted_sample_indices), video_stream_idx, chunk_size = chunk_size)
+
+    else:
+        extract_video_by_idx(video_file, import_path, set(sorted_sample_indices), video_stream_idx)
 
     frame_samples = sort_selected_samples(
         import_path, video_file, [video_stream_idx]
     )
+
     if len(frame_samples) != len(sorted_sample_indices):
         raise Exception(
             f"Expect {len(sorted_sample_indices)} samples but extracted {len(frame_samples)} samples"
