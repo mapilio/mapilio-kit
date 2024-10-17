@@ -6,6 +6,11 @@ import platform
 from calculation.util import calculate_vfov
 import hashlib
 import typing as T
+import os
+import logging
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+LOG = logging.getLogger(__name__)
 
 
 __RULES__ = [{('hero7', 'wide', '4:3'): [122.6, 94.4]}, {('hero7', 'wide', '16:9'): [118.2, 69.5]},
@@ -219,3 +224,37 @@ def photo_uuid_generate(user_email: str, descs: list) -> list:
         desc['photoUuid'] = hash_object.hexdigest()
 
     return descs
+
+def get_video_size(video_path):
+    """
+    Gets the size of the video in bytes
+    """
+    if not os.path.isfile(video_path):
+        raise RuntimeError(f"No such file: {video_path}")
+
+    video_size = os.path.getsize(video_path)
+    return video_size
+
+def is_large_video(video_size, large_video_threshold=1 * 1024 * 1024 * 1024):
+    """
+    Checks if the video size is larger than the given threshold (default 1GB).
+    Returns True if the video size exceeds the threshold, otherwise False.
+    """
+
+    if video_size > large_video_threshold:
+        return True
+
+    else:
+        return False
+
+def calculate_chunk_size(video_size, large_video_threshold=1 * 1024 * 1024 * 1024):
+    """
+    Calculate chunk size based on video size.
+    Use smaller chunks for larger videos.
+    """
+    if video_size > large_video_threshold:
+        chunk_size = 1500
+    else:
+        chunk_size = 5000
+
+    return chunk_size
