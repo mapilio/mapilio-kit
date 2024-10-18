@@ -210,7 +210,15 @@ class Run:
                              2. gopro360max panoramic video upload (Takes your panoramic images, processes and uploads to Mapilio.) still in progress!\n"
                                    )
                 if video_func == "1" or video_func == "Video upload":
+                    sample_dist = input(
+                        "You want the data to be processed in more detail, choose yes; if not, choose no. (Keep in mind that if you choose yes, the process will take more time.)\n\
+                        1. Yes (if you choose this option the distance between your images will be set to 1 meter)\n\
+                        2. No (if you choose this option the distance between your images will be set to 5 meters)\n"
+                    )
+                    if sample_dist == "1" or sample_dist == "Yes" or sample_dist == "yes":
+                        self.video_sample_distance = 1
                     self.perform_video_upload()
+
                 elif video_func == "2" or video_func == "gopro360max panoramic video upload":
                     self.gopro360max_upload()
                 elif video_func == "q":
