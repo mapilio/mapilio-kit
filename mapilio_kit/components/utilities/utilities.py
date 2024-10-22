@@ -254,6 +254,6 @@ def calculate_chunk_size(video_size, large_video_threshold=1 * 1024 * 1024 * 102
     """
 
     if video_size > large_video_threshold:
-        chunk_size = 1500
+        chunk_size = 2500
 
     return chunk_size
