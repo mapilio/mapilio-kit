@@ -25,7 +25,7 @@ def get_ffprobe(path: str) -> dict:
         "-show_streams",
         path,
     ]
-    LOG.info(f"Extracting video information: {' '.join(cmd)}")
+    #LOG.info(f"Extracting video information: {' '.join(cmd)}")
     try:
         output = subprocess.check_output(cmd)
     except FileNotFoundError:
@@ -136,7 +136,7 @@ def extract_stream(source: str, dest: str, stream_id: int) -> None:
         dest,
     ]
 
-    LOG.info(f"Extracting frames: {' '.join(cmd)}")
+    #LOG.info(f"Extracting frames: {' '.join(cmd)}")
     try:
         subprocess.check_output(cmd)
     except FileNotFoundError:
