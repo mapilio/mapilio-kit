@@ -8,7 +8,7 @@ import re
 
 from mapilio_kit.components.logger import MapilioLogger
 
-LOG = MapilioLogger(__name__).get_logger()
+LOG = MapilioLogger().get_logger()
 
 
 def get_ffprobe(path: str) -> dict:
