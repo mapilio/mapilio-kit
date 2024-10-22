@@ -6,7 +6,7 @@ import struct
 from mapilio_kit.components.logger import MapilioLogger
 
 # Configure logging
-LOG = MapilioLogger(__name__).get_logger()
+LOG = MapilioLogger().get_logger()
 
 # Get the NODE_CHANNEL_FD environment variable with a default of -1 if not set
 NODE_CHANNEL_FD = int(os.getenv("NODE_CHANNEL_FD", -1))
