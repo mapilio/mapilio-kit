@@ -7,9 +7,9 @@ import typing as T
 
 from mapilio_kit.components.utilities.config import MAPILIO_UPLOAD_ENDPOINT_ZIP
 from mapilio_kit.components.utilities import types_fmt as types
-import logging
+from mapilio_kit.components.logger import MapilioLogger
 
-LOG = logging.getLogger(__name__)
+LOG = MapilioLogger().get_logger()
 
 DEFAULT_CHUNK_SIZE = 1024 * 1024 * 64
 

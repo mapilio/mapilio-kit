@@ -3,9 +3,9 @@ import typing as T
 import statistics
 
 from mapilio_kit.components.utilities import point as P_exe
+from mapilio_kit.components.logger import MapilioLogger
 
-
-LOG = logging.getLogger(__name__)
+LOG = MapilioLogger().get_logger()
 
 GOPRO_GPS_PRECISION = 15
 GOPRO_GPS_FIXES = {0, 2, 3}

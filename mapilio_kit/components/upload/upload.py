@@ -11,16 +11,12 @@ from mapilio_kit.components.utilities import types_fmt as types
 
 from gps_anomaly.detector import Anomaly
 from mapilio_kit.components.utilities.utilities import photo_uuid_generate
+from mapilio_kit.components.logger import MapilioLogger
 
 from colorama import init, Fore
 init(autoreset=True)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter()
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+LOG = MapilioLogger().get_logger()
+
 
 def read_image_descriptions(desc_path: str):
     if not os.path.isfile(desc_path):
@@ -59,13 +55,13 @@ def zip_images(
     descs = read_image_descriptions(desc_path)
 
     if not descs:
-        logger.warning(f"No images found in {desc_path}. Exiting...")
+        LOG.warning(f"No images found in {desc_path}. Exiting...")
         return
     try:
         uploader.zip_image_dir(import_path, descs, zip_dir)
         return True
     except Exception as ex:
-        logger.error(f"Error zipping {import_path}: {ex}")
+        LOG.error(f"Error zipping {import_path}: {ex}")
         return False
 
 
@@ -121,12 +117,12 @@ def upload(
         descs = photo_uuid_generate(user_email=user_name, descs=descs)
 
         if not descs:
-            logger.warning(f"No images found in {desc_path}. Exiting...")
+            LOG.warning(f"No images found in {desc_path}. Exiting...")
 
             return
         user_items = user_items_retriever(user_name, organization_key)
 
-        logger.warning(f"{Fore.BLUE}If shooting was taken at a point outside the polygon,"
+        LOG.warning(f"{Fore.BLUE}If shooting was taken at a point outside the polygon,"
                     f" these points and images will be published publicly...{Fore.RESET}")
         time.sleep(5)
 

@@ -1,6 +1,5 @@
 import typing as T
 import json
-import logging
 import os
 import uuid
 
@@ -10,17 +9,12 @@ from mapilio_kit.components.logs import image_log
 from mapilio_kit.components.processing import processing
 from gps_anomaly.detector import Anomaly
 from mapilio_kit.components.utilities import types_fmt as types
+from mapilio_kit.components.logger import MapilioLogger
 
 from colorama import init, Fore
 init(autoreset=True)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter()
-ch.setFormatter(formatter)
-logger.addHandler(ch)
 
+LOG = MapilioLogger().get_logger()
 
 
 def get_final_mapilio_image_description(
@@ -98,7 +92,7 @@ def insert_MAPJson(
                     overwrite_EXIF_orientation_tag,
                 )
             except Exception:
-                logger.warning(f"Failed to overwrite EXIF", exc_info=True)
+                LOG.warning(f"Failed to overwrite EXIF", exc_info=True)
 
         relpath = os.path.relpath(image, import_path)
         dirname = os.path.dirname(relpath)
@@ -138,13 +132,13 @@ def insert_MAPJson(
     anomaly = Anomaly()
 
     descs, failed_imgs, anomaly_points = anomaly.anomaly_detector(descs)
-    logger.info(json.dumps(descs[-1]['Information'],indent=4))
-    logger.info("Anomalies can occur due to a combination of factors, including GPS distance being out of range,"
+    LOG.info(json.dumps(descs[-1]['Information'],indent=4))
+    LOG.info("Anomalies can occur due to a combination of factors, including GPS distance being out of range,"
                 "heading angle limit being exceeded, and altitude surpassing the upper limit. "
                 "This contributes to the existence of failed images.")
     if len(failed_imgs) > 0:
 
-        logger.warning(f"{Fore.RED}Some images has failed to upload due to "
+        LOG.warning(f"{Fore.RED}Some images has failed to upload due to "
                        "anomaly detection."
                        f" These images are => {failed_imgs}{Fore.RESET}")
     if desc_path == "-":
@@ -156,7 +150,7 @@ def insert_MAPJson(
     # logger.info(json.dumps(summary, indent=4))
     if 0 < summary['Information']["failed_images"]:
         if skip_process_errors:
-            logger.warning(f"{Fore.YELLOW}Skipping %s failed images{Fore.RESET}", summary['Information']["failed_images"])
+            LOG.warning(f"{Fore.YELLOW}Skipping %s failed images{Fore.RESET}", summary['Information']["failed_images"])
         else:
             raise RuntimeError(
                 f"Failed to process {summary['Information']['failed_images']} images. "
