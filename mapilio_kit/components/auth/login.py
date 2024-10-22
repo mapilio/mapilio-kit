@@ -10,7 +10,7 @@ from mapilio_kit.components.utilities import config ,types_fmt as types
 from mapilio_kit.components.utilities.config import MAPILIO_CONFIG_PATH
 from mapilio_kit.components.logger import MapilioLogger
 
-LOG = MapilioLogger(__name__).get_logger()
+LOG = MapilioLogger().get_logger()
 
 class HTTPError(requests.HTTPError):
     pass
