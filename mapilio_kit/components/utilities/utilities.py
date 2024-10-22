@@ -7,11 +7,9 @@ from calculation.util import calculate_vfov
 import hashlib
 import typing as T
 import os
-import logging
+from mapilio_kit.components.logger import MapilioLogger
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-LOG = logging.getLogger(__name__)
-
+LOG = MapilioLogger().get_logger()
 
 __RULES__ = [{('hero7', 'wide', '4:3'): [122.6, 94.4]}, {('hero7', 'wide', '16:9'): [118.2, 69.5]},
              {('hero7', 'linear', '4:3'): [86.7, 71.0]}, {('hero7', 'linear', '16:9'): [87.6, 56.7]},

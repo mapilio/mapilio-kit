@@ -1,11 +1,7 @@
-import logging
 import sys
 import time
 
 import requests
-
-# Suppress only urllib3 DEBUG logs
-logging.getLogger("urllib3").setLevel(logging.WARNING)
 
 from mapilio_kit.components.utilities.config import MAPILIO_CDN_ENDPOINT
 

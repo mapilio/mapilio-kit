@@ -1,7 +1,6 @@
 import hashlib
 import io
 import json
-import logging
 import os
 import tempfile
 import time
@@ -22,15 +21,10 @@ from mapilio_kit.components.metadata import exif_metadata_writer
 from mapilio_kit.components.upload import upload_manager
 from mapilio_kit.components.utilities import types_fmt as types
 from mapilio_kit.components.utilities.config import MAPILIO_API_ENDPOINT_UPLOAD
+from mapilio_kit.components.logger import MapilioLogger
 
 init(autoreset=True)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-ch = logging.StreamHandler()
-ch.setLevel(logging.DEBUG)
-formatter = logging.Formatter()
-ch.setFormatter(formatter)
-logger.addHandler(ch)
+LOG = MapilioLogger().get_logger()
 
 MIN_CHUNK_SIZE = 1024 * 1024 * 2  # 32MB
 MAX_CHUNK_SIZE = 1024 * 1024 * 16  # 64MB
@@ -136,7 +130,7 @@ def upload_desc(
             json.dump(payload, f)
         resp.raise_for_status()
         if not resp.status_code // 100 == 2:
-            logger.warning(resp.text)
+            LOG.warning(resp.text)
             return {"Success": False, "Error": f"Unexpected response {resp}"}
         return {"Success": True}
     except requests.exceptions.HTTPError as e:
@@ -159,9 +153,9 @@ def upload_image_dir_and_description(
 
     sequences = _group_sequences_by_uuid(image_descs)
     response_list = []
-    logger.info(f"{Fore.GREEN}Upload has been started.{Fore.RESET}")
+    LOG.info(f"{Fore.GREEN}Upload has been started.{Fore.RESET}")
     for sequence_idx, images in enumerate(sequences.values()):
-        logger.info(
+        LOG.info(
             f"🗺️{Fore.GREEN} Currently at: Sequence {sequence_idx + 1}, Total Number of Sequences: {len(sequences)}{Fore.RESET}")
         sequence_information = _zip_and_upload_single_sequence(
             image_dir,
@@ -184,7 +178,7 @@ def upload_image_dir_and_description(
         response_list.append(response['Success'])
 
     if any(response_list):
-        logger.warning(
+        LOG.warning(
             f"{Fore.GREEN}Upload has been successfully finished. {sum(response_list)} sequence(s) out of {len(response_list)} sequences were uploaded correctly. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
 
 
@@ -380,7 +374,7 @@ def _upload_zipfile_fp(
                 if retries < 200 and is_retriable_exception(ex):
                     retries += 1
                     sleep_for = min(2 ** retries, 16)
-                    logger.warning(
+                    LOG.warning(
                         f"Error uploading, resuming in {sleep_for} seconds",
                         exc_info=True,
                     )

@@ -15,9 +15,9 @@ from calculation.geospatial_utils import normalize_bearing, interpolate_lat_lon,
 from mapilio_kit.components.geotagging.gps_parser import get_lat_lon_time_from_gpx, get_lat_lon_time_from_nmea
 from mapilio_kit.components.geotagging.gpx_from_exif import gpx_from_exif
 from mapilio_kit.components.geotagging.gpx_from_gopro import gpx_from_gopro
+from mapilio_kit.components.logger import MapilioLogger
 
-LOG = logging.getLogger(__name__)
-
+LOG = MapilioLogger().get_logger()
 
 def geotag_from_exif(
     process_file_list: List[str],

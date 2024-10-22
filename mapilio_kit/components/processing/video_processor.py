@@ -14,10 +14,10 @@ from mapilio_kit.components.processing import processing
 from mapilio_kit.components.metadata.exif_metadata_writer import ImageExifModifier
 from mapilio_kit.components.processing.ffmpeg import get_video_info, extract_video_by_idx, extract_video_by_idx_large, sort_selected_samples
 from mapilio_kit.components.utilities.utilities import get_exiftool_specific_feature, get_video_size, calculate_chunk_size, is_large_video
+from mapilio_kit.components.logger import MapilioLogger
 
 ZERO_PADDING = 6
-LOG = logging.getLogger(__name__)
-
+LOG = MapilioLogger().get_logger()
 
 def timestamp_from_filename(
         video_filename: str,

@@ -2,8 +2,9 @@ import os
 from mapilio_kit.components.auth.login import prompt_user_for_user_items
 from mapilio_kit.components.auth import auth_config
 from mapilio_kit.components.utilities import config
-import logging
+from mapilio_kit.components.logger import MapilioLogger
 
+LOG = MapilioLogger().get_logger()
 
 def edit_config(
         config_file=None,
@@ -135,5 +136,5 @@ def edit_config_gui(
 
     except Exception as e:
         response = {'status': False, "message": f"{str(e)}. Please try again."}
-        logging.error(f"Authentication failed: {str(e)}. Please try again.")
+        LOG.error(f"Authentication failed: {str(e)}. Please try again.")
         return response

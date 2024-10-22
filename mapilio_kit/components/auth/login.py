@@ -8,9 +8,9 @@ import requests
 from mapilio_kit.components.auth import auth_config
 from mapilio_kit.components.utilities import config ,types_fmt as types
 from mapilio_kit.components.utilities.config import MAPILIO_CONFIG_PATH
+from mapilio_kit.components.logger import MapilioLogger
 
-LOG = logging.getLogger(__name__)
-
+LOG = MapilioLogger(__name__).get_logger()
 
 class HTTPError(requests.HTTPError):
     pass

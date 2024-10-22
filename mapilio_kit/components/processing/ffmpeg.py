@@ -1,14 +1,15 @@
 import datetime
 import json
-import logging
 import os
 import platform
 import subprocess
 import tempfile
 import re
 
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-LOG = logging.getLogger(__name__)
+from mapilio_kit.components.logger import MapilioLogger
+
+LOG = MapilioLogger(__name__).get_logger()
+
 
 def get_ffprobe(path: str) -> dict:
     if not os.path.isfile(path):
