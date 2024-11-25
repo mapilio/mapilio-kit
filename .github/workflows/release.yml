@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.11" ]
-        platform: ["macos-latest"] # "ubuntu-20.04","windows-latest"
+        platform: ["macos-13"] # "ubuntu-20.04","windows-latest"
         architecture: [ "x64" ]
         include:
           - architecture: "x86"
