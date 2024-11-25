@@ -74,7 +74,7 @@ jobs:
 
 
       - name: Build and test with Pyinstaller on MacOS
-        if: matrix.platform == 'macos-latest'
+        if: matrix.platform == 'macos-13'
         run: |
           python3 -m pip install pysocks
           python3 -m pip install pyinstaller
