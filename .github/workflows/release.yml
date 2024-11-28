@@ -81,7 +81,7 @@ jobs:
           python3 -m pip install pillow
           chmod +x ./script/build_osx
           ./script/build_osx
-          ./dist/releases/mapilio-kit--osx-arm64
+#          ./dist/releases/mapilio-kit--osx-arm64
         env:
           MAPILIO_KIT__TESTS_EXECUTABLE: ./dist/osx/mapilio-kit
           MAPILIO_KIT__TESTS_EXIFTOOL_EXECUTABLE: perl ${{ github.workspace }}/exiftool/exiftool.pl
