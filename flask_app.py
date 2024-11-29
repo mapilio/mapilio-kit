@@ -1,176 +1,158 @@
-import json
 import os
-import shutil
+import subprocess
 import sys
-import webbrowser
+from pathlib import Path
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+def install_exiftool():
+    if sys.platform == 'linux':
+        subprocess.run(['sudo', 'apt', 'install', '-y', 'exiftool'], check=True)
+    elif sys.platform == 'darwin':
+        subprocess.run(['brew', 'install', 'exiftool'], check=True)
+    elif sys.platform == 'win32':
+        subprocess.run(['powershell', '-Command',
+                        'Set-ExecutionPolicy Bypass -Scope Process -Force; '
+                        '[System.Net.ServicePointManager]::SecurityProtocol = '
+                        '[System.Net.ServicePointManager]::SecurityProtocol -bor 3072; '
+                        'iex ((New-Object System.Net.WebClient).DownloadString(\'https://community.chocolatey.org/install.ps1\'))'],
+                       check=True)
+        subprocess.run(['choco', 'install', 'exiftool', '-y'], check=True)
+    else:
+        raise ValueError("Unsupported platform")
 
-from mapilio_kit.base import authenticator
-from mapilio_kit.components.utilities.edit_config import edit_config
-from mapilio_kit.components.geotagging.geotag_property_handler import geotag_property_handler
-from mapilio_kit.components.utilities.insert_MAPJson import insert_MAPJson
-from mapilio_kit.components.auth.login import list_all_users
-from mapilio_kit.components.metadata.metadata_property_handler import metadata_property_handler
-from mapilio_kit.components.processing.sequence_property_handler import sequence_property_handler
-from mapilio_kit.components.upload.upload import upload
 
-app = Flask(__name__)
+def get_exiftool_path():
+    try:
+        if sys.platform == 'linux' or sys.platform == 'darwin':
+            # Unix-based systems (Linux, macOS)
+            result = subprocess.run(['which', 'exiftool'], capture_output=True, text=True)
+        elif sys.platform == 'win32':
+            # Windows
+            result = subprocess.run(['where', 'exiftool'], capture_output=True, text=True)
+        else:
+            raise ValueError("Unsupported operating system")
 
-UPLOAD_FOLDER = os.path.join(os.path.expanduser("~"), ".cache", "mapilio", "MapilioKit", "images/")
+        if result.returncode != 0:
+            raise ValueError("ExifTool not found")
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        raise ValueError(f"Error finding ExifTool: {e}")
 
-MAPILIO_CONFIG_PATH = os.getenv(
-    "MAPILIO_CONFIG_PATH",
-    os.path.join(
-        os.path.expanduser("~"),
-        ".config",
-        "mapilio",
-        "configs",
-        "CLIENT_USERS",
-    ),
+def get_installed_package_path(package_name):
+    result = subprocess.run([sys.executable, '-m', 'pip', 'show', package_name], capture_output=True, text=True)
+    if result.returncode != 0:
+        raise ValueError(f"Package {package_name} not found")
+
+    location = None
+    for line in result.stdout.splitlines():
+        if line.startswith('Location:'):
+            location = line.split(' ', 1)[1].strip()
+            break
+
+    if not location:
+        raise ValueError(f"Location not found for package {package_name}")
+
+    package_folder_name = package_name.split('-')[0]
+    package_path = Path(location) / package_folder_name
+    if package_path.exists():
+        return package_path
+
+    package_folder_name = package_name.replace('-', '_')
+    package_path = Path(location) / package_folder_name
+    if package_path.exists():
+        return package_path
+
+    package_path_with_py = package_path.with_suffix('.py')
+    if package_path_with_py.exists():
+        return package_path_with_py
+
+    if package_name == 'attrs':
+        alt_package_name = 'attr'
+        alt_package_path = Path(location) / alt_package_name
+        if alt_package_path.exists():
+            return alt_package_path
+
+    raise ValueError(f"Package path not found for {package_name}")
+
+def create_spec_file():
+    requirements_file = 'requirements.txt'
+    spec_file = 'flask_app.spec'
+    icon_file = 'mapilio_ico.ico'
+
+    current_directory = os.getcwd()
+    datas = [('templates', 'templates'), ('static', 'static'), ('mapilio_kit', 'mapilio_kit'), ('mapilio_ico.ico', 'mapilio_ico.ico')]
+    hiddenimports = ['configparser']
+
+    install_exiftool()
+    try:
+        exiftool_path = get_exiftool_path()
+        datas.append((exiftool_path, 'exiftool'))
+    except ValueError as e:
+        print(f"Warning: {e}")
+
+    with open(requirements_file) as f:
+        packages = [line.split('==')[0].strip() for line in f if line.strip() and not line.startswith('#')]
+        print(packages)
+
+    for package in packages:
+        try:
+            if package == 'ExifRead':
+                package = 'exifread'
+            package_path = get_installed_package_path(package)
+
+            package_folder_name = package.replace('-', '_')
+            hiddenimports.append(package_folder_name)
+
+            if package_folder_name == package:
+                package_data_name = package
+            else:
+                package_data_name = package_path.parts[-1]
+
+            datas.append((str(package_path), package_data_name))
+
+        except ValueError as e:
+            print(f"Warning: {e}")
+    print(datas)
+    with open(spec_file, 'w') as f:
+        f.write(f"""
+# -*- mode: python ; coding: utf-8 -*-
+
+block_cipher = None
+
+options = [("u", None, "OPTION")]
+
+a = Analysis(
+    ['flask_app.py'],
+    pathex=[SPECPATH],
+    binaries=[],
+    datas={datas},
+    hiddenimports={hiddenimports},
+    hookspath=[],
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+)
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    options,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    [],
+    name='MapilioKit-Flask',
+    debug=False,
+    strip=False,
+    upx=True,
+    runtime_tmpdir=None,
+    console=True,
 )
 
-
-def get_args_mapilio(func):
-    arg_names = func.__code__.co_varnames[:func.__code__.co_argcount]
-    return {arg: None for arg in arg_names}
-
-
-def check_authenticate():
-    global authentication_status, token
-    if len(list_all_users()) == 0:
-        authentication_status = False
-        token = None
-    elif len(list_all_users()) >= 2:
-        token = None
-        authentication_status = False
-        remove_accounts()
-    else:
-        token = list_all_users()[0]['user_upload_token']
-        authentication_status = True
-
-    return token, authentication_status
-
-
-def decompose(import_path, exiftool_path):
-    metadata_property_handler(import_path=import_path, exiftool_path=exiftool_path)
-    geotag_property_handler(import_path=import_path)
-    sequence_property_handler(import_path=import_path)
-    insert_MAPJson(import_path=import_path)
-
-
-@app.route("/", methods=["GET", "POST"])
-def index():
-    token, authentication_status = check_authenticate()
-    if authentication_status:
-        return render_template("image-upload.html", token=token)
-    else:
-        return render_template('login.html')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def mapilio_login():
-    if request.method == 'POST':
-        args = get_args_mapilio(edit_config)
-        email = request.form['email'].strip()
-        password = request.form['password'].strip()
-
-        username = email.split('@')[0]
-
-        args["user_name"] = username
-        args["user_email"] = email
-        args["user_password"] = str(password)
-        args["gui"] = True
-        check_authenticate = authenticator().perform_task(args)
-
-        if check_authenticate['status']:
-            message = check_authenticate['message']
-            token = check_authenticate['token']
-            return render_template("image-upload.html", message=message, token=token)
-        else:
-            message = check_authenticate['message']
-            return render_template('login.html', message=message)
-    else:
-        return render_template('login.html')
-
-
-@app.route('/logout', methods=['GET'])
-def remove_accounts():
-    if os.path.exists(MAPILIO_CONFIG_PATH):
-        os.remove(MAPILIO_CONFIG_PATH)
-        return jsonify(success=True, message="Account successfully removed!"), 200
-    else:
-        return jsonify(success=True, message="No accounts found!"), 200
-
-
-@app.route('/image-upload', methods=['GET', 'POST'])
-def mapilio_upload_page():
-    if request.method == 'GET':
-        token, authentication_status = check_authenticate()
-
-        if authentication_status:
-            return render_template('image-upload.html', token=token)
-        else:
-            return redirect(url_for("mapilio_login"))
-    elif request.method == 'POST':
-        if 'file' not in request.files:
-            return jsonify(success=False, message="No file part")
-        for file in request.files.getlist('file'):
-            if file.filename == '':
-                continue
-            if not os.path.exists(UPLOAD_FOLDER):
-                os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-            file.save(UPLOAD_FOLDER + file.filename)
-
-        bundle_dir = getattr(sys, '_MEIPASS', os.path.abspath(os.path.dirname(__file__)))
-        if app.debug:
-            path_to_exiftool = "/usr/bin/exiftool"
-        else:
-            path_to_exiftool = os.path.abspath(os.path.join(bundle_dir, 'exiftool/exiftool'))
-
-        try:
-            decompose(import_path=UPLOAD_FOLDER, exiftool_path=path_to_exiftool)
-            jsonPath = os.path.join(UPLOAD_FOLDER, "mapilio_image_description.json")
-            with open(jsonPath, 'r') as f:
-                data = json.load(f)
-            total_images = data[-1]["Information"]["total_images"]
-            processed_images = data[-1]["Information"]["processed_images"]
-            failed_images = data[-1]["Information"]["failed_images"]
-            duplicated_images = data[-1]["Information"]["duplicated_images"]
-        except:
-            return jsonify(success=False, message="An error occurred during metadata properties extraction.")
-
-        try:
-            upload_status = upload(import_path=UPLOAD_FOLDER, dry_run=False)
-            if upload_status.get("Success"):
-                try:
-                    shutil.rmtree(UPLOAD_FOLDER)
-                    return jsonify(success=True, message="Images uploaded successfully", total_images=total_images,
-                                   processed_images=processed_images, failed_images=failed_images, duplicated_images=duplicated_images), 200
-                except OSError as err:
-                    print(f"Error: {UPLOAD_FOLDER} could not be deleted. - {err}")
-                    return jsonify(success=False, message=f"{err}")
-            else:
-                e = upload_status.get("Error")
-                return jsonify(success=False, message=f"Error: {e}"), 500
-        except:
-            e = upload_status.get("Error")
-            return jsonify(success=False, message=f"Error: {e}"), 500
-    else:
-        return jsonify(success=False, message="Method Not Allowed"), 500
-
-
-@app.route('/video-upload', methods=['GET', 'POST'])
-def mapilio_video_upload_page():
-    token, authentication_status = check_authenticate()
-
-    if authentication_status:
-        return render_template('video-upload.html', token=token)
-    else:
-        return redirect(url_for("mapilio_login"))
-
+app = BUNDLE(exe, name='MapilioKit-Flask.app', icon='mapilio_ico.ico', bundle_identifier=None)
+""")
 
 if __name__ == "__main__":
-    webbrowser.open("http://127.0.0.1:8081/")
-    app.run(host="0.0.0.0", port=8081, debug=False)
-    # FlaskUI(app=app, server="flask", width=1200, height=800, port=8080).run()
+    create_spec_file()
