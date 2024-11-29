@@ -10,12 +10,13 @@ pyinstaller --version
 pyinstaller --noconfirm --distpath dist/${OS} flask_app.spec
 
 # check
-SOURCE=dist/${OS}/MapilioKit-Flask
+SOURCE=dist/${OS}/MapilioKit-Flask.app/Contents/MacOS/MapilioKit-Flask
 $SOURCE --version
 # VERSION=$($SOURCE --version | awk '{print $1}')
 
+echo "HELLOOOOO"
 ARCH=$(uname -m)
-TARGET=dist/releases/mapilio-kit-${OS}-${ARCH}.zip
+TARGET=dist/releases/MapilioKit-Flask-${OS}-${ARCH}.zip
 
 # package
 mkdir -p dist/releases
