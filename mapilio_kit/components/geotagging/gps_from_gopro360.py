@@ -103,11 +103,13 @@ def move_all_files(ifolder, ofolder, file_filter):
 
 def get_gps_date_time(xml_metadata_file):
     xroot = XET.parse(xml_metadata_file).getroot()
-    gps_date_time = ""
     for x in xroot.iter('{http://ns.exiftool.ca/QuickTime/Track4/1.0/}GPSDateTime'):
-        gps_date_time = x.text
-        break
-    return gps_date_time
+        return x.text
+
+    for x in xroot.iter('{http://ns.exiftool.org/QuickTime/Track4/1.0/}GPSDateTime'):
+        return x.text
+        
+    return ""
 
 
 def get_gpx_fmt_url():
