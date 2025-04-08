@@ -264,7 +264,7 @@ def overwrite_exif_tags(
     if overwrite_all_EXIF_tags or overwrite_EXIF_direction_tag:
         heading = desc.get("heading")
         if heading is not None:
-            image_exif.set_direction(heading["heading"])
+            image_exif.set_direction(desc["heading"])
             modified = True
 
     if overwrite_all_EXIF_tags or overwrite_EXIF_orientation_tag:
