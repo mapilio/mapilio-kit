@@ -12,7 +12,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.11" ]
-        platform: ["macos-13"] # "ubuntu-20.04","windows-latest"
+        platform: ["macos-latest"] # "ubuntu-20.04","windows-latest"
         architecture: [ "x64" ]
         include:
           - architecture: "x86"
@@ -45,7 +45,7 @@ jobs:
       - name: Setup FFmpeg
         uses: FedericoCarboni/setup-ffmpeg@v3
 
-        if: matrix.platform != 'macos-13'
+        if: matrix.platform != 'macos-latest'
 
       - name: Set up ${{ matrix.architecture }} Python ${{ matrix.python-version }}
         uses: actions/setup-python@v5
