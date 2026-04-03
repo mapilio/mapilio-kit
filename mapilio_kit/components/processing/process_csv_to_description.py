@@ -1,4 +1,5 @@
 import csv
+import uuid
 import json
 import os.path
 from mapilio_kit.components import version
@@ -36,7 +37,7 @@ def process_csv_to_description(
                 "processed_images": processed,
                 "failed_images": 0,
                 "duplicated_images": 0,
-                "id": "8323ff0a01fe49d1b55e610279f62828",
+                "id": str(uuid.uuid4()),
                 "device_type": "Desktop"
             }
         }
