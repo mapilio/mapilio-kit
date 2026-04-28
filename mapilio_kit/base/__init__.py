@@ -8,6 +8,8 @@ from mapilio_kit.base.process_csv import CSVprocess
 from mapilio_kit.base.gopro_360max import gopro360max_process
 from mapilio_kit.base.zip import Zip
 from mapilio_kit.base.run import Run
+from mapilio_kit.base.doctor import Doctor
+from mapilio_kit.base.validate import Validate
 
 Zipper = Zip
 gopro360max_processor = gopro360max_process
@@ -19,3 +21,5 @@ authenticator = Authenticate
 sampler = Sampler
 video_loader = VideoUpload
 run_mapi = Run
+doctor = Doctor
+validator = Validate

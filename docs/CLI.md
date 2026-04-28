@@ -14,6 +14,8 @@ mapilio_kit <command> --help
 | --- | --- |
 | `run` | Interactive "magic" mode — guides you through everything from a single menu. |
 | `authenticate` | Log in / refresh credentials for your Mapilio account. |
+| `doctor` | Health-check: verify ffmpeg/exiftool, Python, credentials, disk space. |
+| `validate` | Pre-flight EXIF/GPS scan over a folder of images, no upload. |
 | `upload` | Upload a folder of geotagged images. |
 | `decompose` | Read EXIF/GPS from images and write `mapilio_image_description.json`. |
 | `video_upload` | Sample frames from a video, geotag them, and upload. |
@@ -32,6 +34,40 @@ mapilio_kit run
 ```
 
 Walks you through authentication, source selection, geotagging and upload.
+
+### Health-check (doctor)
+
+Run this first when something doesn't work or after a fresh install. It
+verifies that ffmpeg, exiftool, Python and your credentials are all in
+order and prints an actionable list of fixes.
+
+```bash
+mapilio_kit doctor                  # text report (colored)
+mapilio_kit doctor --no-color       # plain text, useful in logs / CI
+mapilio_kit doctor --json           # machine-readable JSON
+mapilio_kit doctor --strict         # exit non-zero on any WARN
+```
+
+Exit codes: `0` everything OK, `1` warnings (only with `--strict`), `2`
+at least one check failed.
+
+### Validate a folder of images (preflight)
+
+Walks a directory and reports problems before you upload — missing GPS
+tags, missing timestamps, duplicate captures, suspicious `(0, 0)`
+coordinates, and large GPS / time gaps between consecutive images.
+
+```bash
+mapilio_kit validate "/path/to/images"
+mapilio_kit validate "/path/to/images" --skip_subfolders
+mapilio_kit validate "/path/to/images" --json > report.json
+mapilio_kit validate "/path/to/images" \
+    --max_gps_gap_meters 1000 \
+    --max_time_gap_seconds 600 \
+    --strict
+```
+
+Exit codes: `0` clean, `1` warnings (only with `--strict`), `2` errors.
 
 ### Authenticate
 

@@ -111,6 +111,16 @@ sudo apt install exiftool
 </pre>
 <img src="docs/assets/gifs/mapilio_kit_run.gif">
 
+<h3>Health-check &amp; preflight</h3>
+
+<p>Two commands help you catch problems before they bite:</p>
+
+<pre><code>mapilio_kit doctor                  # check ffmpeg / exiftool / creds / disk
+mapilio_kit validate /path/to/imgs  # scan EXIF/GPS without uploading</code></pre>
+
+<p>See <a href="docs/CLI.md">docs/CLI.md</a> for full options (JSON output,
+custom thresholds, strict mode).</p>
+
 
 <!--<details> -->
 <!-- <summary> -->

@@ -12,11 +12,13 @@ from mapilio_kit.base import (
     Zipper,
     authenticator,
     decomposer,
+    doctor,
     gopro360max_processor,
     image_and_csv_uploader,
     run_mapi,
     sampler,
     uploader,
+    validator,
     video_loader,
 )
 from mapilio_kit.components.auth.login import list_all_users
@@ -74,7 +76,9 @@ FUNCTION_MAP = {'Upload': uploader,
                 "gopro360max_processor": gopro360max_processor,
                 "Zipper": Zipper,
                 "sampler": sampler,
-                "Run": run_mapi}
+                "Run": run_mapi,
+                "Doctor": doctor,
+                "Validate": validator}
 
 
 def get_parser(subparsers, funtion_map):

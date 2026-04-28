@@ -72,6 +72,27 @@ The build pulls in `extras/max2sphere-batch` and compiles
 `MakeBuild` in `setup.py` and only runs on Linux. Windows and macOS use
 the prebuilt copy distributed with the wheel.
 
+## Health-check & validation
+
+Two commands provide a safety net for users:
+
+- `doctor` (`base/doctor.py` + `components/utilities/doctor.py`) inspects
+  the local environment — Python version, ffmpeg/exiftool availability,
+  free disk space, Mapilio credentials, telemetry config — and prints a
+  text or JSON report. Each individual check is a pure function with
+  injectable dependencies (subprocess runner, `which`, `disk_usage`,
+  user loader) so unit tests stay hermetic.
+- `validate` (`base/validate.py` + `components/utilities/validator.py`)
+  walks a directory of images, reads EXIF + GPS read-only, and applies
+  per-image and sequence-level rules (missing tags, suspicious
+  `(0, 0)` coords, duplicate captures, large GPS / time gaps). It never
+  modifies anything; it produces a `ValidationReport` for the CLI to
+  render.
+
+Both commands cleanly skip `general_arguments` injection (they handle
+their own argument set), so they don't get a forced `import_path` that
+doesn't apply.
+
 ## Telemetry
 
 Sentry is initialised in `__main__.py` _only_ when
