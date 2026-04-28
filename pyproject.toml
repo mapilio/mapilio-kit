@@ -1,0 +1,69 @@
+# Tooling configuration for mapilio-kit.
+# Project metadata still lives in setup.py because the build has custom
+# extension steps; this file is intentionally limited to dev tooling.
+
+[tool.black]
+line-length = 100
+target-version = ["py38", "py39", "py310", "py311", "py312"]
+extend-exclude = '''
+/(
+    \.git
+  | \.venv
+  | build
+  | dist
+  | extras
+  | mapilio_kit/base/bin
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+extend-exclude = [
+    "extras",
+    "mapilio_kit/base/bin",
+    "build",
+    "dist",
+]
+
+[tool.ruff.lint]
+# Conservative starter set. We can broaden once the codebase is clean.
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "W",   # pycodestyle warnings
+]
+ignore = [
+    "E501",   # line too long — handled by black
+    "B008",   # function calls in argument defaults (common pattern here)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B", "F401"]
+"__init__.py" = ["F401"]
+
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+addopts = "-ra --strict-markers"
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+
+[tool.coverage.run]
+source = ["mapilio_kit"]
+omit = [
+    "mapilio_kit/base/bin/*",
+    "tests/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+]

@@ -3,14 +3,19 @@ import os
 import re
 import subprocess
 import sys
-from distutils.version import LooseVersion
 import platform
-
-from setuptools import setup
 import warnings
 
+from setuptools import setup
 from setuptools.command.build_ext import build_ext
 from setuptools.extension import Extension
+
+# `distutils` was removed in Python 3.12. Fall back to `packaging.version`,
+# which is available with any modern setuptools install.
+try:
+    from packaging.version import Version as _Version
+except ImportError:  # pragma: no cover - extremely old environment
+    from distutils.version import LooseVersion as _Version  # type: ignore
 
 with warnings.catch_warnings():
     warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -36,8 +41,8 @@ class MakeBuild(build_ext):
             raise RuntimeError("CMake must be installed to build the following extensions: " +
                                ", ".join(e.name for e in self.extensions))
 
-        cmake_version = LooseVersion(re.search(r'GNU Make\s*([\d.]+)', out.decode()).group(1))
-        if cmake_version < LooseVersion('4.2.1'):
+        cmake_version = _Version(re.search(r'GNU Make\s*([\d.]+)', out.decode()).group(1))
+        if cmake_version < _Version('4.2.1'):
             raise RuntimeError("GNU Make >= 4.2.1 is required")
 
         for ext in self.extensions:
@@ -93,7 +98,20 @@ setup(name='mapilio-kit',
       url='https://github.com/mapilio/mapilio-kit-v2',
       author='Mapilio',
       license='MIT License',
-      python_requires=">=3.6",
+      python_requires=">=3.8",
+      classifiers=[
+          "Development Status :: 4 - Beta",
+          "License :: OSI Approved :: MIT License",
+          "Operating System :: OS Independent",
+          "Programming Language :: Python :: 3",
+          "Programming Language :: Python :: 3.8",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Topic :: Multimedia :: Graphics",
+          "Topic :: Scientific/Engineering :: GIS",
+      ],
       ext_modules=ext_modules,
       cmdclass=cmdclass,
       packages=['mapilio_kit', 'mapilio_kit.base', 'mapilio_kit.components','mapilio_kit.components.auth','mapilio_kit.components.geotagging','mapilio_kit.components.ipc','mapilio_kit.components.metadata','mapilio_kit.components.upload','mapilio_kit.components.blending','mapilio_kit.components.logs','mapilio_kit.components.processing','mapilio_kit.components.utilities'],

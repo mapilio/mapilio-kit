@@ -1,32 +1,69 @@
-# -*- coding: utf-8 -*-
 import argparse
 import os
 import sys
 
-import sentry_sdk
 from colorama import Fore
 
 project_root = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(project_root, 'components'))
 
-from mapilio_kit.components.version import VERSION
-from mapilio_kit.base import uploader, decomposer, authenticator, video_loader, image_and_csv_uploader, CSVprocessor, \
-    gopro360max_processor, Zipper, run_mapi, sampler
-from mapilio_kit.components.utilities import arguments
+from mapilio_kit.base import (
+    CSVprocessor,
+    Zipper,
+    authenticator,
+    decomposer,
+    gopro360max_processor,
+    image_and_csv_uploader,
+    run_mapi,
+    sampler,
+    uploader,
+    video_loader,
+)
 from mapilio_kit.components.auth.login import list_all_users
+from mapilio_kit.components.utilities import arguments
 from mapilio_kit.components.utilities.config import delete_user
 from mapilio_kit.components.utilities.info import get_latest_version, maintenance_info
+from mapilio_kit.components.version import VERSION
 
-sentry_sdk.init(
-    dsn="https://e64e5a7900578f279015f1c573318337@o4506428096577536.ingest.us.sentry.io/4507385354387456",
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    traces_sample_rate=1.0,
-    # Set profiles_sample_rate to 1.0 to profile 100%
-    # of sampled transactions.
-    # We recommend adjusting this value in production.
-    profiles_sample_rate=1.0,
-)
+
+def _init_sentry() -> None:
+    """Initialize Sentry only if a DSN is provided and telemetry is not disabled.
+
+    Configuration is fully driven by environment variables so secrets are never
+    committed to the repository:
+
+      MAPILIO_KIT_SENTRY_DSN           - Sentry DSN (required to enable Sentry)
+      MAPILIO_KIT_DISABLE_TELEMETRY    - Set to "1"/"true" to disable Sentry
+      MAPILIO_KIT_SENTRY_TRACES_RATE   - Float [0.0, 1.0], default 0.1
+      MAPILIO_KIT_SENTRY_PROFILES_RATE - Float [0.0, 1.0], default 0.1
+    """
+    disabled = os.environ.get("MAPILIO_KIT_DISABLE_TELEMETRY", "").lower() in {
+        "1", "true", "yes", "on",
+    }
+    dsn = os.environ.get("MAPILIO_KIT_SENTRY_DSN", "").strip()
+    if disabled or not dsn:
+        return
+
+    try:
+        import sentry_sdk  # imported lazily so the package is optional at runtime
+    except ImportError:
+        return
+
+    def _rate(name: str, default: float) -> float:
+        try:
+            return max(0.0, min(1.0, float(os.environ.get(name, default))))
+        except (TypeError, ValueError):
+            return default
+
+    sentry_sdk.init(
+        dsn=dsn,
+        traces_sample_rate=_rate("MAPILIO_KIT_SENTRY_TRACES_RATE", 0.1),
+        profiles_sample_rate=_rate("MAPILIO_KIT_SENTRY_PROFILES_RATE", 0.1),
+        release=f"mapilio-kit@{VERSION}",
+    )
+
+
+_init_sentry()
 
 FUNCTION_MAP = {'Upload': uploader,
                 'Decompose': decomposer,
