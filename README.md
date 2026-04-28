@@ -49,6 +49,17 @@ Mapilio Kit is a library for processing and uploading images to [Mapilio](https:
   <li><a href="#contact">Contact</a></li>
 </ul>
 
+<h2>Documentation</h2>
+
+<ul>
+  <li><a href="docs/CLI.md">CLI command reference</a> — every subcommand with examples</li>
+  <li><a href="docs/CONFIGURATION.md">Configuration & environment variables</a> — telemetry, .env setup</li>
+  <li><a href="docs/ARCHITECTURE.md">Architecture overview</a> — how the codebase is organised</li>
+  <li><a href="CONTRIBUTING.md">Contributing guide</a> — dev setup, tests, PR workflow</li>
+  <li><a href="Docker.md">Docker usage</a></li>
+  <li><a href="GoPro360Max.md">GoPro 360 Max workflow</a></li>
+</ul>
+
 <h1 id="introduction">Introduction</h1>
 
 <p>Our Image Uploader with GPS Metadata is a powerful tool designed to simplify the process of uploading and managing images, while also preserving and utilizing valuable location-based information embedded in photos. With the increasing popularity of geotagging in modern cameras and smartphones, GPS metadata in images can provide valuable context and enhance the user experience. Whether you're a photographer, a traveler, or simply someone who values the story behind each image, our uploader has you covered.
@@ -100,6 +111,16 @@ sudo apt install exiftool
 </pre>
 <img src="docs/assets/gifs/mapilio_kit_run.gif">
 
+<h3>Health-check &amp; preflight</h3>
+
+<p>Two commands help you catch problems before they bite:</p>
+
+<pre><code>mapilio_kit doctor                  # check ffmpeg / exiftool / creds / disk
+mapilio_kit validate /path/to/imgs  # scan EXIF/GPS without uploading</code></pre>
+
+<p>See <a href="docs/CLI.md">docs/CLI.md</a> for full options (JSON output,
+custom thresholds, strict mode).</p>
+
 
 <!--<details> -->
 <!-- <summary> -->
@@ -119,7 +140,7 @@ sudo apt install exiftool
   <li><strong>Installation:</strong></li>
 <ul>
 
-<li> <p>via Pip on Windows and Python (3.6 and above) and git are required:</p> </li>
+<li> <p>via Pip on Windows and Python (3.8 and above) and git are required:</p> </li>
 <p><strong>Note:</strong> In case you're using <strong></strong>PowerShell<strong></strong> to run these commands below, you need to re-activate virtual env after installation is done, however, if you're using <strong>Command Prompt</strong> you don't need to re-activate it. </p>
 
 <pre><code># Installation commands
@@ -129,7 +150,7 @@ win_installer.cmd
 </code></pre>
 
 
-<li> <p>via Pip on Ubuntu + 18.04 and Python (3.6 and above) and git are required:</p> </li>
+<li> <p>via Pip on Ubuntu + 18.04 and Python (3.8 and above) and git are required:</p> </li>
 
 <pre><code># Installation commands
 git clone https://github.com/mapilio/mapilio-kit-v2.git
@@ -138,7 +159,7 @@ chmod +x install.sh
 source ./install.sh
 </code></pre>
 <li>
-<p>via Pip on macOS and Python (3.6 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using Mac Terminal instead of using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
+<p>via Pip on macOS and Python (3.8 and above) and git are required. In addition, <strong>commands for ubuntu can also be used for macOS</strong>, however, in case using Mac Terminal instead of using iTerm for installation you need to re-activate the virtual env. Otherwise, you're not going to be able to run the kit.</p>
 </li><br>
 </ul>
 
@@ -264,6 +285,32 @@ mapiio_kit upload "path/to/zipfolder" --proccessed
 ### Docker Support
 For docker support please visit; [Docker.md](https://github.com/mapilio/mapilio-kit/blob/main/Docker.md)<br>
 For 360 Upload with docker take a look at here; [GoPro360Max.md](https://github.com/mapilio/mapilio-kit/blob/main/GoPro360Max.md)
+
+### Configuration
+
+Mapilio Kit reads optional settings from environment variables. Sentry-based
+error reporting is **disabled by default** — provide `MAPILIO_KIT_SENTRY_DSN`
+to opt in, or set `MAPILIO_KIT_DISABLE_TELEMETRY=1` to force-disable. Copy
+`.env.example` to `.env` and tweak as needed. See
+[`docs/CONFIGURATION.md`](docs/CONFIGURATION.md) for the full reference.
+
+### Development
+
+```bash
+# Install dev dependencies
+pip install -r requirements.txt
+pip install pytest pytest-cov ruff black pre-commit
+pre-commit install
+
+# Run tests
+pytest
+
+# Lint & format
+ruff check mapilio_kit tests
+black mapilio_kit tests
+```
+
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the full contributor workflow.
 
 <h1 id="license">License</h1>
 

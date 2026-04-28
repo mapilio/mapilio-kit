@@ -1,39 +1,96 @@
-<h2 id="contributing">Contributing</h2>
+# Contributing to Mapilio Kit
 
-<p>We welcome contributions from the community! If you'd like to contribute to the project, please follow these guidelines:</p>
+Thanks for your interest in improving Mapilio Kit! This document explains how
+to set up your environment, how the project is organised, and what we expect
+from contributions.
 
-<ol>
-  <li><strong>Fork the Repository:</strong>
-    <p>Fork this repository to your own GitHub account.</p>
-  </li>
-  <li><strong>Create a Branch:</strong>
-    <p>Create a new branch for your feature or bug fix.</p>
-    <pre><code>git checkout -b feature/your-feature</code></pre>
-  </li>
-  <li><strong>Make Changes:</strong>
-    <p>Make your changes to the codebase. Be sure to follow the project's coding style and conventions.</p>
-  </li>
-  <li><strong>Commit Changes:</strong>
-    <p>Commit your changes with clear and descriptive commit messages.</p>
-    <pre><code>git commit -m "Add feature: your feature description"</code></pre>
-  </li>
-  <li><strong>Push Changes:</strong>
-    <p>Push your changes to your forked repository on GitHub.</p>
-    <pre><code>git push origin feature/your-feature</code></pre>
-  </li>
-  <li><strong>Open a Pull Request:</strong>
-    <p>Open a pull request from your forked repository to the original repository. Provide a clear and detailed description of your changes.</p>
-  </li>
-  <li><strong>Code Review:</strong>
-    <p>Be open to feedback and participate in the code review process. Address any comments or suggestions from maintainers.</p>
-  </li>
-  <li><strong>Merge:</strong>
-    <p>Once your pull request is approved, it will be merged into the main project. Congratulations, you've contributed to the project!</p>
-  </li>
-</ol>
+## Getting Started
 
-<hr>
-<h2 id="license">License</h2>
+1. **Fork & clone**
+   ```bash
+   git clone https://github.com/<your-user>/mapilio-kit-v2.git
+   cd mapilio-kit-v2
+   ```
 
-<p>This project is licensed under the MIT LICENSE - see the <code>LICENSE.md</code> file for details.</p>
-<hr>
+2. **Create a virtual environment** (Python 3.8+ supported, 3.10+ recommended):
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate          # Windows: .venv\Scripts\activate
+   python -m pip install --upgrade pip
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   pip install pytest pytest-cov ruff black pre-commit
+   ```
+
+4. **Configure environment**
+   ```bash
+   cp .env.example .env       # edit if you need Sentry / telemetry
+   ```
+
+5. **Install pre-commit hooks** (optional but recommended):
+   ```bash
+   pre-commit install
+   ```
+
+## Branching & commits
+
+- Open feature branches from `main`:
+  ```bash
+  git checkout -b feature/<short-description>
+  git checkout -b fix/<short-description>
+  ```
+- Use clear, imperative commit messages: `"Fix GPX parser for sub-second timestamps"`.
+- Squash trivial fixups before opening the PR.
+
+## Running the test suite
+
+```bash
+pytest                       # unit tests only (fast, no external tools)
+pytest --run-integration     # includes tests that need ffmpeg / exiftool
+pytest --cov=mapilio_kit     # with coverage report
+```
+
+Heavy optional dependencies (`calculation`, GoPro binaries) are stubbed in
+`tests/conftest.py` so the unit tests run on a clean machine. If you add a
+test that needs a real binary, mark it with
+`@pytest.mark.integration` so it's skipped by default.
+
+## Linting & formatting
+
+We use `ruff` for linting/imports and `black` for formatting:
+
+```bash
+ruff check mapilio_kit tests
+ruff check --fix mapilio_kit tests
+black mapilio_kit tests
+```
+
+Both tools are configured in `pyproject.toml` and run automatically via
+`pre-commit`.
+
+## Pull requests
+
+Before opening a PR, make sure:
+
+- [ ] Tests pass locally (`pytest`).
+- [ ] Lint is clean (`ruff check`).
+- [ ] You've added/updated tests for any behaviour change.
+- [ ] User-visible changes are noted in the PR description.
+- [ ] No secrets, tokens, or credentials are committed (the `.gitignore`
+      excludes `.env`; double-check with `git status`).
+
+Once green, open a PR against `main` and request review. CI runs the test
+suite on Python 3.9 / 3.10 / 3.11 / 3.12 — please keep all of those green.
+
+## Where to make changes
+
+A short tour of the codebase lives in
+[`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). The CLI commands and their
+arguments are documented in [`docs/CLI.md`](docs/CLI.md).
+
+## License
+
+This project is licensed under the MIT License — see [`LICENSE`](LICENSE).

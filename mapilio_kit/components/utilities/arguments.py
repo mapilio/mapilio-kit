@@ -2,7 +2,14 @@ import argparse
 
 
 def general_arguments(parser, command):
-    if command == "authenticate" or command == "gopro360max_process" or command == "run":
+    # Commands that manage their own positional/optional arguments entirely.
+    if command in (
+        "authenticate",
+        "gopro360max_process",
+        "run",
+        "doctor",
+        "validate",
+    ):
         return
     if command in ["Sampler", "video_process", "video_upload"]:
         parser.add_argument(
