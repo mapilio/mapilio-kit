@@ -173,9 +173,11 @@ def get_exiftool_specific_feature(video_or_image_path: str, exiftool_path=None) 
                 dict_object['device_model'] = filtered_line.split(':')[1].lstrip(' ')
             if 'image size' in filtered_line:
                 dict_object['image_size'] = filtered_line.split(':')[1].lstrip(' ')
-        except TypeError:
-            raise f"Exif data does not Exist !" \
-                  f"Please remove this video file {video_or_image_path}"
+        except TypeError as exc:
+            raise RuntimeError(
+                f"Exif data does not exist! "
+                f"Please remove this video file: {video_or_image_path}"
+            ) from exc
 
     if dict_object['field_of_view'] and "deg" in dict_object['field_of_view']:
         dict_object['field_of_view'] = float(dict_object['field_of_view'].replace('deg', ''))
@@ -245,13 +247,28 @@ def is_large_video(video_size, large_video_threshold=1 * 1024 * 1024 * 1024):
     else:
         return False
 
-def calculate_chunk_size(video_size, large_video_threshold=1 * 1024 * 1024 * 1024):
-    """
-    Calculate chunk size based on video size.
-    Use smaller chunks for larger videos.
-    """
+#: Default number of frames per chunk when extracting a "normal-sized" video.
+DEFAULT_CHUNK_FRAMES = 5000
+#: Frames per chunk for videos that exceed ``large_video_threshold``.
+LARGE_VIDEO_CHUNK_FRAMES = 2500
 
+
+def calculate_chunk_size(
+    video_size: int,
+    large_video_threshold: int = 1 * 1024 * 1024 * 1024,
+) -> int:
+    """Pick a frame chunk size based on video size.
+
+    Larger videos get smaller chunks so each FFmpeg invocation stays bounded
+    in memory. Small videos use ``DEFAULT_CHUNK_FRAMES``.
+
+    Args:
+        video_size: video file size in bytes.
+        large_video_threshold: byte threshold above which a video is "large".
+
+    Returns:
+        Number of frames to process per chunk (always a positive integer).
+    """
     if video_size > large_video_threshold:
-        chunk_size = 2500
-
-    return chunk_size
+        return LARGE_VIDEO_CHUNK_FRAMES
+    return DEFAULT_CHUNK_FRAMES

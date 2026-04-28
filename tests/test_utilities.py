@@ -12,7 +12,10 @@ import io
 import pytest
 
 from mapilio_kit.components.utilities.utilities import (
+    DEFAULT_CHUNK_FRAMES,
+    LARGE_VIDEO_CHUNK_FRAMES,
     calculate_aspect_ratio,
+    calculate_chunk_size,
     calculation_vfov,
     find_fov2,
     is_large_video,
@@ -80,6 +83,33 @@ def test_is_large_video_false_below_threshold() -> None:
 def test_is_large_video_custom_threshold() -> None:
     assert is_large_video(10, large_video_threshold=5) is True
     assert is_large_video(3, large_video_threshold=5) is False
+
+
+# ---------------------------- chunk size logic --------------------------- #
+# Regression test for the UnboundLocalError that used to happen when
+# calculate_chunk_size was called with video_size <= threshold.
+
+
+def test_calculate_chunk_size_small_video_returns_default() -> None:
+    chunk = calculate_chunk_size(100 * 1024 * 1024)  # 100 MB → not large
+    assert chunk == DEFAULT_CHUNK_FRAMES
+    assert chunk > 0
+
+
+def test_calculate_chunk_size_large_video_returns_smaller_chunks() -> None:
+    chunk = calculate_chunk_size(2 * 1024 * 1024 * 1024)  # 2 GB → large
+    assert chunk == LARGE_VIDEO_CHUNK_FRAMES
+    assert chunk < DEFAULT_CHUNK_FRAMES
+
+
+def test_calculate_chunk_size_at_exact_threshold_uses_default() -> None:
+    # ``> threshold`` means equality should fall into the "small" branch.
+    threshold = 5
+    assert calculate_chunk_size(threshold, large_video_threshold=threshold) == DEFAULT_CHUNK_FRAMES
+
+
+def test_calculate_chunk_size_above_custom_threshold() -> None:
+    assert calculate_chunk_size(10, large_video_threshold=5) == LARGE_VIDEO_CHUNK_FRAMES
 
 
 # ----------------------------- md5 streaming ------------------------------ #
