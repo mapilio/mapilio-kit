@@ -64,9 +64,12 @@ class UploadManager:
         while True:
             chunk = data.read(chunk_size)
             files = {'chunk': (self.session_key, chunk, "multipart/form-data")}
+            # RFC 7233: Content-Range end is the last byte of the current chunk
+            # (inclusive, 0-indexed), not the total entity size.
+            chunk_end = (offset + len(chunk) - 1) if chunk else self.entity_size
             headers = {
                 'Connection': "keep-alive",
-                "content-range": f"bytes={offset}-{self.entity_size}/{self.entity_size}",
+                "content-range": f"bytes={offset}-{chunk_end}/{self.entity_size}",
                 "X-File-Id": self.session_key,
                 "Content-Length": str(self.entity_size - offset),
                 "email": email,
