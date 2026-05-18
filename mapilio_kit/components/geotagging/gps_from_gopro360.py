@@ -129,7 +129,16 @@ def gopro360max_stitch(video_file: str,
                        frame_rate: int,
                        output_folder: str,
                        quality: str,
-                       bin_dir: str):
+                       bin_dir: str) -> None:
+    """Extract, stitch, and geotag frames from a GoPro MAX 360 video.
+
+    Stitches dual-fisheye tracks into equirectangular JPEGs using
+    MAX2spherebatch, geotagges them from the video's GPS track, and
+    writes XMP projection metadata so panorama viewers can display them
+    correctly.  Crop parameters are computed dynamically from the actual
+    image dimensions, so any GoPro MAX recording resolution is handled
+    without hard-coding pixel counts.
+    """
     script_dir = os.path.dirname(os.path.realpath(__file__))
     frame_delta = 1.0 / frame_rate
     print(f"frame_delta: {frame_delta}")
@@ -219,16 +228,26 @@ def gopro360max_stitch(video_file: str,
     print(f"cmd: {cmd}")
     run_command(cmd, show_progress=False)
 
-    cmd = f"exiftool -CameraElevationAngle=360 " \
-          f"-make=GoPro " \
-          f"-model=Max " \
-          f"-ProjectionType=equirectangular " \
-          f"-UsePanoramaViewer=True " \
-          f"-CroppedAreaImageWidthPixels=4096 " \
-          f"-CroppedAreaImageHeightPixels=1344 " \
-          f"-FullPanoWidthPixels=4096 " \
-          f"-FullPanoHeightPixels=1344 " \
-          f"-CroppedAreaLeftPixels=0 -CroppedAreaTopPixels=0 {frames_folder}"
+    # Use exiftool computed-value syntax to derive crop parameters from
+    # the actual image dimensions.  Hard-coding 4096×1344 only works for
+    # one specific GoPro Max recording mode; this adapts to any output
+    # resolution (e.g. 4096×2048 for full-equirectangular exports).
+    # CroppedAreaTopPixels = (ImageWidth/2 - ImageHeight) / 2
+    cmd = (
+        f"exiftool -CameraElevationAngle=360 "
+        f"-make=GoPro "
+        f"-model=Max "
+        f"-ProjectionType=equirectangular "
+        f"-UsePanoramaViewer=True "
+        f"'-CroppedAreaImageWidthPixels<$ImageWidth' "
+        f"'-CroppedAreaImageHeightPixels<$ImageHeight' "
+        f"'-FullPanoWidthPixels<$ImageWidth' "
+        f"'-FullPanoHeightPixels<$ImageHeight' "
+        f"-CroppedAreaLeftPixels=0 "
+        f"'-CroppedAreaTopPixels<${{ImageWidth;$_=($_/2"
+        f"-$self->GetValue(\"ImageHeight\"))/2}}' "
+        f"{frames_folder}"
+    )
     print(f"cmd: {cmd}")
     run_command(cmd, show_progress=False)
     remove_files(frames_folder, "*.jpg_original")
