@@ -36,7 +36,7 @@ MAPILIO_CONFIG_PATH = os.getenv(
 def load_config(config_path: str) -> configparser.ConfigParser:
     if not os.path.isfile(config_path):
         raise RuntimeError(f"config {config_path} does not exist")
-    config = configparser.ConfigParser()
+    config = configparser.ConfigParser(interpolation=None)
     config.optionxform = str  # type: ignore
     config.read(config_path)
     return config
