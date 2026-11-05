@@ -76,23 +76,20 @@ class UploadManager:
                 "project-organization-key": organization_key if organization_key else None,
                 "project-key": project_key if project_key else None
             }
-            try:
-                resp = requests.post(
-                    f"{MAPILIO_UPLOAD_ENDPOINT_ZIP}",
-                    headers=headers,
-                    files=files
-                )
-                resp.raise_for_status()
-                offset += len(chunk)
-                for callback in self.callbacks:
-                    callback(chunk, resp)
-                if not chunk:
-                    if (resp.status_code != 204 and
-                            resp.headers["content-type"].strip().startswith("application/json")):
-                        response_dict = json.loads(resp.text)
-                        return response_dict["hash"]
-            except requests.exceptions.HTTPError as e:
-                print(e.response.text)
+            resp = requests.post(
+                f"{MAPILIO_UPLOAD_ENDPOINT_ZIP}",
+                headers=headers,
+                files=files
+            )
+            resp.raise_for_status()
+            offset += len(chunk)
+            for callback in self.callbacks:
+                callback(chunk, resp)
+            if not chunk:
+                if (resp.status_code != 204 and
+                        resp.headers["content-type"].strip().startswith("application/json")):
+                    response_dict = json.loads(resp.text)
+                    return response_dict["hash"]
 
 
     def finish(
