@@ -64,6 +64,9 @@ class UploadManager:
         while True:
             chunk = data.read(chunk_size)
             files = {'chunk': (self.session_key, chunk, "multipart/form-data")}
+            # Mapilio's own format, not RFC 7233: the end value is always the total size, not
+            # the last byte of this chunk, and an empty request with bytes=total-total/total
+            # completes the upload. The server rejects any other range with start >= end.
             headers = {
                 'Connection': "keep-alive",
                 "content-range": f"bytes={offset}-{self.entity_size}/{self.entity_size}",
