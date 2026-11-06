@@ -29,13 +29,20 @@ def _install_stub(name: str, attrs: dict | None = None) -> None:
     sys.modules[name] = module
 
 
-# ``calculation`` is an in-house package not always installable in CI. The
-# only symbol we touch from it is ``calculate_vfov``.
+# ``calculation`` is an in-house package not always installable in CI.
+# Upload retry tests import the EXIF writer too, but never convert coordinates.
 _install_stub("calculation")
 _install_stub(
     "calculation.util",
     {"calculate_vfov": lambda fov, w, h: round(float(fov) * float(h) / max(float(w), 1.0), 2)},
 )
+
+
+def _unexpected_coordinate_conversion(*args, **kwargs):
+    raise AssertionError("Upload retry tests must not perform EXIF coordinate conversion")
+
+
+_install_stub("calculation.geospatial_utils", {"decimal_to_dms": _unexpected_coordinate_conversion})
 
 
 def pytest_collection_modifyitems(config, items):

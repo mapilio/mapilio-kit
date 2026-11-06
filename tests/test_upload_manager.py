@@ -90,3 +90,30 @@ def test_transfer_follows_server_range_format(monkeypatch, size, offset, expecte
     assert server.ranges == expected_ranges
     assert server.stored == payload
     assert file_hash == "opaque-hash"
+
+
+@pytest.mark.parametrize("status", [400, 500])
+@pytest.mark.parametrize("successful_chunks", [0, 1])
+def test_http_error_stops_before_reading_another_chunk(monkeypatch, status, successful_chunks):
+    sent = []
+    confirmed = []
+
+    def post(url, headers, files):
+        sent.append((headers["content-range"], files["chunk"][1]))
+        assert len(sent) <= successful_chunks + 1, "continued after the failed chunk"
+        if len(sent) <= successful_chunks:
+            return _response(200, b"{}")
+        return _response(status, b'{"message": "upload failed"}')
+
+    monkeypatch.setattr(upload_manager.requests, "post", post)
+    manager = UploadManager("synthetic-token", "session-key", 4)
+    manager.callbacks.append(lambda chunk, response: confirmed.append(chunk))
+    data = io.BytesIO(b"aabb")
+
+    with pytest.raises(requests.HTTPError) as error:
+        manager.upload(USER, data, offset=0, chunk_size=2)
+
+    assert error.value.response.status_code == status
+    assert sent == [("bytes=0-4/4", b"aa"), ("bytes=2-4/4", b"bb")][:successful_chunks + 1]
+    assert confirmed == [b"aa"][:successful_chunks]
+    assert data.tell() == (successful_chunks + 1) * 2
