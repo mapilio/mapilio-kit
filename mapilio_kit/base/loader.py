@@ -62,4 +62,9 @@ class Upload:
             decomposer().perform_task(vars_args)
 
         valid_args = self.filter_args(vars_args)
-        return upload(**valid_args)
+        result = upload(**valid_args)
+        # A failed folder upload is reported in the result, not raised, because
+        # MapSyncer reads it. Raise here so the command exits with an error.
+        if isinstance(result, dict) and not result.get("Success"):
+            raise RuntimeError(f"Upload failed: {result.get('Error')}")
+        return result

@@ -132,12 +132,17 @@ def upload(
                 dry_run=dry_run,
                 organization_key=organization_key if organization_key else None,
                 project_key=project_key if project_key else None)
-            #logger.warning(f"{Fore.GREEN}Upload has been successfully finished. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
-            return {'Success': True}
         except Exception as e:
+            LOG.error(
+                f"{Fore.RED}Upload failed for {import_path}: {e}. "
+                f"Your image descriptions are kept in {desc_path}, "
+                f"so you can run the upload again.{Fore.RESET}"
+            )
             return {'Success': False, "Error": e}
-        finally:
-            os.remove(desc_path)
+
+        os.remove(desc_path)
+        #logger.warning(f"{Fore.GREEN}Upload has been successfully finished. Thanks for your contributions to Mapilio 🎉!{Fore.RESET}")
+        return {'Success': True}
 
 
     else:
