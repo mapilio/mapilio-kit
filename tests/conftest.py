@@ -38,6 +38,11 @@ _install_stub(
 )
 
 
+# ``gps-anomaly-detector`` isn't installed in CI. Upload imports it but tests don't use it.
+_install_stub("gps_anomaly")
+_install_stub("gps_anomaly.detector", {"Anomaly": object})
+
+
 def _unexpected_coordinate_conversion(*args, **kwargs):
     raise AssertionError("Upload retry tests must not perform EXIF coordinate conversion")
 
