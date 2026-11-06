@@ -86,10 +86,21 @@ class UploadManager:
             for callback in self.callbacks:
                 callback(chunk, resp)
             if not chunk:
-                if (resp.status_code != 204 and
-                        resp.headers["content-type"].strip().startswith("application/json")):
+                if resp.status_code == 204:
+                    raise RuntimeError("Upload completion failed: HTTP 204 returned no hash")
+                content_type = resp.headers.get("content-type", "").split(";", 1)[0].strip().lower()
+                if content_type != "application/json":
+                    raise RuntimeError("Upload completion failed: expected a JSON response")
+                try:
                     response_dict = json.loads(resp.text)
-                    return response_dict["hash"]
+                except json.JSONDecodeError:
+                    raise RuntimeError("Upload completion failed: invalid JSON response") from None
+                if not isinstance(response_dict, dict):
+                    raise RuntimeError("Upload completion failed: expected a JSON object")
+                file_hash = response_dict.get("hash")
+                if not isinstance(file_hash, str) or not file_hash:
+                    raise RuntimeError("Upload completion failed: expected a nonempty string hash")
+                return file_hash
 
 
     def finish(
