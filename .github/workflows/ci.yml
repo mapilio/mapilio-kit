@@ -21,39 +21,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.8.x
-      uses: actions/setup-python@v4
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.8.x'
+        python-version: '3.12'
 
-        
-    - name: Install build dependencies
-      uses: py-actions/py-dependency-install@v4
-      with: 
-           update-pip: "true"
-           update-setuptools: "true"
-           update-wheel: "true"
-           path: "requirements.txt"
-
-    - name: Install pypa/build
-      run: >-
-          python -m
-          pip install
-          build
-          --user
-        
-    - name: Creating dist files
+    - name: Check release version
+      env:
+        RELEASE_TAG: ${{ github.event.release.tag_name }}
       run: |
-            python setup.py sdist
-            python setup.py bdist_wheel --universal
-      shell: bash
+        python - <<'PY'
+        import os
+        import runpy
+        version = runpy.run_path('mapilio_kit/components/version.py')['VERSION']
+        if os.environ['RELEASE_TAG'] != f'v{version}':
+            raise SystemExit('Release tag must match the package version')
+        PY
 
-    - name: CheckFiles
+    - name: Build and check distributions
       run: |
-            ls dist
-      shell: bash
-    
+        python -m pip install build twine
+        python -m build
+        python -m twine check dist/*
+
     - name: Publish a Python distribution to PyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
