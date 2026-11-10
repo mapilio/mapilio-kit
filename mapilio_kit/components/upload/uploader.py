@@ -135,6 +135,7 @@ def upload_desc(
         return {"Success": True}
     except requests.exceptions.HTTPError as e:
         print(e.response.text)
+        return {"Success": False, "Error": str(e)}
 
 
 def upload_image_dir_and_description(
@@ -176,6 +177,12 @@ def upload_image_dir_and_description(
         )
 
         response_list.append(response['Success'])
+
+    failed = response_list.count(False)
+    if failed:
+        raise RuntimeError(
+            f"Descriptions for {failed} of {len(response_list)} sequence(s) were not accepted"
+        )
 
     if any(response_list):
         LOG.warning(
